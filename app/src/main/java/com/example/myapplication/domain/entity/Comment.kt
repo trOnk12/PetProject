@@ -1,9 +1,8 @@
 package com.example.myapplication.domain.entity
 
 data class Comment(
-    val postId: Int,
+    val userId: Int,
     val id: Int,
-    val name: String,
-    val email: String,
+    val title: String,
     val body: String
 )
