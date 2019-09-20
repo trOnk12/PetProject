@@ -1,4 +1,4 @@
-package com.example.myapplication.presentation
+package com.example.myapplication.presentation.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -24,7 +24,6 @@ class MainActivityViewModel(private var commentUseCase: CommentUseCase) : ViewMo
         _isLoading.value = true
 
         viewModelScope.launch {
-
             commentUseCase.getComment().let { outcome ->
                 when (outcome) {
                     is Outcome.Success -> onCommentsLoaded(outcome.value)
