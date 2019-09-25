@@ -5,6 +5,7 @@ import androidx.lifecycle.Observer
 import com.example.myapplication.domain.entity.Comment
 import com.example.myapplication.domain.entity.Outcome
 import com.example.myapplication.domain.usecase.CommentUseCase
+import com.example.myapplication.presentation.main.MainActivityViewModel
 import com.example.myapplication.successFullOutcome
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.times
