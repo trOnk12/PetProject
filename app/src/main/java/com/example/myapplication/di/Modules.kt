@@ -1,6 +1,5 @@
 package com.example.myapplication.di
 
-import com.example.myapplication.data.mapper.CommentDataMapper
 import com.example.myapplication.data.network.ApiService
 import com.example.myapplication.data.network.createNetworkClient
 import com.example.myapplication.data.repository.CommentRepositoryImpl
@@ -35,7 +34,7 @@ val repositoryModule = module {
 }
 
 val dataSourceModule = module {
-    single { CommentRemoteSource(CommentDataMapper(), commentApi) }
+    single { CommentRemoteSource(commentApi) }
 }
 
 val useCaseModule = module {

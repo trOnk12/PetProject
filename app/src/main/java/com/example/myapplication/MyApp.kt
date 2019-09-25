@@ -1,4 +1,4 @@
-package com.example.myapplication.data
+package com.example.myapplication
 
 import android.app.Application
 import org.koin.android.ext.koin.androidContext
