@@ -1,7 +1,6 @@
-package com.example.myapplication.data.source.local
+package com.example.myapplication.data.source.remote
 
 import com.example.myapplication.data.mapper.CommentDataMapper
-import com.example.myapplication.data.model.DataComment
 import com.example.myapplication.data.network.ApiService
 import com.example.myapplication.domain.entity.Comment
 import com.example.myapplication.domain.entity.Outcome

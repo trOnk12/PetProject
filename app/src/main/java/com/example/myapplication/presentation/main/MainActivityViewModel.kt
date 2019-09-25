@@ -9,7 +9,7 @@ import com.example.myapplication.domain.entity.Outcome
 import com.example.myapplication.domain.usecase.CommentUseCase
 import kotlinx.coroutines.launch
 
-class MainActivityViewModel(private var commentUseCase: CommentUseCase) : ViewModel() {
+class MainActivityViewModel constructor(private val commentUseCase: CommentUseCase) : ViewModel() {
 
     private val _commentList = MutableLiveData<List<Comment>>()
     val commentList: LiveData<List<Comment>> = _commentList
@@ -41,6 +41,5 @@ class MainActivityViewModel(private var commentUseCase: CommentUseCase) : ViewMo
     private fun onFailed(exception: Exception, message: String) {
         _snackBarText.value = message
     }
-
 
 }

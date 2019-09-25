@@ -26,19 +26,19 @@ class MainActivityViewModelTest {
     @JvmField
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    private val outComeObserver: Observer<Outcome<List<Comment>>> = mock()
+    private val outComeObserver: Observer<List<Comment>> = mock()
     private val mockCommentUseCase: CommentUseCase = mock()
 
     private lateinit var mainActivityViewModel: MainActivityViewModel
 
     @Captor
-    private lateinit var argumentCaptor: ArgumentCaptor<Outcome<List<Comment>>>
+    private lateinit var argumentCaptor: ArgumentCaptor<List<Comment>>
 
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         mainActivityViewModel = MainActivityViewModel(mockCommentUseCase)
-        mainActivityViewModel.commentListOutcome.observeForever(outComeObserver)
+        mainActivityViewModel.commentList.observeForever(outComeObserver)
     }
 
     @Test
