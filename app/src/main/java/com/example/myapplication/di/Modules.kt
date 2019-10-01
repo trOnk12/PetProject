@@ -1,7 +1,7 @@
 package com.example.myapplication.di
 
+import com.example.core.network.createNetworkClient
 import com.example.myapplication.data.network.ApiService
-import com.example.myapplication.data.network.createNetworkClient
 import com.example.myapplication.data.repository.CommentRepositoryImpl
 import com.example.myapplication.data.source.remote.CommentRemoteSource
 import com.example.myapplication.domain.repository.CommentRepository

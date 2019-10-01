@@ -1,11 +1,10 @@
 package com.example.myapplication
 
 import com.example.myapplication.domain.entity.Comment
-import com.example.myapplication.domain.entity.Outcome
-import retrofit2.HttpException
+import com.example.core.Outcome
 
 val fakeComment = Comment(1, 2, "TEST", "TEST")
 val fakeCommentList = listOf(fakeComment, fakeComment, fakeComment, fakeComment, fakeComment)
 val throwable = Exception()
-val successFullOutcome = Outcome.Success(fakeCommentList)
-val failOutcome = Outcome.Failure("Error",throwable)
+val successFullOutcome = com.example.core.Outcome.Success(fakeCommentList)
+val failOutcome = com.example.core.Outcome.Failure("Error",throwable)

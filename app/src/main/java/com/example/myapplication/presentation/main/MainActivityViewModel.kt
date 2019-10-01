@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.domain.entity.Comment
-import com.example.myapplication.domain.entity.Outcome
+import com.example.core.Outcome
 import com.example.myapplication.domain.usecase.CommentUseCase
 import kotlinx.coroutines.launch
 
@@ -26,8 +26,8 @@ class MainActivityViewModel constructor(private val commentUseCase: CommentUseCa
         viewModelScope.launch {
             commentUseCase.getComment().let { outcome ->
                 when (outcome) {
-                    is Outcome.Success -> onCommentsLoaded(outcome.value)
-                    is Outcome.Failure -> onFailed(outcome.exception, outcome.message)
+                    is com.example.core.Outcome.Success -> onCommentsLoaded(outcome.value)
+                    is com.example.core.Outcome.Failure -> onFailed(outcome.exception, outcome.message)
                 }
             }
         }

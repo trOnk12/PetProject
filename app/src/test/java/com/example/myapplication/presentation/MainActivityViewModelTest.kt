@@ -3,7 +3,7 @@ package com.example.myapplication.presentation
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.example.myapplication.domain.entity.Comment
-import com.example.myapplication.domain.entity.Outcome
+import com.example.core.Outcome
 import com.example.myapplication.domain.usecase.CommentUseCase
 import com.example.myapplication.presentation.main.MainActivityViewModel
 import com.example.myapplication.successFullOutcome

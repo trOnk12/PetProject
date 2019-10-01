@@ -35,26 +35,30 @@ object Versions {
 
 object Dependencies {
 
-    val kotlinStandardLibrary = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
-    val androidAppCompat = "androidx.appcompat:appcompat:${Versions.androidx_appcompat}"
-    val ktxCore = "androidx.core:core-ktx:${Versions.ktx_core}"
-    val constrainLayout = "androidx.constraintlayout:constraintlayout:${Versions.constrainlayout}"
     val junit = "junit:junit:${Versions.junit}"
     val mockito_core = "org.mockito:mockito-core:${Versions.mockito_core}"
     val core_testing = "android.arch.core:core-testing:${Versions.core_testing}"
-    val loggin_interceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.loggin_interceptor}"
-    val retrofit_gson_converter = "com.squareup.retrofit2:converter-gson:${Versions.retrofit_gson_converter}"
     val mockk = "io.mockk:mockk:${Versions.mockk}"
     val mockito_inline = "org.mockito:mockito-inline:${Versions.mockito_inline}"
     val mockito_kotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:${Versions.mockito_kotlin}"
     val test_runnter = "androidx.test:runner:${Versions.test_runnter}"
     val espresso_core = "androidx.test.espresso:espresso-core:${Versions.espresso_core}"
+
+    val kotlinStandardLibrary = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
+    val androidAppCompat = "androidx.appcompat:appcompat:${Versions.androidx_appcompat}"
+    val ktxCore = "androidx.core:core-ktx:${Versions.ktx_core}"
+    val constrainLayout = "androidx.constraintlayout:constraintlayout:${Versions.constrainlayout}"
+    val recyclerview = "com.android.support:recyclerview-v7:${Versions.recyclerview}"
+
     val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
+    val loggin_interceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.loggin_interceptor}"
+    val retrofit_gson_converter = "com.squareup.retrofit2:converter-gson:${Versions.retrofit_gson_converter}"
     val gson = "com.google.code.gson:gson:${Versions.gson}"
+
     val couroutines_core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.couroutines_core}"
     val viewmodel_ktx = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.viewmodel_ktx}"
     val koin_viewmodel = "org.koin:koin-android-viewmodel:${Versions.koin_viewmodel}"
-    val recyclerview = "com.android.support:recyclerview-v7:${Versions.recyclerview}"
+
     val koin = "org.koin:koin-android:${Versions.koin}"
 
 }
