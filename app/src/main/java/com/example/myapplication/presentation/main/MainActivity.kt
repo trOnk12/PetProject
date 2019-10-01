@@ -16,7 +16,7 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
 
         viewModel.snackBarText.observe(this, Observer { message ->
-            Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+          showSnackbar(message)
         })
     }
 

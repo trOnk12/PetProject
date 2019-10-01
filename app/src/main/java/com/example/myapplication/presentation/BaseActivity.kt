@@ -11,4 +11,8 @@ open class BaseActivity : AppCompatActivity() {
         injectFeature()
     }
 
+    fun showSnackbar(message:String){
+        Snackbar
+    }
+
 }
