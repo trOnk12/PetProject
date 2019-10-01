@@ -1,9 +1,6 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
-
 apply plugin: "kotlin-kapt"
 
 android {
@@ -14,12 +11,12 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
-        applicationId "com.example.myapplication"
-        minSdkVersion 15
-        targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        applicationId Versions.applicationId
+        minSdkVersion Versions.mindSdkVersion
+        targetSdkVersion Versions.targetSdkVersion
+        versionCode Versions.versionCode
+        versionName Versions.versionName
+        testInstrumentationRunner Versions.testInstrumentationRunner
     }
     buildTypes {
         release {
@@ -31,37 +28,29 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.core:core-ktx:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    testImplementation 'junit:junit:4.12'
-    testImplementation 'org.mockito:mockito-core:2.28.2'
-    testImplementation 'android.arch.core:core-testing:1.1.1'
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.12.1'
-    //Gson
-    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
-    testImplementation "io.mockk:mockk:1.2"
-    testImplementation 'org.mockito:mockito-inline:2.24.5'
-    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.1.0"
 
-    androidTestImplementation "android.arch.core:core-testing:1.1.1"
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    testImplementation "io.mockk:mockk:1.2"
+    testImplementation Dependencies.junit
+    testImplementation Dependencies.mockito_core
+    testImplementation Dependencies.core_testing
+    testImplementation Dependencies.mockk
+    testImplementation Dependencies.mockito_inline
+    testImplementation Dependencies.mockito_kotlin
+    androidTestImplementation Dependencies.test_runnter
+    androidTestImplementation Dependencies.espresso_core
 
-    implementation 'com.squareup.retrofit2:retrofit:2.6.1'
-
-    implementation 'com.google.code.gson:gson:2.8.5'
-
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.1'
-
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0-alpha04'
-
-    implementation 'org.koin:koin-android-viewmodel:2.0.1'
-    implementation 'androidx.recyclerview:recyclerview:1.0.0'
-
-    // Koin for Android
-    implementation "org.koin:koin-android:2.0.1"
+    implementation Dependencies.kotlinStandardLibrary
+    implementation Dependencies.androidAppCompat
+    implementation Dependencies.ktxCore
+    implementation Dependencies.constrainLayout
+    implementation Dependencies.loggin_interceptor
+    implementation Dependencies.retrofit_gson_converter
+    implementation Dependencies.ktxCore
+    implementation Dependencies.retrofit
+    implementation Dependencies.couroutines_core
+    implementation Dependencies.gson
+    implementation Dependencies.viewmodel_ktx
+    implementation Dependencies.koin_viewmodel
+    implementation Dependencies.recyclerview
+    implementation Dependencies.koin
 
 }

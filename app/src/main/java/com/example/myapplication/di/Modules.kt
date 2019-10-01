@@ -10,13 +10,13 @@ import com.example.myapplication.presentation.main.MainActivityViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.dsl.module
-import retrofit2.create
 
 fun injectFeature() = loadFeature
 
 private val loadFeature by lazy {
     loadKoinModules(
         listOf(
+            networkModule,
             viewModelModule,
             useCaseModule,
             repositoryModule,

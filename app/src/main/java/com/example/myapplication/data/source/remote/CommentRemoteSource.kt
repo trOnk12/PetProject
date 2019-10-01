@@ -10,9 +10,7 @@ class CommentRemoteSource(var apiService: ApiService) {
 
     suspend fun getComments(): Outcome<List<Comment>> {
         return try {
-            Outcome.Success((apiService.getComments().map {
-                it.mapToDomain()
-            }))
+            Outcome.Success((apiService.getComments().mapToDomain()))
         } catch (ex: HttpException) {
             Outcome.Failure(ex.message(), ex)
         }
