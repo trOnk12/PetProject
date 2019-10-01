@@ -3,6 +3,7 @@ package com.example.myapplication.presentation
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.di.injectFeature
+import com.google.android.material.snackbar.Snackbar
 
 open class BaseActivity : AppCompatActivity() {
 
@@ -12,7 +13,7 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     fun showSnackbar(message:String){
-        Snackbar
+      // Snackbar.make(this,message,Snackbar.LENGTH_LONG)
     }
 
 }

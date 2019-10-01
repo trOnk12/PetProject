@@ -33,25 +33,25 @@ dependencies {
     testImplementation Dependencies.junit
     testImplementation Dependencies.mockito_core
     testImplementation Dependencies.core_testing
-    testImplementation Dependencies.mock
+    testImplementation Dependencies.mockk
     testImplementation Dependencies.mockito_inline
     testImplementation Dependencies.mockito_kotlin
-    androidTestImplementation Dependencies.test_runner
+    androidTestImplementation Dependencies.test_runnter
     androidTestImplementation Dependencies.espresso_core
 
     implementation Dependencies.kotlinStandardLibrary
     implementation Dependencies.androidAppCompat
     implementation Dependencies.ktxCore
-    implementation Dependencies.constraint_layout
-    implementation Dependencies.logging_interceptor
+    implementation Dependencies.constrainLayout
+    implementation Dependencies.loggin_interceptor
     implementation Dependencies.retrofit_gson_converter
     implementation Dependencies.ktxCore
     implementation Dependencies.retrofit
-    implementation Dependencies.coroutines_core
+    implementation Dependencies.couroutines_core
     implementation Dependencies.gson
-    implementation Dependencies.view_model_ktx
-    implementation Dependencies.koin_view_model
-    implementation Dependencies.recycler_view
+    implementation Dependencies.viewmodel_ktx
+    implementation Dependencies.koin_viewmodel
+    implementation Dependencies.recyclerview
     implementation Dependencies.koin
     implementation Dependencies.support_design
 

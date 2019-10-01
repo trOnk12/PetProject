@@ -3,7 +3,7 @@ apply from: "$rootDir/common-kotlin-library.gradle"
 
 dependencies {
     implementation Dependencies.retrofit
-    implementation Dependencies.logging_interceptor
+    implementation Dependencies.loggin_interceptor
     implementation Dependencies.retrofit_gson_converter
     implementation Dependencies.gson
 }
