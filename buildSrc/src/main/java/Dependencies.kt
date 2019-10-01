@@ -1,11 +1,13 @@
 object Versions {
 
+    const val compiledSdkVersion = 29
+    const val buildToolsVersion = "29.0.2"
     const val applicationId = "com.example.myapplication"
     const val mindSdkVersion = 15
     const val targetSdkVersion = 29
     const val versionCode = 1
     const val versionName = "1.0"
-    const val testIntrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    const val testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
     const val kotlin = "1.2.71"
     const val androidx_appcompat = "1.1.0"
