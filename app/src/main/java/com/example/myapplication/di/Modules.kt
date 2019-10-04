@@ -6,7 +6,7 @@ import com.example.myapplication.data.repository.CommentRepositoryImpl
 import com.example.myapplication.data.source.remote.CommentRemoteSource
 import com.example.myapplication.domain.repository.CommentRepository
 import com.example.myapplication.domain.usecase.CommentUseCase
-import com.example.myapplication.presentation.main.MainActivityViewModel
+import com.example.myapplication.ui.main.MainActivityViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.dsl.module

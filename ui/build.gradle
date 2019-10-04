@@ -1,0 +1,10 @@
+apply plugin: 'com.android.library'
+apply from: "$rootDir/common-android-library.gradle"
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    
+    implementation Dependencies.recyclerview
+
+
+}
