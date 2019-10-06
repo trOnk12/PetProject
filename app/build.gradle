@@ -56,5 +56,6 @@ dependencies {
     implementation Dependencies.recyclerview
     implementation Dependencies.koin
     implementation Dependencies.support_design
+    compile project(path: ':core_ui')
 
 }

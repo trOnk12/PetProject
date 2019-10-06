@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
     <data>
-        <variable name="item" type="com.example.myapplication.domain.entity.Comment"/>
+        <variable name="comment_item" type="com.example.myapplication.domain.entity.Comment"/>
     </data>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                   android:orientation="vertical"
@@ -9,13 +9,13 @@
                   android:layout_height="match_parent">
 
         <TextView
-                android:text="@{item.title}"
+                android:text="@{comment_item.title}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
         />
 
         <TextView
-                android:text="@{item.body}"
+                android:text="@{comment_item.body}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
         />

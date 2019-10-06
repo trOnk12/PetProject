@@ -1,16 +1,18 @@
 package com.example.myapplication.ui.main
 
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.core_ui.GenericBindableAdapter
 import com.example.myapplication.R
 import com.example.myapplication.ui.BaseActivity
 import com.example.myapplication.ui.main.adapter.CommentAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
+import org.w3c.dom.Comment
 
-class MainActivity : BaseActivity() {
-
+class MainActivity : BaseActivity(){
     private val binding: MainActivityViewModel by viewModel()
 
     private lateinit var recyclerView: RecyclerView
@@ -32,19 +34,20 @@ class MainActivity : BaseActivity() {
 
     private fun initRecyclerView() {
         viewManager = LinearLayoutManager(this)
-        commentAdapter = CommentAdapter()
+
+        commentAdapter.setOnItemClickListener(object:GenericBindableAdapter.OnItemClickListener{
+            override fun onItemClick(item: Any?) {
+                val comment = item as Comment
+            }
+        })
 
         recyclerView = findViewById<RecyclerView>(R.id.comment_list).apply {
             layoutManager = viewManager
             adapter = commentAdapter
         }
-
-
-
     }
 
     private fun initViewModel() {
-
         binding.snackBarText.observe(this, Observer { message ->
             showSnackbar(message)
         })
@@ -52,7 +55,6 @@ class MainActivity : BaseActivity() {
         binding.items.observe(this, Observer { commentList ->
             commentAdapter.setData(commentList)
         })
-
     }
 
 }

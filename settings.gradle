@@ -1,3 +1,3 @@
-include ':app', ':common', ':co', ':core', ':networking', ':networking', ':presentation', ':ui'
+include ':app', ':core', ':core_ui'
 
 

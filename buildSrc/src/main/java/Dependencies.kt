@@ -11,7 +11,7 @@ object Versions {
     const val testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
     const val support_desin = "28.0.0"
-   const val kotlin = "1.2.71"
+    const val kotlin = "1.2.71"
     const val androidx_appcompat = "1.1.0"
     const val ktx_core = "1.1.0"
     const val constrainlayout = "1.1.3"
