@@ -39,6 +39,8 @@ class MainActivity : BaseActivity() {
             adapter = commentAdapter
         }
 
+
+
     }
 
     private fun initViewModel() {

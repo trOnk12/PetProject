@@ -1,4 +1,4 @@
-package com.example.ui
+package com.example.myapplication.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,21 +6,16 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.BR
-import java.util.Collections.emptyList
 
-interface BindableAdapter<T> {
-    fun setData(data: List<T>?)
-}
+open class GenericBindableAdapter<T, R : ViewDataBinding>(var itemLayoutViewId: Int, var variableId: Int) : RecyclerView.Adapter<BindableViewHolder<T>>(){
 
-open class GenericBindableAdapter<T, R : ViewDataBinding>(var itemView:Int) : RecyclerView.Adapter<BindableViewHolder<T>>(), BindableAdapter<T> {
-
-     var dataList: List<T> = emptyList()
+    var dataList: List<T> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindableViewHolder<T> {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding: R = DataBindingUtil.inflate(layoutInflater,itemView, parent, false) as R
+        val binding: R = DataBindingUtil.inflate(layoutInflater, itemLayoutViewId, parent, false) as R
 
-        return BindableViewHolder(binding)
+        return BindableViewHolder(binding,variableId)
     }
 
     override fun onBindViewHolder(holder: BindableViewHolder<T>, position: Int) {
@@ -30,7 +25,7 @@ open class GenericBindableAdapter<T, R : ViewDataBinding>(var itemView:Int) : Re
     override fun getItemCount() = dataList.size
 
     override fun setData(data: List<T>?) {
-        data?.let{
+        data?.let {
             dataList = data
             notifyDataSetChanged()
         }
@@ -38,13 +33,12 @@ open class GenericBindableAdapter<T, R : ViewDataBinding>(var itemView:Int) : Re
 
 }
 
-class BindableViewHolder<T>(var binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root) {
+class BindableViewHolder<T>(var binding: ViewDataBinding,var variableId:Int) : RecyclerView.ViewHolder(binding.root) {
     fun bind(item: T) {
         binding.apply {
-            setVariable(BR.item, item)
+            setVariable(variableId, item)
             executePendingBindings()
         }
     }
 }
-
 

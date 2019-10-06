@@ -28,6 +28,8 @@ android {
 
 dependencies {
     implementation project(path: ':core')
+
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     testImplementation Dependencies.junit
@@ -41,7 +43,7 @@ dependencies {
 
     implementation Dependencies.kotlinStandardLibrary
     implementation Dependencies.androidAppCompat
-    implementation Dependencies.ktxCore
+
     implementation Dependencies.constrainLayout
     implementation Dependencies.loggin_interceptor
     implementation Dependencies.retrofit_gson_converter
@@ -54,6 +56,5 @@ dependencies {
     implementation Dependencies.recyclerview
     implementation Dependencies.koin
     implementation Dependencies.support_design
-
 
 }

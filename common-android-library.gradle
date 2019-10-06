@@ -1,10 +1,13 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: "kotlin-kapt"
 
 android {
+    dataBinding {
+        enabled = true
+    }
     compileSdkVersion Versions.compiledSdkVersion
-
     defaultConfig {
         minSdkVersion Versions.mindSdkVersion
         targetSdkVersion Versions.targetSdkVersion
