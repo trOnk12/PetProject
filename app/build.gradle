@@ -28,8 +28,7 @@ android {
 
 dependencies {
     implementation project(path: ':core')
-
-
+    implementation project(path: ':core_ui')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     testImplementation Dependencies.junit
@@ -56,6 +55,5 @@ dependencies {
     implementation Dependencies.recyclerview
     implementation Dependencies.koin
     implementation Dependencies.support_design
-    compile project(path: ':core_ui')
 
 }

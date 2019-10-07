@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
+        <variable name="favouriteCallback" type="com.example.myapplication.ui.main.adapter.CommentAdapter.OnAddToFavoriteClickListener"/>
         <variable name="comment_item" type="com.example.myapplication.domain.entity.Comment"/>
     </data>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
+                  android:onClick="@{() -> favouriteCallback.onAddToFavouriteClick(comment_item)}"
                   android:orientation="vertical"
                   android:layout_width="match_parent"
                   android:layout_height="match_parent">
 
         <TextView
+                android:id="@+id/test"
                 android:text="@{comment_item.title}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

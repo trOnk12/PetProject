@@ -5,14 +5,14 @@ import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.core_ui.GenericBindableAdapter
 import com.example.myapplication.R
+import com.example.myapplication.domain.entity.Comment
 import com.example.myapplication.ui.BaseActivity
 import com.example.myapplication.ui.main.adapter.CommentAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
-import org.w3c.dom.Comment
 
-class MainActivity : BaseActivity(){
+class MainActivity : BaseActivity(), CommentAdapter.OnAddToFavoriteClickListener {
+
     private val binding: MainActivityViewModel by viewModel()
 
     private lateinit var recyclerView: RecyclerView
@@ -34,12 +34,7 @@ class MainActivity : BaseActivity(){
 
     private fun initRecyclerView() {
         viewManager = LinearLayoutManager(this)
-
-        commentAdapter.setOnItemClickListener(object:GenericBindableAdapter.OnItemClickListener{
-            override fun onItemClick(item: Any?) {
-                val comment = item as Comment
-            }
-        })
+        commentAdapter = CommentAdapter(onAddToFavoriteClickListener = this)
 
         recyclerView = findViewById<RecyclerView>(R.id.comment_list).apply {
             layoutManager = viewManager
@@ -55,6 +50,10 @@ class MainActivity : BaseActivity(){
         binding.items.observe(this, Observer { commentList ->
             commentAdapter.setData(commentList)
         })
+    }
+
+    override fun onAddToFavouriteClick(comment: Comment) {
+        Log.d("TEST", comment.body)
     }
 
 }
