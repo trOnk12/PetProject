@@ -1,7 +1,7 @@
 package com.example.myapplication.domain.repository
 
 
-import com.example.core.network.Outcome
+import com.example.core.network.data.Outcome
 import com.example.myapplication.domain.entity.Comment
 
 interface CommentRepository {

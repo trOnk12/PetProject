@@ -43,8 +43,10 @@ class MainActivity : BaseActivity(), CommentAdapter.OnAddToFavoriteClickListener
     }
 
     private fun initViewModel() {
-        binding.snackBarText.observe(this, Observer { message ->
-            showSnackbar(message)
+        binding.snackBarText.observe(this, Observer { event ->
+            event.getContentIfNotHandled()?.let { message ->
+                showSnackbar(message)
+            }
         })
 
         binding.items.observe(this, Observer { commentList ->
