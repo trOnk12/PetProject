@@ -17,8 +17,10 @@ abstract class GenericBindableAdapter<T> :
     }
 
     fun clearData() {
-        dataList.clear()
-        notifyDataSetChanged()
+        if (dataList is ArrayList) {
+            (dataList as ArrayList).clear()
+            notifyDataSetChanged()
+        }
     }
 
     override fun onBindViewHolder(holder: BindableViewHolder<T>, position: Int) {

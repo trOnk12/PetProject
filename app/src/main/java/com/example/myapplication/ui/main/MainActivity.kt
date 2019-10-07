@@ -2,15 +2,14 @@ package com.example.myapplication.ui.main
 
 import android.os.Bundle
 import android.util.Log
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
-import com.example.myapplication.databinding.ActivityMainBinding
 import com.example.myapplication.domain.entity.Comment
 import com.example.myapplication.ui.BaseActivity
 import com.example.myapplication.ui.main.adapter.CommentAdapter
+import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity(), CommentAdapter.OnAddToFavoriteClickListener {
@@ -32,7 +31,9 @@ class MainActivity : BaseActivity(), CommentAdapter.OnAddToFavoriteClickListener
     private fun initViewComponents() {
         initViewModel()
         initRecyclerView()
+        initSwipeContainer()
     }
+
 
     private fun initViewModel() {
         viewModel.snackBarText.observe(this, Observer { event ->
@@ -50,9 +51,15 @@ class MainActivity : BaseActivity(), CommentAdapter.OnAddToFavoriteClickListener
         viewManager = LinearLayoutManager(this)
         commentAdapter = CommentAdapter(onAddToFavoriteClickListener = this)
 
-        recyclerView = findViewById<RecyclerView>(R.id.comment_list).apply {
+        recyclerView = findViewById<RecyclerView>(R.id.commentList).apply {
             layoutManager = viewManager
             adapter = commentAdapter
+        }
+    }
+
+    private fun initSwipeContainer() {
+        swipeContainer.setOnRefreshListener {
+            viewModel.fetchComments()
         }
     }
 

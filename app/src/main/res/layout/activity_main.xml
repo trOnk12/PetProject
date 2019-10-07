@@ -17,31 +17,18 @@
             android:layout_height="match_parent"
             tools:context=".ui.main.MainActivity">
 
-        <ProgressBar
-                android:id="@+id/progressBar"
-                style="?android:attr/progressBarStyle"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/swipeContainer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginBottom="8dp"
+                app:isRefreshing="@{viewModel.isRefreshing}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:visibility="@{viewModel.isLoading ? View.GONE : View.VISIBLE }"/>
-
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-        >
+                app:layout_constraintTop_toTopOf="parent">
 
             <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/comment_list"
+                    android:id="@+id/commentList"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_marginStart="8dp"
@@ -54,7 +41,8 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:visibility="@{viewModel.isLoading ? View.GONE : View.VISIBLE }"/>
+                    android:visibility="@{viewModel.isRefreshing ? View.GONE : View.VISIBLE }"/>
+
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
