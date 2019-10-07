@@ -3,7 +3,6 @@ package com.example.myapplication.ui
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.example.myapplication.domain.entity.Comment
-import com.example.core.Outcome
 import com.example.myapplication.domain.usecase.GetCommentsUseCase
 import com.example.myapplication.ui.main.MainActivityViewModel
 import com.example.myapplication.successFullOutcome
@@ -38,7 +37,7 @@ class MainActivityViewModelTest {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         mainActivityViewModel = MainActivityViewModel(mockGetCommentsUseCase)
-        mainActivityViewModel.commentList.observeForever(outComeObserver)
+       // mainActivityViewModel.commentList.observeForever(outComeObserver)
     }
 
     @Test

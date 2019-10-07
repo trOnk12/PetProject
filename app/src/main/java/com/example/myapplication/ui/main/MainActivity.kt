@@ -2,10 +2,12 @@ package com.example.myapplication.ui.main
 
 import android.os.Bundle
 import android.util.Log
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
+import com.example.myapplication.databinding.ActivityMainBinding
 import com.example.myapplication.domain.entity.Comment
 import com.example.myapplication.ui.BaseActivity
 import com.example.myapplication.ui.main.adapter.CommentAdapter
@@ -13,7 +15,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity(), CommentAdapter.OnAddToFavoriteClickListener {
 
-    private val binding: MainActivityViewModel by viewModel()
+    private val viewModel: MainActivityViewModel by viewModel()
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var commentAdapter: CommentAdapter
@@ -24,12 +26,24 @@ class MainActivity : BaseActivity(), CommentAdapter.OnAddToFavoriteClickListener
         setContentView(R.layout.activity_main)
         initViewComponents()
 
-        binding.fetchComments()
+        viewModel.fetchComments()
     }
 
     private fun initViewComponents() {
         initViewModel()
         initRecyclerView()
+    }
+
+    private fun initViewModel() {
+        viewModel.snackBarText.observe(this, Observer { event ->
+            event.getContentIfNotHandled()?.let { message ->
+                showSnackbar(message)
+            }
+        })
+
+        viewModel.items.observe(this, Observer { commentList ->
+            commentAdapter.setData(commentList)
+        })
     }
 
     private fun initRecyclerView() {
@@ -40,18 +54,6 @@ class MainActivity : BaseActivity(), CommentAdapter.OnAddToFavoriteClickListener
             layoutManager = viewManager
             adapter = commentAdapter
         }
-    }
-
-    private fun initViewModel() {
-        binding.snackBarText.observe(this, Observer { event ->
-            event.getContentIfNotHandled()?.let { message ->
-                showSnackbar(message)
-            }
-        })
-
-        binding.items.observe(this, Observer { commentList ->
-            commentAdapter.setData(commentList)
-        })
     }
 
     override fun onAddToFavouriteClick(comment: Comment) {

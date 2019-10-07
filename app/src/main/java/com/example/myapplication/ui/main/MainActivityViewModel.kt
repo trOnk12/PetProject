@@ -25,7 +25,7 @@ class MainActivityViewModel constructor(private val getCommentsUseCase: GetComme
         get() = _snackBarText
 
     fun fetchComments() {
-            _isLoading.value = false
+            _isLoading.value = true
 
         viewModelScope.launch {
             getCommentsUseCase.getComment().let { outcome ->
@@ -35,11 +35,12 @@ class MainActivityViewModel constructor(private val getCommentsUseCase: GetComme
                 }
             }
         }
-          _isLoading.value = false
+
     }
 
     private fun onCommentsLoaded(comments: List<Comment>) {
         _items.value = comments
+        _isLoading.value = false
     }
 
     private fun onFailed(exception: Exception, message: String) {

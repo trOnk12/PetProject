@@ -33,6 +33,7 @@ object Versions {
     const val recyclerview = "1.0.0"
     const val koin = "2.0.1"
 
+    const val swipeRefresh = "1.0.0"
 }
 
 object Dependencies {
@@ -63,5 +64,6 @@ object Dependencies {
 
     val koin = "org.koin:koin-android:${Versions.koin}"
     val support_design = "com.android.support:design:${Versions.support_desin}"
+    val swipeRefresh = "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.swipeRefresh}"
 
 }

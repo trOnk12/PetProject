@@ -55,5 +55,6 @@ dependencies {
     implementation Dependencies.recyclerview
     implementation Dependencies.koin
     implementation Dependencies.support_design
+    implementation Dependencies.swipeRefresh
 
 }
