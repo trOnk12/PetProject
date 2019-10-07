@@ -24,6 +24,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    flavorDimensions "version"
+    productFlavors{
+        akaTwitter{
+            buildConfigField "String","BASE_URL", "https://jsonplaceholder.typicode.com/"
+        }
+    }
 }
 
 dependencies {

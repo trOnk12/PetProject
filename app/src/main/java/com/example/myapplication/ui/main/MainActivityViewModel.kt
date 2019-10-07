@@ -33,7 +33,6 @@ class MainActivityViewModel constructor(private val getCommentsUseCase: GetComme
                 }
             }
         }
-
         _isRefreshing.value = Event(true)
     }
 

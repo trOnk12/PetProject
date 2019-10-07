@@ -1,6 +1,7 @@
 package com.example.myapplication.di
 
 import com.example.core.network.createNetworkClient
+import com.example.myapplication.BuildConfig
 import com.example.myapplication.data.network.ApiService
 import com.example.myapplication.data.repository.CommentRepositoryImpl
 import com.example.myapplication.data.source.remote.CommentRemoteSource
@@ -45,7 +46,6 @@ val networkModule = module {
     single { commentApi }
 }
 
-private const val BASE_URL = "https://jsonplaceholder.typicode.com/"
-
+private val BASE_URL = BuildConfig.BASE_URL
 private val retrofit = createNetworkClient(BASE_URL)
 private val commentApi = retrofit.create(ApiService::class.java)
