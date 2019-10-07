@@ -5,7 +5,7 @@ import org.junit.Before
 
 import org.junit.Assert.*
 
-class CommentUseCaseTest {
+class GetCommentsUseCaseTest {
 
     @Before
     fun setUp() {

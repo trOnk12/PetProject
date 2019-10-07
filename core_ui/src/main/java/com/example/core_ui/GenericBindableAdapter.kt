@@ -5,7 +5,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 
 abstract class GenericBindableAdapter<T> :
-    RecyclerView.Adapter<GenericBindableAdapter<T>.BindableViewHolder<T>>() {
+    RecyclerView.Adapter<BindableViewHolder<T>>() {
 
     var dataList: List<T> = emptyList()
 
@@ -16,21 +16,22 @@ abstract class GenericBindableAdapter<T> :
         }
     }
 
-    abstract override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindableViewHolder<T>
-
     override fun onBindViewHolder(holder: BindableViewHolder<T>, position: Int) {
         holder.bind(dataList[position])
     }
 
     override fun getItemCount() = dataList.size
 
-    inner class BindableViewHolder<T>(var binding: ViewDataBinding, var variableId: Int) :
-        RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: T) {
-            binding.apply {
-                setVariable(variableId, item)
-                executePendingBindings()
-            }
+    abstract override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindableViewHolder<T>
+
+}
+
+class BindableViewHolder<T>(var binding: ViewDataBinding, var variableId: Int) :
+    RecyclerView.ViewHolder(binding.root) {
+    fun bind(item: T) {
+        binding.apply {
+            setVariable(variableId, item)
+            executePendingBindings()
         }
     }
 }

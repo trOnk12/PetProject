@@ -3,6 +3,7 @@ package com.example.myapplication.ui.main.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import com.example.core_ui.BindableViewHolder
 import com.example.core_ui.GenericBindableAdapter
 import com.example.myapplication.BR
 import com.example.myapplication.R

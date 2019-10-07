@@ -7,10 +7,10 @@ import androidx.lifecycle.viewModelScope
 import com.example.core.network.data.Outcome
 import com.example.core.utills.Event
 import com.example.myapplication.domain.entity.Comment
-import com.example.myapplication.domain.usecase.CommentUseCase
+import com.example.myapplication.domain.usecase.GetCommentsUseCase
 import kotlinx.coroutines.launch
 
-class MainActivityViewModel constructor(private val commentUseCase: CommentUseCase) : ViewModel() {
+class MainActivityViewModel constructor(private val getCommentsUseCase: GetCommentsUseCase) : ViewModel() {
 
     private val _items = MutableLiveData<List<Comment>>()
     val items: LiveData<List<Comment>>
@@ -25,17 +25,17 @@ class MainActivityViewModel constructor(private val commentUseCase: CommentUseCa
         get() = _snackBarText
 
     fun fetchComments() {
-        //    _isLoading.value = true
+            _isLoading.value = false
 
         viewModelScope.launch {
-            commentUseCase.getComment().let { outcome ->
+            getCommentsUseCase.getComment().let { outcome ->
                 when (outcome) {
                     is Outcome.Success -> onCommentsLoaded(outcome.value)
                     is Outcome.Failure -> onFailed(outcome.exception, outcome.message)
                 }
             }
         }
-        //  _isLoading.value = false
+          _isLoading.value = false
     }
 
     private fun onCommentsLoaded(comments: List<Comment>) {

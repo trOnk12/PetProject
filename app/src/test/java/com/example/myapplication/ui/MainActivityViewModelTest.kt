@@ -4,7 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.example.myapplication.domain.entity.Comment
 import com.example.core.Outcome
-import com.example.myapplication.domain.usecase.CommentUseCase
+import com.example.myapplication.domain.usecase.GetCommentsUseCase
 import com.example.myapplication.ui.main.MainActivityViewModel
 import com.example.myapplication.successFullOutcome
 import com.nhaarman.mockitokotlin2.mock
@@ -27,7 +27,7 @@ class MainActivityViewModelTest {
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
     private val outComeObserver: Observer<List<Comment>> = mock()
-    private val mockCommentUseCase: CommentUseCase = mock()
+    private val mockGetCommentsUseCase: GetCommentsUseCase = mock()
 
     private lateinit var mainActivityViewModel: MainActivityViewModel
 
@@ -37,7 +37,7 @@ class MainActivityViewModelTest {
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        mainActivityViewModel = MainActivityViewModel(mockCommentUseCase)
+        mainActivityViewModel = MainActivityViewModel(mockGetCommentsUseCase)
         mainActivityViewModel.commentList.observeForever(outComeObserver)
     }
 
@@ -46,7 +46,7 @@ class MainActivityViewModelTest {
         //Arrange
         val result =
             runBlocking {
-                `when`(mockCommentUseCase.getComment())
+                `when`(mockGetCommentsUseCase.getComment())
                     .thenReturn(successFullOutcome)
             }
         //Act
