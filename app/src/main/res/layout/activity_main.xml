@@ -21,7 +21,6 @@
                 android:id="@+id/swipeContainer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:isRefreshing="@{viewModel.isRefreshing}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -41,7 +40,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:visibility="@{viewModel.isRefreshing ? View.GONE : View.VISIBLE }"/>
+                    />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

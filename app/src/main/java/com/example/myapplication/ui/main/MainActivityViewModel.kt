@@ -16,8 +16,8 @@ class MainActivityViewModel constructor(private val getCommentsUseCase: GetComme
     val items: LiveData<List<Comment>>
         get() = _items
 
-    private val _isRefreshing = MutableLiveData<Boolean>()
-    val isRefreshing: LiveData<Boolean>
+    private val _isRefreshing = MutableLiveData<Event<Boolean>>()
+    val isRefreshing: LiveData<Event<Boolean>>
         get() = _isRefreshing
 
     private val _snackBarText = MutableLiveData<Event<String>>()
@@ -25,8 +25,6 @@ class MainActivityViewModel constructor(private val getCommentsUseCase: GetComme
         get() = _snackBarText
 
     fun fetchComments() {
-        _isRefreshing.value = true
-
         viewModelScope.launch {
             getCommentsUseCase.getComment().let { outcome ->
                 when (outcome) {
@@ -35,7 +33,8 @@ class MainActivityViewModel constructor(private val getCommentsUseCase: GetComme
                 }
             }
         }
-        _isRefreshing.value = false
+
+        _isRefreshing.value = Event(true)
     }
 
     private fun onCommentsLoaded(comments: List<Comment>) {
