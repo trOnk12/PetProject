@@ -1,11 +1,21 @@
 apply plugin: 'java-library'
 apply from: "$rootDir/common-kotlin-library.gradle"
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
 
 dependencies {
     implementation Dependencies.retrofit
     implementation Dependencies.loggin_interceptor
     implementation Dependencies.retrofit_gson_converter
     implementation Dependencies.gson
+    implementation Dependencies.couroutines_core
+    implementation Dependencies.kotlinCoroutinesAndroid
+}
+
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
 }
 
 

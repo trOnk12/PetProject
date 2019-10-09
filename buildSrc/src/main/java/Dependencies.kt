@@ -10,6 +10,8 @@ object Versions {
     const val versionName = "1.0"
     const val testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
+
+    const val coroutine_android = "1.3.2"
     const val support_desin = "28.0.0"
     const val kotlin = "1.2.71"
     const val androidx_appcompat = "1.1.0"
@@ -59,6 +61,7 @@ object Dependencies {
     val gson = "com.google.code.gson:gson:${Versions.gson}"
 
     val couroutines_core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.couroutines_core}"
+    val kotlinCoroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutine_android}"
     val viewmodel_ktx = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.viewmodel_ktx}"
     val koin_viewmodel = "org.koin:koin-android-viewmodel:${Versions.koin_viewmodel}"
 

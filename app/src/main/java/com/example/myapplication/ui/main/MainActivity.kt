@@ -10,7 +10,6 @@ import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityMainBinding
 import com.example.myapplication.domain.entity.Comment
 import com.example.myapplication.ui.BaseActivity
-import com.example.myapplication.ui.main.adapter.CommentAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.viewmodel.ext.android.viewModel
 

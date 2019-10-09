@@ -27,7 +27,7 @@ android {
     flavorDimensions "version"
     productFlavors{
         akaTwitter{
-            buildConfigField "String","BASE_URL", "https://jsonplaceholder.typicode.com/"
+            buildConfigField "String","BASE_URL",'"https://jsonplaceholder.typicode.com/"'
         }
     }
 }
@@ -62,5 +62,6 @@ dependencies {
     implementation Dependencies.koin
     implementation Dependencies.support_design
     implementation Dependencies.swipeRefresh
+    implementation Dependencies.kotlinCoroutinesAndroid
 
 }
