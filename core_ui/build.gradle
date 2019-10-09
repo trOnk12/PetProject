@@ -2,6 +2,8 @@ apply from: "$rootDir/common-android-library.gradle"
 
 dependencies {
     implementation Dependencies.recyclerview
+    implementation Dependencies.androidAppCompat
+    implementation Dependencies.koin
     compile project(path: ':core')
 
 }

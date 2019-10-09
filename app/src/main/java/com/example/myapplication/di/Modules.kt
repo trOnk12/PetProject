@@ -6,7 +6,7 @@ import com.example.myapplication.data.network.CommentApi
 import com.example.myapplication.data.repository.CommentRepositoryImpl
 import com.example.myapplication.data.source.remote.CommentRemoteSource
 import com.example.myapplication.domain.repository.CommentRepository
-import com.example.myapplication.domain.usecase.GetCommentsUseCase
+import com.example.myapplication.domain.usecase.GetComments
 import com.example.myapplication.ui.main.MainActivityViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.context.loadKoinModules
@@ -39,7 +39,7 @@ val dataSourceModule = module {
 }
 
 val useCaseModule = module {
-    factory { GetCommentsUseCase(commentRepository = get()) }
+    factory { GetComments(commentRepository = get()) }
 }
 
 val networkModule = module {

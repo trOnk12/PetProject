@@ -7,7 +7,7 @@ import com.example.core.interactor.UseCase.None
 import com.example.myapplication.domain.repository.CommentRepository
 import com.example.myapplication.domain.model.Comment
 
-class GetCommentsUseCase(private var commentRepository: CommentRepository) : UseCase<List<Comment>, None>() {
+class GetComments(private var commentRepository: CommentRepository) : UseCase<List<Comment>, None>() {
 
     override suspend fun run(params: None): Either<Failure, List<Comment>> = commentRepository.comments()
 

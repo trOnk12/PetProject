@@ -1,6 +1,6 @@
 package com.example.myapplication.data.network
 
-import com.example.myapplication.data.model.DataComment
+import com.example.myapplication.data.entity.CommentEntity
 import retrofit2.Call
 import retrofit2.http.GET
 
@@ -10,6 +10,6 @@ interface CommentApi {
     }
 
     @GET(COMMENTS)
-     fun getComments(): Call<List<DataComment>>
+     fun getComments(): Call<List<CommentEntity>>
 
 }

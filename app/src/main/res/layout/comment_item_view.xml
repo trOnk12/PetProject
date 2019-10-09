@@ -3,7 +3,7 @@
     <data>
         <variable name="favouriteCallback"
                   type="com.example.myapplication.ui.main.CommentAdapter"/>
-        <variable name="comment_item" type="com.example.myapplication.domain.entity.Comment"/>
+        <variable name="comment_item" type="com.example.myapplication.domain.model.Comment"/>
     </data>
 
     <LinearLayout

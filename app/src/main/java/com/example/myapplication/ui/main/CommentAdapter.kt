@@ -8,7 +8,7 @@ import com.example.core_ui.GenericBindableAdapter
 import com.example.myapplication.BR
 import com.example.myapplication.R
 import com.example.myapplication.databinding.CommentItemViewBinding
-import com.example.myapplication.domain.entity.Comment
+import com.example.myapplication.domain.model.Comment
 
 class CommentAdapter(var onAddToFavoriteClickListener: OnAddToFavoriteClickListener) : GenericBindableAdapter<Comment>() {
 

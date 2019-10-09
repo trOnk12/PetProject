@@ -2,7 +2,6 @@ package com.example.core.functional
 
 import com.example.core.exception.Failure
 import retrofit2.Call
-import java.rmi.ServerError
 
 class Transformer {
     operator fun <T, R> invoke(call: Call<T>, transform: (T) -> R, default: T): Either<Failure, R> {

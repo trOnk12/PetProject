@@ -8,10 +8,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityMainBinding
-import com.example.myapplication.domain.entity.Comment
-import com.example.myapplication.ui.BaseActivity
-import kotlinx.android.synthetic.main.activity_main.*
-import org.koin.android.viewmodel.ext.android.viewModel
+import com.example.myapplication.domain.model.Comment
+import com.example.core_ui.platform.BaseActivity
+import com.example.myapplication.di.injectFeature
 
 class MainActivity : BaseActivity(), CommentAdapter.OnAddToFavoriteClickListener {
 
@@ -24,7 +23,8 @@ class MainActivity : BaseActivity(), CommentAdapter.OnAddToFavoriteClickListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_comment_lis)
+        injectFeature()
         initViewComponents()
 
         viewModel.fetchComments()
@@ -37,12 +37,14 @@ class MainActivity : BaseActivity(), CommentAdapter.OnAddToFavoriteClickListener
     }
 
     private fun initViewModel() {
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_comment_lis)
         binding.viewModel = this.viewModel
 
-        viewModel.snackBarText.observe(this, Observer { snackBarEvent ->
-            snackBarEvent.getContentIfNotHandled()?.let { message ->
-                showSnackbar(message)
+        viewModel.failure.observe(this, Observer {
+            it.getContentIfNotHandled()?.let { failure ->
+                when (failure) {
+                    is Failure.ServerError -> showSnackbar(getString(R.string.server_error_message))
+                }
             }
         })
 

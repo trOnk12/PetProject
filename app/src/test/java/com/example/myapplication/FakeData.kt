@@ -1,6 +1,6 @@
 package com.example.myapplication
 
-import com.example.myapplication.domain.entity.Comment
+import com.example.myapplication.domain.model.Comment
 import com.example.core.Outcome
 
 val fakeComment = Comment(1, 2, "TEST", "TEST")
