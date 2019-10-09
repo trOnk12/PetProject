@@ -4,16 +4,11 @@ import com.example.core.exception.Failure
 import com.example.core.functional.Either
 import com.example.core.interactor.UseCase
 import com.example.core.interactor.UseCase.None
-import com.example.core.network.data.Outcome
 import com.example.myapplication.domain.repository.CommentRepository
-import com.example.myapplication.domain.entity.Comment
+import com.example.myapplication.domain.model.Comment
 
 class GetCommentsUseCase(private var commentRepository: CommentRepository) : UseCase<List<Comment>, None>() {
 
-    override suspend fun run(params: None): Either<Failure, List<Comment>> {
-
-    }
-
-    suspend fun getComment(): Outcome<List<Comment>> = commentRepository.getComments()
+    override suspend fun run(params: None): Either<Failure, List<Comment>> = commentRepository.comments()
 
 }
