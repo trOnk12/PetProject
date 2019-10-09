@@ -2,7 +2,7 @@ package com.example.myapplication.di
 
 import com.example.core.network.createNetworkClient
 import com.example.myapplication.BuildConfig
-import com.example.myapplication.data.network.CommentsAPI
+import com.example.myapplication.data.network.CommentApi
 import com.example.myapplication.data.repository.CommentRepositoryImpl
 import com.example.myapplication.data.source.remote.CommentRemoteSource
 import com.example.myapplication.domain.repository.CommentRepository
@@ -48,4 +48,4 @@ val networkModule = module {
 
 private val BASE_URL = BuildConfig.BASE_URL
 private val retrofit = createNetworkClient(BASE_URL)
-private val commentApi = retrofit.create(CommentsAPI::class.java)
+private val commentApi = retrofit.create(CommentApi::class.java)
