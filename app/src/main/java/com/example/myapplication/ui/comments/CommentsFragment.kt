@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.core_ui.platform.BaseFragment
 import com.example.myapplication.R
 import com.example.myapplication.di.injectFeature
-import com.example.myapplication.domain.model.Comment
 import com.example.myapplication.ui.route.Navigator
 import kotlinx.android.synthetic.main.activity_comment_list.*
 import org.koin.android.ext.android.inject

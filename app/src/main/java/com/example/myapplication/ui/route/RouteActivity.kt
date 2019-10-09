@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.core_ui.platform.BaseActivity
 import com.example.core_ui.platform.BaseFragment
 import com.example.myapplication.di.injectFeature
+import org.koin.android.ext.android.inject
 
 class RouteActivity : AppCompatActivity() {
 

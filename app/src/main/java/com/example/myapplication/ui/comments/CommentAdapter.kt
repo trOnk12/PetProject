@@ -13,11 +13,19 @@ import com.example.myapplication.domain.model.Comment
 class CommentAdapter :
     GenericBindableAdapter<Comment>() {
 
-     var onAddToFavoriteClick : (Comment) -> Unit = {_ -> }
+    interface OnAddToFavouriteClickListener{
+        fun onAddToFavouriteClick(comment:Comment)
+    }
+
+    lateinit var onAddToFavoriteClickListener : OnAddToFavouriteClickListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindableViewHolder<Comment> {
         val binding: CommentItemViewBinding =
             DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.comment_item_view, parent, false)
+
+        with(binding){
+            onAddToFavoriteClickListener = onAddToFavoriteClickListener
+        }
 
         return BindableViewHolder(binding, BR.commentItem)
     }

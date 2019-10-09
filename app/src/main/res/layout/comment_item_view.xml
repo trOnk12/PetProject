@@ -2,10 +2,12 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <variable name="comment_item" type="com.example.myapplication.domain.model.Comment"/>
+        <variable name="onAddToFavoriteClickListener"
+                  type="com.example.myapplication.ui.comments.CommentAdapter.OnAddToFavouriteClickListener"/>
     </data>
 
     <LinearLayout
-            android:onClick="@{() -> onAddToFavoriteClick(comment_item)}"
+            android:onClick="@{() -> onAddToFavoriteClickListener.onAddToFavouriteClick(comment_item)}"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
