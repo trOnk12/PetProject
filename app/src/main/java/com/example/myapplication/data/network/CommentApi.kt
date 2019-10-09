@@ -10,6 +10,6 @@ interface CommentApi {
     }
 
     @GET(COMMENTS)
-     fun getComments(): Call<List<CommentEntity>>
+     fun comments(): Call<List<CommentEntity>>
 
 }

@@ -1,12 +1,15 @@
 package com.example.myapplication.di
 
+import com.example.core.functional.Transformer
 import com.example.core.network.createNetworkClient
 import com.example.myapplication.BuildConfig
+import com.example.myapplication.data.network.CommentService
 import com.example.myapplication.data.repository.CommentRepositoryImpl
 import com.example.myapplication.data.source.remote.CommentRemoteSource
 import com.example.myapplication.domain.repository.CommentRepository
 import com.example.myapplication.domain.usecase.GetComments
 import com.example.myapplication.ui.comments.CommentsActivityViewModel
+import com.example.myapplication.ui.route.Navigator
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.dsl.module
@@ -20,7 +23,9 @@ private val loadFeature by lazy {
             viewModelModule,
             useCaseModule,
             repositoryModule,
-            dataSourceModule
+            dataSourceModule,
+            transformerModule,
+            navigatorModule
         )
     )
 }
@@ -34,7 +39,7 @@ val repositoryModule = module {
 }
 
 val dataSourceModule = module {
-    single { CommentRemoteSource(commentApi) }
+    single { CommentRemoteSource(get(), get()) }
 }
 
 val useCaseModule = module {
@@ -42,9 +47,16 @@ val useCaseModule = module {
 }
 
 val networkModule = module {
-    single { commentApi }
+    single { CommentService(retrofit) }
 }
 
-private val BASE_URL = BuildConfig.BASE_URL
+val transformerModule = module {
+    factory { Transformer() }
+}
+
+val navigatorModule = module {
+    single { Navigator() }
+}
+
+private const val BASE_URL = BuildConfig.BASE_URL
 private val retrofit = createNetworkClient(BASE_URL)
-private val commentApi = retrofit.create(CommentApi::class.java)

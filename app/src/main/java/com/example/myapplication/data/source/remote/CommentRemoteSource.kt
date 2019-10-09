@@ -10,6 +10,6 @@ import com.example.myapplication.domain.model.Comment
 
 class CommentRemoteSource(private var transformer: Transformer, private var commentService: CommentService) {
     fun comments(): Either<Failure, List<Comment>> {
-        return transformer(commentService.getComments(), { it.mapToDomain() }, emptyList<CommentEntity>())
+        return transformer(commentService.comments(), { it.mapToDomain() }, emptyList<CommentEntity>())
     }
 }
