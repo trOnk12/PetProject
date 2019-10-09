@@ -8,5 +8,5 @@ class CommentService constructor(retrofit: Retrofit) : CommentApi {
         retrofit.create(CommentApi::class.java)
     }
 
-    override suspend fun getComments(): List<DataComment> = commentApi.comments()
+    override fun getComments() = commentApi.comments()
 }

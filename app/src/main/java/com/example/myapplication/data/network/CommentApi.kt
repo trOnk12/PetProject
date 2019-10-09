@@ -5,11 +5,11 @@ import retrofit2.Call
 import retrofit2.http.GET
 
 interface CommentApi {
-    companion object{
+    companion object {
         private const val COMMENTS = "/comments"
     }
 
     @GET(COMMENTS)
-    suspend fun getComments(): List<DataComment>
+     fun getComments(): Call<List<DataComment>>
 
 }
