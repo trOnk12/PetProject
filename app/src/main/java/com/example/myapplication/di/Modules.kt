@@ -2,12 +2,11 @@ package com.example.myapplication.di
 
 import com.example.core.network.createNetworkClient
 import com.example.myapplication.BuildConfig
-import com.example.myapplication.data.network.CommentApi
 import com.example.myapplication.data.repository.CommentRepositoryImpl
 import com.example.myapplication.data.source.remote.CommentRemoteSource
 import com.example.myapplication.domain.repository.CommentRepository
 import com.example.myapplication.domain.usecase.GetComments
-import com.example.myapplication.ui.main.MainActivityViewModel
+import com.example.myapplication.ui.comments.CommentsActivityViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.dsl.module
@@ -27,7 +26,7 @@ private val loadFeature by lazy {
 }
 
 val viewModelModule = module {
-    viewModel { MainActivityViewModel(get()) }
+    viewModel { CommentsActivityViewModel(get()) }
 }
 
 val repositoryModule = module {

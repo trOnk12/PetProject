@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.main
+package com.example.myapplication.ui.comments
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,7 +10,7 @@ import com.example.myapplication.domain.model.Comment
 import com.example.myapplication.domain.usecase.GetComments
 import kotlinx.coroutines.launch
 
-class MainActivityViewModel constructor(private val getComments: GetComments) : BaseViewModel() {
+class CommentsActivityViewModel constructor(private val getComments: GetComments) : BaseViewModel() {
 
     private val _items = MutableLiveData<List<Comment>>()
     val items: LiveData<List<Comment>>

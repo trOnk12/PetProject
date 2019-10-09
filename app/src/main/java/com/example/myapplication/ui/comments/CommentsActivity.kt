@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.main
+package com.example.myapplication.ui.comments
 
 import android.os.Bundle
 import android.util.Log
@@ -12,9 +12,12 @@ import com.example.myapplication.domain.model.Comment
 import com.example.core_ui.platform.BaseActivity
 import com.example.myapplication.di.injectFeature
 
-class MainActivity : BaseActivity(), CommentAdapter.OnAddToFavoriteClickListener {
+class CommentsActivity : BaseActivity(), CommentAdapter.OnAddToFavoriteClickListener {
+    companion object {
+        fun callingIntent(context: Context):Intent = Intent(context, CommentsActivity::class.java)
+    }
 
-    private val viewModel: MainActivityViewModel by viewModel()
+    private val viewModel: CommentsActivityViewModel by viewModel()
     private lateinit var binding: ActivityMainBinding
 
     private lateinit var recyclerView: RecyclerView
@@ -23,7 +26,7 @@ class MainActivity : BaseActivity(), CommentAdapter.OnAddToFavoriteClickListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_comment_lis)
+        setContentView(R.layout.activity_comment_list)
         injectFeature()
         initViewComponents()
 
@@ -37,7 +40,7 @@ class MainActivity : BaseActivity(), CommentAdapter.OnAddToFavoriteClickListener
     }
 
     private fun initViewModel() {
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_comment_lis)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_comment_list)
         binding.viewModel = this.viewModel
 
         viewModel.failure.observe(this, Observer {

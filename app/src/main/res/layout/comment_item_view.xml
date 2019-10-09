@@ -2,7 +2,7 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <variable name="favouriteCallback"
-                  type="com.example.myapplication.ui.main.CommentAdapter"/>
+                  type="com.example.myapplication.ui.comments.CommentAdapter"/>
         <variable name="comment_item" type="com.example.myapplication.domain.model.Comment"/>
     </data>
 

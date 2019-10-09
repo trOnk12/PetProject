@@ -9,13 +9,13 @@
 
         <variable
                 name="viewModel"
-                type="com.example.myapplication.ui.main.MainActivityViewModel"/>
+                type="com.example.myapplication.ui.comments.CommentsActivityViewModel"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".ui.main.MainActivity">
+            tools:context=".ui.comments.CommentsActivity">
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                 android:id="@+id/swipeContainer"
