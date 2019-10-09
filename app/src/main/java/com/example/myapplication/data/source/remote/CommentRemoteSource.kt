@@ -1,19 +1,22 @@
 package com.example.myapplication.data.source.remote
 
-import com.example.core.network.data.Outcome
-import com.example.myapplication.data.model.mapToDomain
-import com.example.myapplication.data.network.ApiService
+import com.example.core.exception.Failure
+import com.example.core.functional.Either
+import com.example.myapplication.data.network.CommentsAPI
 import com.example.myapplication.domain.entity.Comment
-import retrofit2.HttpException
 
-class CommentRemoteSource(var apiService: ApiService) {
+class CommentRemoteSource(var commentsAPI: CommentsAPI) {
 
-    suspend fun getComments(): Outcome<List<Comment>> {
-        return try {
-            Outcome.Success((apiService.getComments().mapToDomain()))
-        } catch (ex: HttpException) {
-            Outcome.Failure(ex.message(), ex)
-        }
+    fun comments(): Either<Failure, List<Comment>>{
+
     }
+
+//    suspend fun getComments(): Outcome<List<Comment>> {
+//        return try {
+//            Outcome.Success((commentsAPI.getComments().mapToDomain()))
+//        } catch (ex: HttpException) {
+//            Outcome.Failure(ex.message(), ex)
+//        }
+//    }
 
 }

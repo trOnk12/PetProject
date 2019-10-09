@@ -4,9 +4,12 @@ import com.example.myapplication.data.model.DataComment
 import retrofit2.Call
 import retrofit2.http.GET
 
-interface ApiService {
+interface CommentsAPI {
+    companion object{
+        private const val COMMENTS = "/comments"
+    }
 
-    @GET("/comments")
+    @GET(COMMENTS)
     suspend fun getComments(): List<DataComment>
 
 }
