@@ -21,6 +21,7 @@ import com.example.myapplication.domain.model.Comment
 import com.example.myapplication.ui.route.Navigator
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.comments_fragment.*
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -78,13 +79,10 @@ class CommentsFragment : BaseFragment() {
         viewModel.fetchComments()
     }
 
-
     private fun renderCommentList(comments: List<Comment>) {
         stopRefreshing()
 
-        GlobalScope.launch(Dispatchers.Main) {
-            commentAdapter.updateData(comments)
-        }
+        CoroutineScope(Dispatchers.Main).launch { commentAdapter.updateData(comments) }
     }
 
     private fun handleFailure(failure: Failure) {

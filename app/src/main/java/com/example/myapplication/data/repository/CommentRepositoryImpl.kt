@@ -9,5 +9,7 @@ import com.example.myapplication.domain.model.Comment
 class CommentRepositoryImpl(
     var remoteSource: CommentRemoteSource
 ) : CommentRepository {
+    override fun comments(oldValue: List<Comment>): Either<Failure, List<Comment>> = remoteSource.comments(oldValue)
+
     override fun comments(): Either<Failure, List<Comment>> = remoteSource.comments()
 }
