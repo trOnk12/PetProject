@@ -2,21 +2,22 @@ package com.example.core_ui
 
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import kotlin.properties.Delegates
 
 abstract class GenericBindableAdapter<T> :
     RecyclerView.Adapter<BindableViewHolder<T>>() {
 
-    var dataList: List<T> by Delegates.observable(emptyList()){
-        _,_,_ -> notifyDataSetChanged()
+    var dataList: List<T> by Delegates.observable(emptyList()) { _, oldValue, newValue ->
+        updateList(oldValue, newValue)
     }
 
-    fun clearData() {
-        if (dataList is ArrayList) {
-            (dataList as ArrayList).clear()
-            notifyDataSetChanged()
-        }
+    abstract fun diffCallBack(oldValue: List<T>, newValue: List<T>): DiffUtil.Callback
+
+    private fun updateList(oldValue: List<T>, newValue: List<T>) {
+        val diffResult = DiffUtil.calculateDiff(diffCallBack(oldValue, newValue))
+        diffResult.dispatchUpdatesTo(this)
     }
 
     override fun onBindViewHolder(holder: BindableViewHolder<T>, position: Int) {
