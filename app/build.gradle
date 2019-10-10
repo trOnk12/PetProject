@@ -63,5 +63,6 @@ dependencies {
     implementation Dependencies.support_design
     implementation Dependencies.swipeRefresh
     implementation Dependencies.kotlinCoroutinesAndroid
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
 
 }

@@ -3,17 +3,13 @@ package com.example.core_ui
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
+import kotlin.properties.Delegates
 
 abstract class GenericBindableAdapter<T> :
     RecyclerView.Adapter<BindableViewHolder<T>>() {
 
-    var dataList: List<T> = emptyList()
-
-    fun setData(data: List<T>?) {
-        data?.let {
-            dataList = data
-            notifyDataSetChanged()
-        }
+    var dataList: List<T> by Delegates.observable(emptyList()){
+        _,_,_ -> notifyDataSetChanged()
     }
 
     fun clearData() {

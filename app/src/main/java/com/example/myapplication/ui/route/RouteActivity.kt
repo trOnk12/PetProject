@@ -17,7 +17,7 @@ class RouteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         injectFeature()
 
-        navigator.showMain()
+        navigator.showMain(this)
     }
 
 }

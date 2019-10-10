@@ -24,7 +24,6 @@ private val loadFeature by lazy {
             useCaseModule,
             repositoryModule,
             dataSourceModule,
-            transformerModule,
             navigatorModule
         )
     )
@@ -39,6 +38,7 @@ val repositoryModule = module {
 }
 
 val dataSourceModule = module {
+    factory { Transformer() }
     single { CommentRemoteSource(get(), get()) }
 }
 
@@ -48,10 +48,6 @@ val useCaseModule = module {
 
 val networkModule = module {
     single { CommentService(retrofit) }
-}
-
-val transformerModule = module {
-    factory { Transformer() }
 }
 
 val navigatorModule = module {

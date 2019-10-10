@@ -1,6 +1,7 @@
 package com.example.myapplication.ui.route
 
 import android.content.Context
+import android.util.Log
 import com.example.myapplication.domain.model.Comment
 import com.example.myapplication.ui.comments.CommentsActivity
 
@@ -13,7 +14,7 @@ class Navigator {
     }
 
     fun showCommentDetails(comment: Comment) {
-
+        Log.d("TEST", "comment" + comment.body)
     }
 
 }
