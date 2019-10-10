@@ -4,6 +4,8 @@ dependencies {
     implementation Dependencies.recyclerview
     implementation Dependencies.androidAppCompat
     implementation Dependencies.koin
+    implementation Dependencies.couroutines_core
+    implementation Dependencies.kotlinCoroutinesAndroid
     compile project(path: ':core')
 
 }

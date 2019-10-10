@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.UiThread
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -20,6 +21,9 @@ import com.example.myapplication.domain.model.Comment
 import com.example.myapplication.ui.route.Navigator
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.comments_fragment.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -74,9 +78,13 @@ class CommentsFragment : BaseFragment() {
         viewModel.fetchComments()
     }
 
+
     private fun renderCommentList(comments: List<Comment>) {
         stopRefreshing()
-        commentAdapter.dataList = comments
+
+        GlobalScope.launch(Dispatchers.Main) {
+            commentAdapter.updateData(comments)
+        }
     }
 
     private fun handleFailure(failure: Failure) {
