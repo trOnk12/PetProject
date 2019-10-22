@@ -7,5 +7,4 @@ import com.example.myapplication.domain.model.Comment
 
 interface CommentRepository {
     fun comments(): Either<Failure, List<Comment>>
-    fun comments(oldValue: List<Comment>): Either<Failure, DiffUtil.DiffResult>
 }

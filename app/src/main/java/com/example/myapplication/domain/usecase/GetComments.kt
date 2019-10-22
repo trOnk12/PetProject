@@ -9,13 +9,13 @@ import com.example.core.interactor.UseCase.None
 import com.example.myapplication.domain.repository.CommentRepository
 import com.example.myapplication.domain.model.Comment
 
-class GetComments(private var commentRepository: CommentRepository) : UseCase<DiffUtil.DiffResult, List<Comment>?>() {
+class GetComments(private var commentRepository: CommentRepository) : UseCase<List<Comment>, None>() {
 
-    override suspend fun run(params: List<Comment>?): Either<Failure, DiffUtil.DiffResult> {
-        return commentRepository.comments().map { DiffUtil.calculateDiff(difference(emptyList(), it)) }
+    override suspend fun run(params: None): Either<Failure, List<Comment>> {
+        return commentRepository.comments()
     }
 
-    private fun difference(oldValue: List<Comment>, newValue: List<Comment>): DiffUtil.Callback {
+     private fun difference(oldValue: List<Comment>, newValue: List<Comment>): DiffUtil.Callback {
         return object : DiffUtil.Callback() {
             override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
                 return oldValue[oldItemPosition].id == newValue[newItemPosition].id

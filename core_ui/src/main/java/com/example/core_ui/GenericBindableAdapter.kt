@@ -11,21 +11,14 @@ import kotlinx.coroutines.withContext
 abstract class GenericBindableAdapter<T> :
     RecyclerView.Adapter<BindableViewHolder<T>>() {
 
-    private var dataList: List<T> = emptyList()
+    protected var dataList: List<T> = emptyList()
 
-    private fun setData(newValue: List<T>) {
+     fun setData(newValue: List<T>) {
         dataList = newValue
     }
 
-    private fun clearData() {
+     fun clearData() {
         (dataList as? ArrayList)?.clear()
-    }
-
-    fun updateData(newValue: List<T>, result: DiffUtil.DiffResult) {
-        result.dispatchUpdatesTo(this)
-
-        clearData()
-        setData(newValue)
     }
 
     override fun onBindViewHolder(holder: BindableViewHolder<T>, position: Int) {
@@ -47,3 +40,4 @@ class BindableViewHolder<T>(var binding: ViewDataBinding, var variableId: Int) :
         }
     }
 }
+

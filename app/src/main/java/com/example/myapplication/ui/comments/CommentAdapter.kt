@@ -10,6 +10,8 @@ import com.example.myapplication.BR
 import com.example.myapplication.R
 import com.example.myapplication.databinding.CommentItemViewBinding
 import com.example.myapplication.domain.model.Comment
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class CommentAdapter :
     GenericBindableAdapter<Comment>() {
@@ -29,6 +31,22 @@ class CommentAdapter :
         }
 
         return BindableViewHolder(binding, BR.comment_item)
+    }
+
+    suspend fun updateData(newValues: List<Comment>) {
+        calculateDiff(currentValues = dataList, newValues = newValues)
+    }
+
+    private suspend fun calculateDiff(currentValues: List<Comment>, newValues: List<Comment>) {
+        withContext(Dispatchers.IO) {
+            val diffCallBack = CommentDiffCallBack(currentValues, newValues)
+            val diffResult = DiffUtil.calculateDiff(diffCallBack)
+
+            withContext(Dispatchers.Main) {
+                setData(newValues)
+                diffResult.dispatchUpdatesTo(this@CommentAdapter)
+            }
+        }
     }
 
 }
