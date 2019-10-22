@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.RecyclerView
 import com.example.core_ui.BindableViewHolder
-import com.example.core_ui.GenericBindableAdapter
 import com.example.myapplication.BR
 import com.example.myapplication.R
 import com.example.myapplication.databinding.CommentItemViewBinding
@@ -13,18 +13,31 @@ import com.example.myapplication.domain.model.Comment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class CommentAdapter :
-    GenericBindableAdapter<Comment>() {
-
-    interface OnAddToFavouriteClickListener {
-        fun onAddToFavouriteClick(comment: Comment)
-    }
+class CommentAdapter : RecyclerView.Adapter<BindableViewHolder<Comment>>() {
 
     lateinit var onAddToFavoriteClickListener: OnAddToFavouriteClickListener
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindableViewHolder<Comment> {
+    var comments: List<Comment> = emptyList()
+
+    suspend fun updateData(newValues: List<Comment>) {
+        calculateDiff(newValues)
+    }
+
+    private suspend fun calculateDiff(newValues: List<Comment>) {
+        withContext(Dispatchers.IO) {
+            val diffCallBack = CommentDiffCallBack(comments, newValues)
+            val diffResult = DiffUtil.calculateDiff(diffCallBack)
+
+            withContext(Dispatchers.Main) {
+                comments = newValues
+                diffResult.dispatchUpdatesTo(this@CommentAdapter)
+            }
+        }
+    }
+
+    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): BindableViewHolder<Comment> {
         val binding: CommentItemViewBinding =
-            DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.comment_item_view, parent, false)
+            DataBindingUtil.inflate(LayoutInflater.from(p0.context), R.layout.comment_item_view, p0, false)
 
         with(binding) {
             onAddToFavoriteClickListener = this@CommentAdapter.onAddToFavoriteClickListener
@@ -33,20 +46,14 @@ class CommentAdapter :
         return BindableViewHolder(binding, BR.comment_item)
     }
 
-    suspend fun updateData(newValues: List<Comment>) {
-        calculateDiff(currentValues = dataList, newValues = newValues)
+    override fun onBindViewHolder(p0: BindableViewHolder<Comment>, p1: Int) {
+        p0.bind(comments[p1])
     }
 
-    private suspend fun calculateDiff(currentValues: List<Comment>, newValues: List<Comment>) {
-        withContext(Dispatchers.IO) {
-            val diffCallBack = CommentDiffCallBack(currentValues, newValues)
-            val diffResult = DiffUtil.calculateDiff(diffCallBack)
+    override fun getItemCount() = comments.size
 
-            withContext(Dispatchers.Main) {
-                setData(newValues)
-                diffResult.dispatchUpdatesTo(this@CommentAdapter)
-            }
-        }
+    interface OnAddToFavouriteClickListener {
+        fun onAddToFavouriteClick(comment: Comment)
     }
 
 }

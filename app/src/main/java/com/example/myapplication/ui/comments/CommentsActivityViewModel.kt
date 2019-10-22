@@ -19,17 +19,18 @@ class CommentsActivityViewModel constructor(
     val comments: LiveData<List<Comment>>
         get() = _items
 
-    private val _isRefreshing = MutableLiveData<Event<Boolean>>()
-    val isRefreshing: LiveData<Event<Boolean>>
+    private val _isRefreshing = MutableLiveData<Boolean>()
+    val isRefreshing: LiveData<Boolean>
         get() = _isRefreshing
 
     fun fetchComments() {
         viewModelScope.launch {
-          getComments(None()) { it.either(::handleFailure, ::handleComments) }
+            getComments(None()) { it.either(::handleFailure, ::handleComments) }
         }
     }
 
     private fun handleComments(comments: List<Comment>) {
+        _isRefreshing.value = true
         _items.value = comments
     }
 

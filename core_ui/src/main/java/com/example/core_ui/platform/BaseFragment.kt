@@ -10,7 +10,7 @@ abstract class BaseFragment : Fragment() {
 
     abstract fun layoutId() : Int
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
-        inflater.inflate(layoutId(), container, false)
+//    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
+//        inflater.inflate(layoutId(), container, false)
 
 }
