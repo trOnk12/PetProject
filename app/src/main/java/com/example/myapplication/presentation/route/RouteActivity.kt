@@ -1,11 +1,7 @@
-package com.example.myapplication.ui.route
+package com.example.myapplication.presentation.route
 
 import android.os.Bundle
-import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import com.example.core_ui.platform.BaseActivity
-import com.example.core_ui.platform.BaseFragment
 import com.example.myapplication.di.injectFeature
 import org.koin.android.ext.android.inject
 
@@ -16,7 +12,6 @@ class RouteActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         injectFeature()
-
         navigator.showMain(this)
     }
 

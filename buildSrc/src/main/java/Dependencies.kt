@@ -1,6 +1,5 @@
 object Versions {
 
-
     const val compiledSdkVersion = 29
     const val buildToolsVersion = "29.0.2"
     const val applicationId = "com.example.myapplication"
@@ -9,7 +8,6 @@ object Versions {
     const val versionCode = 1
     const val versionName = "1.0"
     const val testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-
 
     const val coroutine_android = "1.3.2"
     const val support_desin = "28.0.0"
@@ -36,6 +34,7 @@ object Versions {
     const val koin = "2.0.1"
 
     const val swipeRefresh = "1.0.0"
+    const val viewpager2 = "1.0.0-rc01"
 }
 
 object Dependencies {
@@ -68,5 +67,6 @@ object Dependencies {
     val koin = "org.koin:koin-android:${Versions.koin}"
     val support_design = "com.android.support:design:${Versions.support_desin}"
     val swipeRefresh = "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.swipeRefresh}"
+    val viewpager2 = "androidx.viewpager2:viewpager2:${Versions.viewpager2}"
 
 }

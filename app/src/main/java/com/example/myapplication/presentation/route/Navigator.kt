@@ -1,0 +1,20 @@
+package com.example.myapplication.presentation.route
+
+import android.content.Context
+import android.util.Log
+import com.example.myapplication.domain.model.Comment
+import com.example.myapplication.presentation.main.MainActivity
+import com.example.myapplication.presentation.comments.CommentsActivity
+import com.example.myapplication.presentation.search.SearchActivity
+
+class Navigator {
+
+    private fun showComments(context: Context) = context.startActivity(CommentsActivity.callingIntent(context))
+     fun showMain(context:Context) = context.startActivity(MainActivity.callingIntent(context))
+    fun showSearch(context:Context) = context.startActivity(SearchActivity.callingIntent(context))
+
+    fun showCommentDetails(comment: Comment) {
+        Log.d("TEST", "comment" + comment.body)
+    }
+
+}

@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.comments
+package com.example.myapplication.presentation.comments
 
 import android.os.Bundle
 import android.util.Log
@@ -14,7 +14,7 @@ import com.example.myapplication.R
 import com.example.myapplication.databinding.CommentsFragmentBinding
 import com.example.myapplication.di.injectFeature
 import com.example.myapplication.domain.model.Comment
-import com.example.myapplication.ui.route.Navigator
+import com.example.myapplication.presentation.route.Navigator
 import kotlinx.android.synthetic.main.comments_fragment.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -23,17 +23,16 @@ import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class CommentsFragment : BaseFragment() {
+    override fun layoutId() = R.layout.comments_fragment
 
     private val navigator: Navigator by inject()
-    private val commentAdapter: CommentAdapter by lazy {
+    private val commentsAdapter: CommentsAdapter by lazy {
         viewModel.fetchComments()
-        CommentAdapter()
+        CommentsAdapter()
     }
 
     private val viewModel: CommentsActivityViewModel by viewModel()
     lateinit var binding: CommentsFragmentBinding
-
-    override fun layoutId() = R.layout.comments_fragment
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.comments_fragment, container, false)
@@ -46,40 +45,31 @@ class CommentsFragment : BaseFragment() {
         initializeView()
     }
 
-    private fun initializeView() {
-        commentList.apply {
-            layoutManager = LinearLayoutManager(activity)
-            adapter = commentAdapter
-        }
-
-        commentAdapter.onAddToFavoriteClickListener = object : CommentAdapter.OnAddToFavouriteClickListener {
-            override fun onAddToFavouriteClick(comment: Comment) {
-                navigator.showCommentDetails(comment)
-            }
-        }
-
-        swipeContainer.setOnRefreshListener { swipeAction() }
-    }
-
-    private fun swipeAction() {
-        viewModel.fetchComments()
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         injectFeature()
         startObserving()
     }
 
+    private fun initializeView() {
+        commentList.apply {
+            layoutManager = LinearLayoutManager(activity)
+            adapter = commentsAdapter
+        }
+        commentsAdapter.clickListener = { comment ->
+            viewModel.addToFavourite(comment)
+        }
+        swipeContainer.setOnRefreshListener{ viewModel.fetchComments() }
+    }
+
     private fun startObserving() {
         viewModel.comments.observe(this, Observer { showComments(it) })
         viewModel.failure.observe(
-            this,
-            Observer { it.getContentIfNotHandled()?.let { failure -> handleFailure(failure) } })
+            this, Observer { it.getContentIfNotHandled()?.let { failure -> handleFailure(failure) } })
     }
 
     private fun showComments(comments: List<Comment>) {
-        CoroutineScope(Dispatchers.Main).launch { commentAdapter.updateData(comments) }
+        CoroutineScope(Dispatchers.Main).launch { commentsAdapter.updateData(comments) }
     }
 
     private fun handleFailure(failure: Failure) {

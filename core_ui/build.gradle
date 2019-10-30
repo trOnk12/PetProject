@@ -6,6 +6,7 @@ dependencies {
     implementation Dependencies.koin
     implementation Dependencies.couroutines_core
     implementation Dependencies.kotlinCoroutinesAndroid
+    implementation Dependencies.viewpager2
     compile project(path: ':core')
 
 }

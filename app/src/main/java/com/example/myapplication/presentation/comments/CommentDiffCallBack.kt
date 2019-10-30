@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.comments
+package com.example.myapplication.presentation.comments
 
 import androidx.recyclerview.widget.DiffUtil
 import com.example.myapplication.domain.model.Comment

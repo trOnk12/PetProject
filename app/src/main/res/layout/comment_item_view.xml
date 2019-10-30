@@ -1,46 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android">
-    <data>
-        <variable name="comment_item" type="com.example.myapplication.domain.model.Comment"/>
-        <variable name="onAddToFavoriteClickListener"
-                  type="com.example.myapplication.ui.comments.CommentAdapter.OnAddToFavouriteClickListener"/>
-    </data>
+<LinearLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <LinearLayout
-            android:onClick="@{() -> onAddToFavoriteClickListener.onAddToFavouriteClick(comment_item)}"
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-            <ImageView
-                    android:id="@+id/background_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="128dp"
-                    android:background="@color/colorPrimary"/>
-        </LinearLayout>
-
-        <TextView
-                android:id="@+id/test"
-                android:text="@{comment_item.title}"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-        <TextView
-                android:text="@{comment_item.body}"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
         <ImageView
-                android:id="@+id/favouriteIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@android:drawable/btn_star_big_on"/>
-
+                android:id="@+id/background_image"
+                android:layout_width="match_parent"
+                android:layout_height="128dp"
+                android:background="@color/colorPrimary"/>
     </LinearLayout>
 
+    <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
-</layout>
+    <TextView
+            android:id="@+id/body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    <ImageView
+            android:id="@+id/favouriteIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@android:drawable/btn_star_big_on"/>
+
+</LinearLayout>

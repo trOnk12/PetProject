@@ -8,8 +8,8 @@ import com.example.myapplication.data.repository.CommentRepositoryImpl
 import com.example.myapplication.data.source.remote.CommentRemoteSource
 import com.example.myapplication.domain.repository.CommentRepository
 import com.example.myapplication.domain.usecase.GetComments
-import com.example.myapplication.ui.comments.CommentsActivityViewModel
-import com.example.myapplication.ui.route.Navigator
+import com.example.myapplication.presentation.comments.CommentsActivityViewModel
+import com.example.myapplication.presentation.route.Navigator
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.dsl.module

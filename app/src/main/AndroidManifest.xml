@@ -5,24 +5,33 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
+            android:name=".MyApp"
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
-            android:name=".MyApp"
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity
-                android:name=".ui.route.RouteActivity"
-                android:noHistory="true"
-        >
+                android:name=".presentation.route.RouteActivity"
+                android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.comments.CommentsActivity">
+        <activity android:name=".presentation.main.MainActivity">
+
+        </activity>
+
+        <activity android:name=".presentation.comments.CommentsActivity">
+
+        </activity>
+
+        <activity android:name=".presentation.search.SearchActivity"
+                  android:parentActivityName=".presentation.main.MainActivity"
+                  android:theme="@style/AppThemeNoActionBar">
 
         </activity>
     </application>

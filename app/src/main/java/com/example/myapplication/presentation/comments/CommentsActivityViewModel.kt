@@ -1,11 +1,9 @@
-package com.example.myapplication.ui.comments
+package com.example.myapplication.presentation.comments
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import androidx.recyclerview.widget.DiffUtil
 import com.example.core.interactor.UseCase.None
-import com.example.core.utills.Event
 import com.example.core_ui.platform.BaseViewModel
 import com.example.myapplication.domain.model.Comment
 import com.example.myapplication.domain.usecase.GetComments
@@ -19,7 +17,7 @@ class CommentsActivityViewModel constructor(
     val comments: LiveData<List<Comment>>
         get() = _items
 
-    private val _isRefreshing = MutableLiveData<Boolean>()
+    val _isRefreshing = MutableLiveData<Boolean>()
     val isRefreshing: LiveData<Boolean>
         get() = _isRefreshing
 
@@ -30,8 +28,12 @@ class CommentsActivityViewModel constructor(
     }
 
     private fun handleComments(comments: List<Comment>) {
-        _isRefreshing.value = true
+        _isRefreshing.value = false
         _items.value = comments
+    }
+
+    fun addToFavourite(comment: Comment) {
+
     }
 
 }
