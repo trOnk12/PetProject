@@ -29,6 +29,11 @@ class ToolBar(context: Context, attrs: AttributeSet) : Toolbar(context, attrs) {
     }
 
     private fun openSearchActivity() {
+        if (hostActivity == null) {
+            context.startActivity(SearchActivity.callingIntent(context))
+            return
+        }
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             val options = ActivityOptions
                 .makeSceneTransitionAnimation(hostActivity)

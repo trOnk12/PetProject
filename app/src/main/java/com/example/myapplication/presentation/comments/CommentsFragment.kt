@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.core.exception.Failure
@@ -23,16 +24,16 @@ import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class CommentsFragment : BaseFragment() {
-    override fun layoutId() = R.layout.comments_fragment
 
     private val navigator: Navigator by inject()
-    private val commentsAdapter: CommentsAdapter by lazy {
-        viewModel.fetchComments()
-        CommentsAdapter()
-    }
 
     private val viewModel: CommentsActivityViewModel by viewModel()
-    lateinit var binding: CommentsFragmentBinding
+
+    private lateinit var binding: CommentsFragmentBinding
+
+    private lateinit var commentsAdapter: CommentsAdapter
+
+    override fun layoutId(): Int = R.layout.comments_fragment
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.comments_fragment, container, false)
@@ -42,40 +43,47 @@ class CommentsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         initializeView()
+        loadComments()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         injectFeature()
-        startObserving()
+
+        viewModel.comments.observe(this, Observer { commentList -> renderCommentList(commentList) })
+        viewModel.failure.observe(
+            this,
+            Observer { failure -> failure.getContentIfNotHandled()?.let { handleFailure(it) } })
     }
 
     private fun initializeView() {
-        commentList.apply {
+        swipeContainer.setOnRefreshListener { viewModel.fetchComments() }
+
+        commentsAdapter = CommentsAdapter()
+
+        with(commentList) {
             layoutManager = LinearLayoutManager(activity)
             adapter = commentsAdapter
         }
+
         commentsAdapter.clickListener = { comment ->
-            viewModel.addToFavourite(comment)
-        }
-        swipeContainer.setOnRefreshListener{ viewModel.fetchComments() }
+            navigator.showCommentDetails(activity!!, comment) }
     }
 
-    private fun startObserving() {
-        viewModel.comments.observe(this, Observer { showComments(it) })
-        viewModel.failure.observe(
-            this, Observer { it.getContentIfNotHandled()?.let { failure -> handleFailure(failure) } })
-    }
-
-    private fun showComments(comments: List<Comment>) {
-        CoroutineScope(Dispatchers.Main).launch { commentsAdapter.updateData(comments) }
+    private fun loadComments() {
+        viewModel.fetchComments()
     }
 
     private fun handleFailure(failure: Failure) {
         when (failure) {
             is Failure.ServerError -> Log.d("TEST", "failure test")
         }
+    }
+
+    private fun renderCommentList(comments: List<Comment>) {
+        CoroutineScope(Dispatchers.Main).launch { commentsAdapter.updateData(comments) }
     }
 
 }

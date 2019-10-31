@@ -7,7 +7,9 @@ android {
     dataBinding {
         enabled = true
     }
-
+    androidExtensions {
+        experimental = true
+    }
     compileSdkVersion Versions.compiledSdkVersion
     buildToolsVersion Versions.buildToolsVersion
     defaultConfig {

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <ImageView
+                android:id="@+id/backgroundImage"
+                tools:background="@color/colorPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="360dp"/>
+
+        <TextView
+                android:layout_gravity="left|bottom"
+                android:textColor="@color/colorWhite"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Test title"
+                android:textSize="32sp"/>
+
+    </FrameLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/participants"
+            android:layout_width="match_parent"
+            android:layout_height="128dp">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+</LinearLayout>
