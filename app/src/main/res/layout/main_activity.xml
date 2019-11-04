@@ -11,12 +11,12 @@
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent">
 
-            <com.example.myapplication.presentation.toolbar.ToolBar
+            <com.example.myapplication.presentation.toolbar.Toolbar
                     android:id="@+id/toolBar"
                     app:layout_scrollFlags="scroll"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-            </com.example.myapplication.presentation.toolbar.ToolBar>
+            </com.example.myapplication.presentation.toolbar.Toolbar>
 
         </com.google.android.material.appbar.AppBarLayout>
 

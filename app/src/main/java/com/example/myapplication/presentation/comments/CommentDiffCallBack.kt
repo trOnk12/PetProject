@@ -3,7 +3,7 @@ package com.example.myapplication.presentation.comments
 import androidx.recyclerview.widget.DiffUtil
 import com.example.myapplication.domain.model.Comment
 
-class CommentDiffCallBack(var currentValues: List<Comment>, var newValues: List<Comment>) :
+class CommentDiffCallBack(private var currentValues: List<Comment>, var newValues: List<Comment>) :
     DiffUtil.Callback() {
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {

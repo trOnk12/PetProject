@@ -1,4 +1,4 @@
-package com.example.myapplication.presentation.main
+package com.example.myapplication.presentation
 
 import android.content.Context
 import android.content.Intent
@@ -9,6 +9,7 @@ import com.example.myapplication.R
 import com.example.myapplication.presentation.comments.CommentsFragment
 import com.example.myapplication.presentation.feed.FeedFragment
 import com.example.myapplication.presentation.friends.FriendsFragment
+import com.example.myapplication.presentation.model.FragmentItem
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.main_activity.*
 
@@ -17,11 +18,13 @@ class MainActivity : FragmentActivity() {
         fun callingIntent(context: Context): Intent = Intent(context, MainActivity::class.java)
     }
 
-    var fragmentsList = listOf(CommentsFragment(), FeedFragment(), FriendsFragment())
-    var fragmentsTitle = listOf("Comments", "Feed", "Friends")
+    private var fragmentsItems = listOf(
+        FragmentItem("Comments", CommentsFragment()),
+        FragmentItem("Feed", FeedFragment()),
+        FragmentItem(("Friends"), FriendsFragment())
+    )
 
-    lateinit var viewPager: ViewPager2
-    lateinit var fragmentsAdapter: FragmentsAdapter
+    private lateinit var fragmentsAdapter: FragmentsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,17 +33,28 @@ class MainActivity : FragmentActivity() {
     }
 
     private fun initializeView() {
-        fragmentsAdapter = FragmentsAdapter(this)
-        fragmentsAdapter.fragmentsList = this.fragmentsList
+        toolBar.attachHostActivity(this)
 
-        viewPager = findViewById(R.id.viewPager)
+        fragmentsAdapter = FragmentsAdapter(this)
+        fragmentsAdapter.fragmentsList = fragmentsItems
+
         viewPager.adapter = fragmentsAdapter
 
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-            tab.text = fragmentsTitle[position]
+            tab.text = fragmentsItems[position].title
         }.attach()
 
-        toolBar.attachHostActivity(this)
+        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                if (position == 0) {
+                    toolBar.hide()
+                } else {
+                    toolBar.show()
+                }
+
+            }
+        })
     }
 
     override fun onBackPressed() {
@@ -50,6 +64,5 @@ class MainActivity : FragmentActivity() {
             viewPager.currentItem = viewPager.currentItem - 1
         }
     }
-
 
 }

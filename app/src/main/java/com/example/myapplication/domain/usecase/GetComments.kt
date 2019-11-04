@@ -15,24 +15,4 @@ class GetComments(private var commentRepository: CommentRepository) : UseCase<Li
         return commentRepository.comments()
     }
 
-     private fun difference(oldValue: List<Comment>, newValue: List<Comment>): DiffUtil.Callback {
-        return object : DiffUtil.Callback() {
-            override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                return oldValue[oldItemPosition].id == newValue[newItemPosition].id
-            }
-
-            override fun getOldListSize(): Int {
-                return oldValue.size
-            }
-
-            override fun getNewListSize(): Int {
-                return newValue.size
-            }
-
-            override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                return oldValue[oldItemPosition] == newValue[newItemPosition]
-            }
-        }
-    }
-
 }

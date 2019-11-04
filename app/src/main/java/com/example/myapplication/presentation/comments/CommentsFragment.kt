@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.core.exception.Failure
@@ -19,6 +21,7 @@ import com.example.myapplication.presentation.route.Navigator
 import kotlinx.android.synthetic.main.comments_fragment.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -43,7 +46,6 @@ class CommentsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         initializeView()
         loadComments()
     }
@@ -59,8 +61,6 @@ class CommentsFragment : BaseFragment() {
     }
 
     private fun initializeView() {
-        swipeContainer.setOnRefreshListener { viewModel.fetchComments() }
-
         commentsAdapter = CommentsAdapter()
 
         with(commentList) {
@@ -69,7 +69,10 @@ class CommentsFragment : BaseFragment() {
         }
 
         commentsAdapter.clickListener = { comment ->
-            navigator.showCommentDetails(activity!!, comment) }
+            navigator.showCommentDetails(activity!!, comment)
+        }
+
+        swipeContainer.setOnRefreshListener { viewModel.fetchComments() }
     }
 
     private fun loadComments() {
@@ -83,7 +86,7 @@ class CommentsFragment : BaseFragment() {
     }
 
     private fun renderCommentList(comments: List<Comment>) {
-        CoroutineScope(Dispatchers.Main).launch { commentsAdapter.updateData(comments) }
+        MainScope().launch { commentsAdapter.updateData(comments) }
     }
 
 }

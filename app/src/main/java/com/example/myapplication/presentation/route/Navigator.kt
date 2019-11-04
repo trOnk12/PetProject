@@ -1,12 +1,9 @@
 package com.example.myapplication.presentation.route
 
 import android.content.Context
-import android.util.Log
 import com.example.myapplication.domain.model.Comment
-import com.example.myapplication.presentation.main.MainActivity
-import com.example.myapplication.presentation.comments.CommentsActivity
+import com.example.myapplication.presentation.MainActivity
 import com.example.myapplication.presentation.comments.CommentsDetailActivity
-import com.example.myapplication.presentation.search.SearchActivity
 
 class Navigator {
 

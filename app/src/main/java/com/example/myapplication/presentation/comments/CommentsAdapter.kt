@@ -23,14 +23,18 @@ class CommentsAdapter : RecyclerView.Adapter<CommentsAdapter.ViewHolder>() {
 
     private suspend fun calculateDiff(newValues: List<Comment>) {
         withContext(Dispatchers.IO) {
-            val diffCallBack = CommentDiffCallBack(comments, newValues)
-            val diffResult = DiffUtil.calculateDiff(diffCallBack)
+            val diffResult = calculateDiff(newValues,comments)
 
             withContext(Dispatchers.Main) {
                 comments = newValues
                 diffResult.dispatchUpdatesTo(this@CommentsAdapter)
             }
         }
+    }
+
+    private fun calculateDiff(oldValue: List<Comment>, newValue: List<Comment>): DiffUtil.DiffResult {
+        val diffCallBack = CommentDiffCallBack(oldValue, newValue)
+        return DiffUtil.calculateDiff(diffCallBack)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): ViewHolder {
