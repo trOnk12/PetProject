@@ -8,8 +8,9 @@ import com.example.core_ui.platform.BaseViewModel
 import com.example.myapplication.domain.model.Comment
 import com.example.myapplication.domain.usecase.GetComments
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class CommentsActivityViewModel constructor(
+class CommentsActivityViewModel @Inject constructor(
     private val getComments: GetComments
 ) : BaseViewModel() {
 

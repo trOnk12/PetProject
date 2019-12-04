@@ -1,7 +1,9 @@
 package com.example.myapplication.data.network
 
+import javax.inject.Inject
+
 class CommentService
-constructor(
+@Inject constructor(
     private val commentApi: CommentApi
 ) : CommentApi {
 

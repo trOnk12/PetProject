@@ -5,7 +5,7 @@ import com.example.myapplication.domain.model.Comment
 import com.example.myapplication.presentation.MainActivity
 import com.example.myapplication.presentation.comments.CommentsDetailActivity
 
-class Navigator {
+object Navigator {
 
     fun showMain(context: Context) = context.startActivity(MainActivity.callingIntent(context))
 
