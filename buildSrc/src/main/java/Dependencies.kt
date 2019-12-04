@@ -35,6 +35,9 @@ object Versions {
 
     const val swipeRefresh = "1.0.0"
     const val viewpager2 = "1.0.0-rc01"
+
+    const val dagger = "2.25.2"
+    const val dagger_android = "2.25.2"
 }
 
 object Dependencies {
@@ -68,5 +71,8 @@ object Dependencies {
     val support_design = "com.android.support:design:${Versions.support_desin}"
     val swipeRefresh = "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.swipeRefresh}"
     val viewpager2 = "androidx.viewpager2:viewpager2:${Versions.viewpager2}"
+
+    val dagger2 = "com.google.dagger:dagger:${Versions.dagger}"
+    val dagger2_android = "com.google.dagger:dagger-android:${Versions.dagger_android}"
 
 }

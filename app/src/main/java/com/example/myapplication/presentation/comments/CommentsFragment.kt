@@ -29,12 +29,13 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class CommentsFragment : BaseFragment() {
 
     private val navigator: Navigator by inject()
+    private val commentAdapter: CommentsAdapter by lazy {
+        viewModel.fetchComments()
+        CommentsAdapter()
+    }
 
     private val viewModel: CommentsActivityViewModel by viewModel()
-
     private lateinit var binding: CommentsFragmentBinding
-
-    private lateinit var commentsAdapter: CommentsAdapter
 
     override fun layoutId(): Int = R.layout.comments_fragment
 
@@ -47,7 +48,6 @@ class CommentsFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initializeView()
-        loadComments()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,22 +61,16 @@ class CommentsFragment : BaseFragment() {
     }
 
     private fun initializeView() {
-        commentsAdapter = CommentsAdapter()
-
-        with(commentList) {
+        commentList.apply{
             layoutManager = LinearLayoutManager(activity)
-            adapter = commentsAdapter
+            adapter = commentAdapter
         }
 
-        commentsAdapter.clickListener = { comment ->
+        commentAdapter.clickListener = { comment ->
             navigator.showCommentDetails(activity!!, comment)
         }
 
         swipeContainer.setOnRefreshListener { viewModel.fetchComments() }
-    }
-
-    private fun loadComments() {
-        viewModel.fetchComments()
     }
 
     private fun handleFailure(failure: Failure) {
@@ -86,7 +80,7 @@ class CommentsFragment : BaseFragment() {
     }
 
     private fun renderCommentList(comments: List<Comment>) {
-        MainScope().launch { commentsAdapter.updateData(comments) }
+        CoroutineScope(Dispatchers.Main).launch { commentAdapter.updateData(comments) }
     }
 
 }

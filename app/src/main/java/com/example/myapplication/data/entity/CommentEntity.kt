@@ -11,4 +11,4 @@ data class CommentEntity(
 )
 
 fun CommentEntity.mapToDomain(): Comment = Comment(userId, id, title, body)
-fun List<CommentEntity>.mapToDomain(): List<Comment> = map {it.mapToDomain()}
+fun List<CommentEntity>.mapToDomain(): List<Comment> = map { it.mapToDomain() }
