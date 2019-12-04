@@ -8,7 +8,7 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [ApplicationModule::class])
-class ApplicationComponent {
+interface ApplicationComponent {
 
     @Component.Builder
     interface Builder {
