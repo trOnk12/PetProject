@@ -1,4 +1,4 @@
-package com.example.myapplication.presentation.toolbar
+package com.example.myapplication.ui.toolbar
 
 import com.example.core_ui.platform.BaseFragment
 import com.example.myapplication.R

@@ -1,9 +1,9 @@
-package com.example.myapplication.presentation.route
+package com.example.myapplication.ui.route
 
 import android.content.Context
 import com.example.myapplication.domain.model.Comment
-import com.example.myapplication.presentation.MainActivity
-import com.example.myapplication.presentation.comments.CommentsDetailActivity
+import com.example.myapplication.ui.MainActivity
+import com.example.myapplication.ui.comments.CommentsDetailActivity
 
 object Navigator {
 

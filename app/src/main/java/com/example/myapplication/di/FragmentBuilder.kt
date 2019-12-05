@@ -1,6 +1,6 @@
 package com.example.myapplication.di
 
-import com.example.myapplication.presentation.comments.CommentsFragment
+import com.example.myapplication.ui.comments.CommentsFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

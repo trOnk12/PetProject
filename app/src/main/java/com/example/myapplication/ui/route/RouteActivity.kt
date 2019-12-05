@@ -1,4 +1,4 @@
-package com.example.myapplication.presentation.route
+package com.example.myapplication.ui.route
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

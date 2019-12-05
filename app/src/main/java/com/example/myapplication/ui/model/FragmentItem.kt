@@ -1,4 +1,4 @@
-package com.example.myapplication.presentation.model
+package com.example.myapplication.ui.model
 
 import androidx.fragment.app.Fragment
 

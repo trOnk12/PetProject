@@ -13,7 +13,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppThemeNoActionBar">
         <activity
-                android:name=".presentation.route.RouteActivity"
+                android:name=".ui.route.RouteActivity"
                 android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -21,20 +21,20 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".presentation.MainActivity">
+        <activity android:name=".ui.MainActivity">
 
         </activity>
 
-        <activity android:name=".presentation.comments.CommentsActivity">
+        <activity android:name=".ui.comments.CommentsActivity">
 
         </activity>
 
-        <activity android:name=".presentation.comments.CommentsDetailActivity">
+        <activity android:name=".ui.comments.CommentsDetailActivity">
 
         </activity>
 
-        <activity android:name=".presentation.search.SearchActivity"
-                  android:parentActivityName=".presentation.MainActivity">
+        <activity android:name=".ui.search.SearchActivity"
+                  android:parentActivityName=".ui.MainActivity">
 
         </activity>
     </application>

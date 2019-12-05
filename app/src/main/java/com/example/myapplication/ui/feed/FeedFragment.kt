@@ -1,4 +1,4 @@
-package com.example.myapplication.presentation.feed
+package com.example.myapplication.ui.feed
 
 import com.example.core_ui.platform.BaseFragment
 import com.example.myapplication.R

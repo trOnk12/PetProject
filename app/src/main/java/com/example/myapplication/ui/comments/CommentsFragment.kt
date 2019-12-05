@@ -1,4 +1,4 @@
-package com.example.myapplication.presentation.comments
+package com.example.myapplication.ui.comments
 
 import android.content.Context
 import android.os.Bundle
@@ -13,12 +13,10 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.core.exception.Failure
 import com.example.core_ui.platform.BaseFragment
-import com.example.myapplication.MyApplication
 import com.example.myapplication.R
 import com.example.myapplication.databinding.CommentsFragmentBinding
 import com.example.myapplication.domain.model.Comment
-import com.example.myapplication.presentation.route.Navigator
-import dagger.android.AndroidInjection
+import com.example.myapplication.ui.route.Navigator
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.comments_fragment.*
 import kotlinx.coroutines.CoroutineScope

@@ -1,4 +1,4 @@
-package com.example.myapplication.presentation
+package com.example.myapplication.ui
 
 import android.content.Context
 import android.content.Intent
@@ -6,10 +6,10 @@ import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.example.myapplication.R
-import com.example.myapplication.presentation.comments.CommentsFragment
-import com.example.myapplication.presentation.feed.FeedFragment
-import com.example.myapplication.presentation.friends.FriendsFragment
-import com.example.myapplication.presentation.model.FragmentItem
+import com.example.myapplication.ui.comments.CommentsFragment
+import com.example.myapplication.ui.feed.FeedFragment
+import com.example.myapplication.ui.friends.FriendsFragment
+import com.example.myapplication.ui.model.FragmentItem
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.main_activity.*
 
@@ -36,7 +36,7 @@ class MainActivity : FragmentActivity() {
         toolBar.attachHostActivity(this)
 
         fragmentsAdapter = FragmentsAdapter(this)
-        fragmentsAdapter.fragmentsList = fragmentsItems
+        fragmentsAdapter.fragmentsItems = fragmentsItems
 
         viewPager.adapter = fragmentsAdapter
 

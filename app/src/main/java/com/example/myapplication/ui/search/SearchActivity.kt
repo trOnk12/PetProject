@@ -1,4 +1,4 @@
-package com.example.myapplication.presentation.search
+package com.example.myapplication.ui.search
 
 import android.content.Context
 import android.content.Intent
