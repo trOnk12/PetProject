@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: "kotlin-kapt"
-
+apply plugin: 'androidx.navigation.safeargs'
 android {
     dataBinding {
         enabled = true
@@ -74,4 +74,8 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:2.25.2"
     implementation Dependencies.dagger2_android
     kapt "com.google.dagger:dagger-android-processor:2.25.2"
+
+    def nav_version = "1.0.0-alpha05"
+    implementation "android.arch.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "android.arch.navigation:navigation-ui-ktx:$nav_version"
 }
