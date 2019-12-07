@@ -2,12 +2,15 @@ package com.example.myapplication.ui.comments
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.core.exception.Failure
+import com.example.myapplication.core.EventObserver
 import com.example.myapplication.core.extension.observe
 import com.example.myapplication.core.viewModel
 import com.example.myapplication.databinding.CommentsFragmentBinding
@@ -32,9 +35,10 @@ class CommentsFragment : Fragment() {
     ): View {
         viewModel = viewModel(viewModelFactory)
 
-        val binding = CommentsFragmentBinding.inflate(inflater, container, false).apply {
-            viewModel = viewModel
-        }
+        val binding = CommentsFragmentBinding.inflate(inflater, container, false)
+            .apply {
+                viewModel = viewModel
+            }
 
         return binding.root
     }
@@ -53,13 +57,11 @@ class CommentsFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
-        viewModel.comments.observe(this,::renderCommentList)
-        viewModel.failure.observe(
-            this,
-            Observer { failure -> failure.getContentIfNotHandled()?.let { handleFailure(it) } })
+        viewModel.comments.observe(this, Observer(::renderCommentList))
+        viewModel.failure.observe(this, EventObserver(::handleFailure))
     }
-//
+
+    //
 //    private fun initializeView() {
 //        commentAdapter = CommentsAdapter()
 //
@@ -77,12 +79,12 @@ class CommentsFragment : Fragment() {
 //        viewModel.fetchComments()
 //    }
 //
-//    private fun handleFailure(failure: Failure) {
-//        when (failure) {
-//            is Failure.ServerError -> Log.d("TEST", "failure test")
-//        }
-//    }
-//
+    private fun handleFailure(failure: Failure) {
+        when (failure) {
+            is Failure.ServerError -> Log.d("TEST", "failure test")
+        }
+    }
+
     private fun renderCommentList(comments: List<Comment>) {
         CoroutineScope(Dispatchers.Main).launch { commentAdapter.updateData(comments) }
     }
