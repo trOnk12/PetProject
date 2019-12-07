@@ -8,10 +8,10 @@ import com.example.myapplication.di.modules.NetworkModule
 import com.example.myapplication.di.modules.RepositoryModule
 import com.example.myapplication.di.modules.UseCaseModule
 import com.example.myapplication.di.modules.viewmodel.ViewModelModule
+import com.example.myapplication.ui.comment.CommentFragment
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
-import dagger.android.AndroidInjector
 import javax.inject.Singleton
 
 @Singleton
@@ -36,5 +36,6 @@ interface ApplicationComponent {
     }
 
     fun inject(application: MyApplication)
+    fun inject(fragment:CommentFragment)
 
 }

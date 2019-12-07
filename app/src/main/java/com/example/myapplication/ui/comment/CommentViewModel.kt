@@ -1,18 +1,18 @@
-package com.example.myapplication.ui.comments
+package com.example.myapplication.ui.comment
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.core.interactor.UseCase.None
-import com.example.core_ui.platform.BaseViewModel
+import com.example.myapplication.core.platform.BaseViewModel
 import com.example.myapplication.domain.model.Comment
 import com.example.myapplication.domain.usecase.GetComments
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class CommentsActivityViewModel @Inject constructor(
+class CommentViewModel @Inject constructor(
     private val getComments: GetComments
-) : BaseViewModel() {
+) : BaseViewModel(), CommentEventListener{
 
     private val _items = MutableLiveData<List<Comment>>()
     val comments: LiveData<List<Comment>>
@@ -33,8 +33,13 @@ class CommentsActivityViewModel @Inject constructor(
         _items.value = comments
     }
 
-    fun addToFavourite(comment: Comment) {
+    override fun addToFavourite(comment: Comment) {
 
     }
+
+    override fun openCommentDetail(comment: Comment) {
+
+    }
+
 
 }

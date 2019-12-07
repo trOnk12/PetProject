@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.friends
+package com.example.myapplication.ui.friend
 
 import com.example.core_ui.platform.BaseFragment
 import com.example.myapplication.R

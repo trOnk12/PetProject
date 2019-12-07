@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.comments
+package com.example.myapplication.ui.comment
 
 import android.content.Context
 import android.os.Bundle
@@ -11,22 +11,25 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.core.exception.Failure
 import com.example.myapplication.core.EventObserver
-import com.example.myapplication.core.extension.observe
 import com.example.myapplication.core.viewModel
 import com.example.myapplication.databinding.CommentsFragmentBinding
 import com.example.myapplication.domain.model.Comment
 import dagger.android.support.AndroidSupportInjection
+import kotlinx.android.synthetic.main.comments_fragment.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class CommentsFragment : Fragment() {
+class CommentFragment : Fragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private lateinit var viewModel: CommentsActivityViewModel
+    private lateinit var viewModel: CommentViewModel
+    private lateinit var binding: CommentsFragmentBinding
+
+    private lateinit var commentAdapter: CommentAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,20 +38,29 @@ class CommentsFragment : Fragment() {
     ): View {
         viewModel = viewModel(viewModelFactory)
 
-        val binding = CommentsFragmentBinding.inflate(inflater, container, false)
+        binding = CommentsFragmentBinding.inflate(inflater, container, false)
             .apply {
                 viewModel = viewModel
             }
 
+        viewModel.comments.observe(this, Observer(::renderCommentList))
+        viewModel.failure.observe(this, EventObserver(::handleFailure))
+
         return binding.root
     }
 
-    //
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//        initializeView()
-//    }
-//
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        commentAdapter = CommentAdapter(viewModel, this)
+
+        binding.commentList.apply {
+            adapter = this@CommentFragment.commentAdapter
+        }
+
+        swipeContainer.setOnRefreshListener { viewModel.fetchComments() }
+    }
+
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
         super.onAttach(context)
@@ -56,29 +68,9 @@ class CommentsFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        viewModel.comments.observe(this, Observer(::renderCommentList))
-        viewModel.failure.observe(this, EventObserver(::handleFailure))
+        viewModel.fetchComments()
     }
 
-    //
-//    private fun initializeView() {
-//        commentAdapter = CommentsAdapter()
-//
-//        commentList.apply {
-//            layoutManager = LinearLayoutManager(activity)
-//            adapter = commentAdapter
-//        }
-//
-//        commentAdapter.clickListener = { comment ->
-//            Navigator.showCommentDetails(activity!!, comment)
-//        }
-//
-//        swipeContainer.setOnRefreshListener { viewModel.fetchComments() }
-//
-//        viewModel.fetchComments()
-//    }
-//
     private fun handleFailure(failure: Failure) {
         when (failure) {
             is Failure.ServerError -> Log.d("TEST", "failure test")
