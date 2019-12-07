@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import com.example.myapplication.R
+import com.example.myapplication.core.viewModel
 import com.example.myapplication.databinding.CommentsFragmentBinding
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
@@ -27,6 +27,8 @@ class CommentsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        viewModel = viewModel(viewModelFactory)
+
         binding = DataBindingUtil.inflate(inflater, R.layout.comments_fragment, container, false)
         binding.viewModel = viewModel
 
@@ -47,8 +49,6 @@ class CommentsFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel =
-            ViewModelProviders.of(this, viewModelFactory)[CommentsActivityViewModel::class.java]
 
 //        viewModel.comments.observe(this, Observer { commentList -> renderCommentList(commentList) })
 //        viewModel.failure.observe(
