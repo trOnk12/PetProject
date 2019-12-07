@@ -8,7 +8,6 @@ dependencies {
     implementation Dependencies.kotlinCoroutinesAndroid
     implementation Dependencies.viewpager2
     compile project(path: ':core')
-
 }
 
 

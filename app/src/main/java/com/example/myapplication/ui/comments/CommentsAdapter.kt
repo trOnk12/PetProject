@@ -23,7 +23,7 @@ class CommentsAdapter : RecyclerView.Adapter<CommentsAdapter.ViewHolder>() {
 
     private suspend fun calculateDiff(newValues: List<Comment>) {
         withContext(Dispatchers.IO) {
-            val diffResult = calculateDiff(newValues,comments)
+            val diffResult = calculateDiff(newValues, comments)
 
             withContext(Dispatchers.Main) {
                 comments = newValues
@@ -32,13 +32,17 @@ class CommentsAdapter : RecyclerView.Adapter<CommentsAdapter.ViewHolder>() {
         }
     }
 
-    private fun calculateDiff(oldValue: List<Comment>, newValue: List<Comment>): DiffUtil.DiffResult {
+    private fun calculateDiff(
+        oldValue: List<Comment>,
+        newValue: List<Comment>
+    ): DiffUtil.DiffResult {
         val diffCallBack = CommentDiffCallBack(oldValue, newValue)
         return DiffUtil.calculateDiff(diffCallBack)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.comment_item_view, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.comment_item_view, parent, false)
         return ViewHolder(view)
     }
 
@@ -56,6 +60,27 @@ class CommentsAdapter : RecyclerView.Adapter<CommentsAdapter.ViewHolder>() {
                 favouriteIcon.setOnClickListener { clickListener }
             }
         }
+    }
+
+}
+
+class CommentDiffCallBack(private var currentValues: List<Comment>, var newValues: List<Comment>) :
+    DiffUtil.Callback() {
+
+    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+        return currentValues[oldItemPosition].id == newValues[newItemPosition].id
+    }
+
+    override fun getOldListSize(): Int {
+        return currentValues.size
+    }
+
+    override fun getNewListSize(): Int {
+        return newValues.size
+    }
+
+    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+        return currentValues[oldItemPosition] == newValues[newItemPosition]
     }
 
 }

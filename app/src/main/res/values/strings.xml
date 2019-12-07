@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">My Application</string>
     <string name="server_error_message">Ooops... something went wrong, please try again.</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_comment">Comments</string>
+    <string name="title_event">Events</string>
+    <string name="title_friends">Friends</string>
 </resources>
