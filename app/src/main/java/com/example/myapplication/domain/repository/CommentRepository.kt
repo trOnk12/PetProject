@@ -7,4 +7,5 @@ import com.example.myapplication.domain.model.Comment
 
 interface CommentRepository {
     fun comments(): Either<Failure, List<Comment>>
+    fun comment(id: String): Either<Failure, Comment>
 }

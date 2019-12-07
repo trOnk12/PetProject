@@ -9,7 +9,16 @@
             android:id="@id/bottomNavigationComment"
             android:name="com.example.myapplication.ui.comment.CommentFragment"
             android:label="Comments"
-            tools:layout="@layout/comments_fragment" />
+            tools:layout="@layout/comments_fragment">
+        <action
+                android:id="@+id/action_commentFragment_to_commentDetailFragment"
+                app:destination="@id/commentDetailFragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+    </fragment>
 
     <fragment
             android:id="@id/bottomNavigationEvent"
@@ -22,5 +31,10 @@
             android:name="com.example.myapplication.ui.friend.FriendsFragment"
             android:label="Friends"
             tools:layout="@layout/friends_fragment" />
+
+    <fragment
+            android:id="@+id/commentDetailFragment"
+            android:name="com.example.myapplication.ui.comment.CommentFragment"
+            tools:layout="@layout/fragment_comment" />
 
 </navigation>

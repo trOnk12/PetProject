@@ -10,3 +10,4 @@ data class Comment(
     val title: String?,
     val body: String
 ) : Parcelable
+

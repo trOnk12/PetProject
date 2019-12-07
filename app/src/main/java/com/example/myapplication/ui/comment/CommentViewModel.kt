@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.core.interactor.UseCase.None
+import com.example.myapplication.core.Event
 import com.example.myapplication.core.platform.BaseViewModel
 import com.example.myapplication.domain.model.Comment
 import com.example.myapplication.domain.usecase.GetComments
@@ -14,13 +15,17 @@ class CommentViewModel @Inject constructor(
     private val getComments: GetComments
 ) : BaseViewModel(), CommentEventListener{
 
-    private val _items = MutableLiveData<List<Comment>>()
+    private val _comments = MutableLiveData<List<Comment>>()
     val comments: LiveData<List<Comment>>
-        get() = _items
+        get() = _comments
 
     val _isRefreshing = MutableLiveData<Boolean>()
     val isRefreshing: LiveData<Boolean>
         get() = _isRefreshing
+
+   private val _navigateToCommentDetail = MutableLiveData<Event<String>>()
+    val navigateToCommentDetail: LiveData<Event<String>>
+        get() = _navigateToCommentDetail
 
     fun fetchComments() {
         viewModelScope.launch {
@@ -30,7 +35,7 @@ class CommentViewModel @Inject constructor(
 
     private fun handleComments(comments: List<Comment>) {
         _isRefreshing.value = false
-        _items.value = comments
+        _comments.value = comments
     }
 
     override fun addToFavourite(comment: Comment) {

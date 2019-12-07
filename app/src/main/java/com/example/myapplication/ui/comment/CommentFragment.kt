@@ -44,6 +44,7 @@ class CommentFragment : Fragment() {
             }
 
         viewModel.comments.observe(this, Observer(::renderCommentList))
+        viewModel.navigateToCommentDetail.observe(this, EventObserver(::navigateToCommentDetail))
         viewModel.failure.observe(this, EventObserver(::handleFailure))
 
         return binding.root
@@ -80,6 +81,14 @@ class CommentFragment : Fragment() {
 
     private fun renderCommentList(comments: List<Comment>) {
         CoroutineScope(Dispatchers.Main).launch { commentAdapter.updateData(comments) }
+    }
+
+    private fun navigateToCommentDetail(id: String) {
+        openCommentDetail(id)
+    }
+
+    private fun openCommentDetail(id: String) {
+        val action =
     }
 
 }
