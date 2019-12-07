@@ -62,6 +62,7 @@ class CommentAdapter(
             binding.comment = comment
             binding.commentEventListener = commentEventListener
             binding.lifecycleOwner = lifecycleOwner
+            binding.executePendingBindings()
         }
     }
 

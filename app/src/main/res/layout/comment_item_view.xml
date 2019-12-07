@@ -45,7 +45,7 @@
                 android:id="@+id/favouriteIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{commentEventListener.addToFavourite(comment)}"
+                android:onClick="@{() -> commentEventListener.addToFavourite(comment)}"
                 app:srcCompat="@android:drawable/btn_star_big_on" />
 
     </LinearLayout>
