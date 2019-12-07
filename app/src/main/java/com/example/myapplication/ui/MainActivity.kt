@@ -13,8 +13,12 @@ class MainActivity : DaggerAppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
 
-        val navController = findNavController(R.id.nav_host)
-        navigation.setupWithNavController(navController)
+        //set up the controller only on first creation.
+        if (savedInstanceState == null) {
+            val navController = findNavController(R.id.nav_host)
+            navigation.setupWithNavController(navController)
+        }
+
     }
 
 }
