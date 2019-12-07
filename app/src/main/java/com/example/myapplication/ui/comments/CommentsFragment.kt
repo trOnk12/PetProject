@@ -20,7 +20,6 @@ class CommentsFragment : Fragment() {
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private lateinit var viewModel: CommentsActivityViewModel
-    private lateinit var binding: CommentsFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,8 +28,9 @@ class CommentsFragment : Fragment() {
     ): View {
         viewModel = viewModel(viewModelFactory)
 
-        binding = DataBindingUtil.inflate(inflater, R.layout.comments_fragment, container, false)
-        binding.viewModel = viewModel
+        val binding = CommentsFragmentBinding.inflate(inflater, container, false).apply {
+            viewModel = viewModel
+        }
 
         return binding.root
     }
