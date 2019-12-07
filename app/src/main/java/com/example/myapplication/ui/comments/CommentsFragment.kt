@@ -5,13 +5,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.myapplication.R
+import com.example.myapplication.core.extension.observe
 import com.example.myapplication.core.viewModel
 import com.example.myapplication.databinding.CommentsFragmentBinding
+import com.example.myapplication.domain.model.Comment
 import dagger.android.support.AndroidSupportInjection
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class CommentsFragment : Fragment() {
@@ -50,10 +54,10 @@ class CommentsFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
 
-//        viewModel.comments.observe(this, Observer { commentList -> renderCommentList(commentList) })
-//        viewModel.failure.observe(
-//            this,
-//            Observer { failure -> failure.getContentIfNotHandled()?.let { handleFailure(it) } })
+        viewModel.comments.observe(this,::renderCommentList)
+        viewModel.failure.observe(
+            this,
+            Observer { failure -> failure.getContentIfNotHandled()?.let { handleFailure(it) } })
     }
 //
 //    private fun initializeView() {
@@ -79,8 +83,8 @@ class CommentsFragment : Fragment() {
 //        }
 //    }
 //
-//    private fun renderCommentList(comments: List<Comment>) {
-//        CoroutineScope(Dispatchers.Main).launch { commentAdapter.updateData(comments) }
-//    }
+    private fun renderCommentList(comments: List<Comment>) {
+        CoroutineScope(Dispatchers.Main).launch { commentAdapter.updateData(comments) }
+    }
 
 }
