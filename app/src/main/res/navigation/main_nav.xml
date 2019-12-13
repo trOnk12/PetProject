@@ -17,7 +17,6 @@
                 app:exitAnim="@anim/nav_default_exit_anim"
                 app:popEnterAnim="@anim/nav_default_pop_enter_anim"
                 app:popExitAnim="@anim/nav_default_pop_exit_anim" />
-
     </fragment>
 
     <fragment
@@ -35,6 +34,10 @@
     <fragment
             android:id="@+id/commentDetailFragment"
             android:name="com.example.myapplication.ui.comment.CommentFragment"
-            tools:layout="@layout/fragment_comment" />
+            tools:layout="@layout/fragment_comment">
+        <argument
+                android:name="commentId"
+                app:argType="string" />
+    </fragment>
 
 </navigation>

@@ -6,24 +6,27 @@ import androidx.lifecycle.viewModelScope
 import com.example.core.interactor.UseCase.None
 import com.example.myapplication.core.Event
 import com.example.myapplication.core.platform.BaseViewModel
+import com.example.myapplication.data.local.sharedpreferences.FavouriteStatus
 import com.example.myapplication.domain.model.Comment
+import com.example.myapplication.domain.usecase.AddCommentToFavourite
 import com.example.myapplication.domain.usecase.GetComments
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class CommentViewModel @Inject constructor(
-    private val getComments: GetComments
-) : BaseViewModel(), CommentEventListener{
+    private val getComments: GetComments,
+    private val addCommentToFavourite: AddCommentToFavourite
+) : BaseViewModel(), CommentEventListener {
 
     private val _comments = MutableLiveData<List<Comment>>()
     val comments: LiveData<List<Comment>>
         get() = _comments
 
-    val _isRefreshing = MutableLiveData<Boolean>()
+    private val _isRefreshing = MutableLiveData<Boolean>()
     val isRefreshing: LiveData<Boolean>
         get() = _isRefreshing
 
-   private val _navigateToCommentDetail = MutableLiveData<Event<String>>()
+    private val _navigateToCommentDetail = MutableLiveData<Event<String>>()
     val navigateToCommentDetail: LiveData<Event<String>>
         get() = _navigateToCommentDetail
 
@@ -33,17 +36,30 @@ class CommentViewModel @Inject constructor(
         }
     }
 
+    override fun addToFavourite(comment: Comment) {
+        viewModelScope.launch {
+            addCommentToFavourite(comment.id.toString()) {
+                it.either(
+                    ::handleFailure,
+                    ::addFavouriteSuccess
+                )
+            }
+        }
+    }
+
+    private fun addFavouriteSuccess(favouriteStatus: FavouriteStatus) {
+
+    }
+
+    override fun openCommentDetail(comment: Comment) {
+        _navigateToCommentDetail.value = Event(comment.id.toString())
+    }
+
+
     private fun handleComments(comments: List<Comment>) {
         _isRefreshing.value = false
         _comments.value = comments
     }
 
-    override fun addToFavourite(comment: Comment) {
-
-    }
-
-    override fun openCommentDetail(comment: Comment) {
-
-    }
-
 }
+

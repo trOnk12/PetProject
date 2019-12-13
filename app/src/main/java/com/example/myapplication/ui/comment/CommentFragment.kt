@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.core.exception.Failure
 import com.example.myapplication.core.EventObserver
 import com.example.myapplication.core.viewModel
@@ -89,6 +90,8 @@ class CommentFragment : Fragment() {
 
     private fun openCommentDetail(id: String) {
         val action =
+            CommentFragmentDirections.actionCommentFragmentToCommentDetailFragment(id)
+        findNavController().navigate(action)
     }
 
 }
