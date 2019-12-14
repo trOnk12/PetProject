@@ -3,6 +3,8 @@ package com.example.myapplication.data.local.sharedpreferences
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
+import androidx.annotation.WorkerThread
+import androidx.core.content.edit
 import javax.inject.Inject
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
@@ -14,39 +16,28 @@ class SharedPreferenceStorage
     private val preferences =
         context.applicationContext.getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
 
-    private var favouriteCommentsPrefs by StringSetPreference(preferences, FAVOURITE_COMMENTS)
-
-    fun addCommentToFavourite(id: String): FavouriteStatus {
-        return if (isCommentFavourite(id)) { favouriteCommentsPrefs.add(id); FavouriteStatus.IS_ADDED }
-         else { favouriteCommentsPrefs.remove(id); FavouriteStatus.IS_REMOVED }
-    }
-
-    private fun isCommentFavourite(id: String): Boolean {
-        return favouriteCommentsPrefs.contains(id)
-    }
+    var userId by StringPreference(preferences,userID,null)
 
     companion object {
         const val PREFS_NAME = "akatwitter"
-        const val FAVOURITE_COMMENTS = "favourite_comments"
+        const val userID = "userid"
     }
 }
 
-class StringSetPreference(
+class StringPreference(
     private val preferences: SharedPreferences,
-    private val name: String
-) : ReadWriteProperty<Any, MutableSet<String>> {
+    private val name: String,
+    private val defaultValue: String?
+) : ReadWriteProperty<Any, String?> {
 
-    override fun getValue(thisRef: Any, property: KProperty<*>): MutableSet<String> {
-        return preferences.getStringSet(name, emptySet())!!
+    @WorkerThread
+    override fun getValue(thisRef: Any, property: KProperty<*>): String? {
+        return preferences.getString(name, defaultValue)
     }
 
-    override fun setValue(thisRef: Any, property: KProperty<*>, value: MutableSet<String>) {
-        preferences.edit().putStringSet(SharedPreferenceStorage.FAVOURITE_COMMENTS, value).apply()
+    override fun setValue(thisRef: Any, property: KProperty<*>, value: String?) {
+        preferences.edit { putString(name, value) }
     }
-}
-
-enum class FavouriteStatus {
-    IS_ADDED, IS_REMOVED
 }
 
 

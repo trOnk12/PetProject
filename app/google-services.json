@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "492806039267",
+    "firebase_url": "https://akatwittermodulair.firebaseio.com",
+    "project_id": "akatwittermodulair",
+    "storage_bucket": "akatwittermodulair.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:492806039267:android:0a511b63f4ecb9b81d47d6",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "492806039267-tt8dfq6442c49j4u5ihph1jeo3oqj1ei.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.myapplication",
+            "certificate_hash": "d4e1a4793acb67d06b27ba72fd93716625fd7e33"
+          }
+        },
+        {
+          "client_id": "492806039267-0cgrjda08iibm7dhv34r896kii7kodk0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4LGk57YHFU5fa_QyAC29arVUREyD9aWs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "492806039267-0cgrjda08iibm7dhv34r896kii7kodk0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

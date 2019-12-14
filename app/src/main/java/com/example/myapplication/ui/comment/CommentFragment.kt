@@ -15,6 +15,7 @@ import com.example.myapplication.core.EventObserver
 import com.example.myapplication.core.viewModel
 import com.example.myapplication.databinding.CommentsFragmentBinding
 import com.example.myapplication.domain.model.Comment
+import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.comments_fragment.*
 import kotlinx.coroutines.CoroutineScope
@@ -47,9 +48,11 @@ class CommentFragment : Fragment() {
         viewModel.comments.observe(this, Observer(::renderCommentList))
         viewModel.navigateToCommentDetail.observe(this, EventObserver(::navigateToCommentDetail))
         viewModel.failure.observe(this, EventObserver(::handleFailure))
+        viewModel.snackBarEvent.observe(this, EventObserver(::handleSnackBar))
 
         return binding.root
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -82,6 +85,10 @@ class CommentFragment : Fragment() {
 
     private fun renderCommentList(comments: List<Comment>) {
         CoroutineScope(Dispatchers.Main).launch { commentAdapter.updateData(comments) }
+    }
+
+    private fun handleSnackBar(i: Int) {
+        Snackbar.make(commentList, i, Snackbar.LENGTH_LONG).show()
     }
 
     private fun navigateToCommentDetail(id: String) {

@@ -7,4 +7,6 @@
     <string name="title_comment">Comments</string>
     <string name="title_event">Events</string>
     <string name="title_friends">Friends</string>
+    <string name="comment_favourite">Comment added to favourite</string>
+    <string name="comment_unfavourite">Comment removed from favourite</string>
 </resources>

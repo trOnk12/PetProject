@@ -10,6 +10,6 @@ class CommentLocalSource
 ) {
 
     fun addToFavourite(id: String) =
-        Either.Right(sharedPreferenceStorage.addCommentToFavourite(id))
+       sharedPreferenceStorage.addCommentToFavourite(id)
 
 }
