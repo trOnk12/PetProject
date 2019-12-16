@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.core.exception.Failure
 import com.example.myapplication.core.EventObserver
-import com.example.myapplication.core.viewModel
+import com.example.myapplication.core.extension.viewModel
 import com.example.myapplication.databinding.CommentsFragmentBinding
 import com.example.myapplication.domain.model.Comment
 import com.google.android.material.snackbar.Snackbar
@@ -38,6 +38,7 @@ class CommentFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         viewModel = viewModel(viewModelFactory)
 
         binding = CommentsFragmentBinding.inflate(inflater, container, false)

@@ -6,17 +6,6 @@
         app:startDestination="@id/bottomNavigationComment">
 
     <fragment
-            android:id="@+id/splashFragment"
-            android:name="com.example.myapplication.ui.splash.SplashFragment">
-        <action
-                android:id="@+id/action_splashFragment_to_LoginFragment"
-                app:destination="@id/loginFragment" />
-        <action
-                android:id="@+id/action_splashFragment_to_CommentFragment"
-                app:destination="@id/bottomNavigationComment" />
-    </fragment>
-
-    <fragment
             android:id="@id/bottomNavigationComment"
             android:name="com.example.myapplication.ui.comment.CommentFragment"
             android:label="Comments"
@@ -50,22 +39,5 @@
                 android:name="commentId"
                 app:argType="string" />
     </fragment>
-
-    <navigation
-            android:id="@+id/navigation3"
-            app:startDestination="@id/loginFragment">
-        <fragment
-                android:id="@+id/loginFragment"
-                android:name="com.example.myapplication.ui.login.LoginFragment"
-                tools:layout="@layout/login_fragment" />
-        <fragment
-                android:id="@+id/registerFragment"
-                android:name="com.example.myapplication.ui.register.RegisterFragment"
-                tools:layout="@layout/register_fragment" />
-        <action
-                android:id="@+id/action_global_bottomNavigationComment"
-                app:destination="@id/bottomNavigationComment" />
-    </navigation>
-
 
 </navigation>

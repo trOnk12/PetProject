@@ -1,15 +1,19 @@
 package com.example.myapplication.data.firebase
 
 
+
 import com.example.core.functional.Result
 import com.example.myapplication.domain.model.User
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
+
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
+
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
+
 
 class FireStoreUserDataSource(private val fireStore: FirebaseFirestore) {
 
@@ -54,6 +58,24 @@ class FireStoreUserDataSource(private val fireStore: FirebaseFirestore) {
             }
         }
 
+    suspend fun getUser(id: String): Result<User> =
+        withContext(Dispatchers.Main) {
+            suspendCancellableCoroutine<Result<User>> { continuation ->
+                fireStore.collection(USERS_COLLECTION)
+                    .document(id)
+                    .get()
+                    .addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            val result = it.result
+                            val user = result?.data
+                        } else {
+                            it.exception?.let {
+                                continuation.resume(Result.Error(it))
+                            }
+                        }
+                    }
+            }
+        }
 }
 
 enum class FireStoreStatus {

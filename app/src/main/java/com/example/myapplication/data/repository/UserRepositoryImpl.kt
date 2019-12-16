@@ -1,28 +1,39 @@
 package com.example.myapplication.data.repository
 
-import com.example.core.exception.Failure
-import com.example.core.functional.Either
+import com.example.core.functional.Result
+import com.example.core.functional.Result.Error
 import com.example.myapplication.data.firebase.FireStoreUserDataSource
-import com.example.myapplication.data.source.firebase.UserFireBaseSource
+import com.example.myapplication.data.source.firebase.FireBaseAuthentication
+import com.example.myapplication.domain.model.User
 import com.example.myapplication.domain.repository.UserRepository
 
 class UserRepositoryImpl(
-    private val userFireBaseSource: UserFireBaseSource,
+    private val fireBaseAuthentication: FireBaseAuthentication,
     private val fireStoreUserDataSource: FireStoreUserDataSource
 ) : UserRepository {
 
-    override fun isUserSignIn(): Boolean {
-        return userFireBaseSource.isUserSignIn()
+    override suspend fun signIn(email: String, password: String): Result<User> {
+        if (isSignIn()) return Error(Exception("User is already sign in"))
+
+        val user =
+            fireBaseAuthentication.signIn(email, password)
+        if (user is Result.Success) {
+            fireStoreUserDataSource.createUser(user.data)
+        }
+
+        return user
     }
 
-    //check if user logged in
-    //if yes -> retrieve user data -> go to main activity
-    //if no -> go to log in activity
-    override suspend fun signIn(email: String, password: String): Either<Failure, Any> {
-        val user = userFireBaseSource.signIn(email,password)
+    override suspend fun getUser(id:String): Result<User> {
+        return if (isSignIn()) {
+            fireStoreUserDataSource.getUser(id)
+        } else {
+            Error(Exception("No user sign in"))
+        }
+    }
 
-        if(user.isRight) fireStoreUserDataSource.createUser(user.)
-
+    override fun isSignIn(): Boolean {
+        return fireBaseAuthentication.isSignIn()
     }
 
 

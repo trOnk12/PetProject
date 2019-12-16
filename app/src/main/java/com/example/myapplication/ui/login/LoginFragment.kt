@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.myapplication.core.viewModel
+import com.example.myapplication.core.extension.viewModel
 import com.example.myapplication.databinding.LoginFragmentBinding
 import javax.inject.Inject
 

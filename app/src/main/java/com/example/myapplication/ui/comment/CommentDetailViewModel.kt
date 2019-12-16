@@ -7,6 +7,7 @@ import com.example.myapplication.core.platform.BaseViewModel
 import com.example.myapplication.domain.model.Comment
 import com.example.myapplication.domain.usecase.GetComment
 import kotlinx.coroutines.launch
+import com.example.core.functional.Result
 
 class CommentDetailViewModel(val getComment: GetComment) : BaseViewModel() {
 
@@ -16,7 +17,12 @@ class CommentDetailViewModel(val getComment: GetComment) : BaseViewModel() {
 
     fun getComment(id: String) {
         viewModelScope.launch {
-            getComment(id) { it.either(::handleFailure, ::handleComment) }
+            getComment(id) {
+                when(it){
+                    is Result.Success -> handleComment(it.data)
+                    is Result.Error -> handleFailure(it.exception)
+                }
+            }
         }
     }
 

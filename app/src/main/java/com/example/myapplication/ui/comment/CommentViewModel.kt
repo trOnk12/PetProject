@@ -47,22 +47,13 @@ class CommentViewModel @Inject constructor(
     }
 
     override fun addToFavourite(comment: Comment) {
-        viewModelScope.launch {
-            addCommentToFavourite(comment.id.toString()) {
-                when (it) {
-                    is Result.Success -> addFavouriteSuccess(it.data)
-                }
-            }
-        }
-    }
-
-    private fun addFavouriteSuccess(favouriteStatus: FavouriteStatus) {
-        val stringResId = if (favouriteStatus == FavouriteStatus.IS_ADDED) {
-            R.string.comment_favourite
-        } else {
-            R.string.comment_unfavourite
-        }
-        _snackBarEvent.value = Event(stringResId)
+//        viewModelScope.launch {
+//            addCommentToFavourite(comment.id.toString()) {
+//                when (it) {
+//                    is Result.Success -> addFavouriteSuccess(it.data)
+//                }
+//            }
+//        }
     }
 
     override fun openCommentDetail(comment: Comment) {

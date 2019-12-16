@@ -7,9 +7,9 @@ import com.example.myapplication.core.Event
 
 open class BaseViewModel : ViewModel() {
 
-    var failure: MutableLiveData<Event<Failure>> = MutableLiveData()
+    var failure: MutableLiveData<Event<Exception>> = MutableLiveData()
 
-    protected fun handleFailure(failure: Failure) {
+    protected fun handleFailure(failure: Exception) {
         this.failure.value = Event(failure)
     }
 
