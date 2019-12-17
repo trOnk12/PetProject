@@ -81,8 +81,6 @@ class CommentFragment : Fragment() {
         viewModel.fetchComments()
     }
 
-
-
     private fun renderCommentList(comments: List<Comment>) {
         CoroutineScope(Dispatchers.Main).launch { commentAdapter.updateData(comments) }
     }

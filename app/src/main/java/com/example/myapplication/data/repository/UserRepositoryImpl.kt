@@ -7,6 +7,7 @@ import com.example.myapplication.data.local.sharedpreferences.SharedPreferenceSt
 import com.example.myapplication.data.source.firebase.FireBaseAuthentication
 import com.example.myapplication.domain.model.User
 import com.example.myapplication.domain.repository.UserRepository
+import java.lang.IllegalStateException
 
 class UserRepositoryImpl(
     private val fireBaseAuthentication: FireBaseAuthentication,
@@ -16,17 +17,24 @@ class UserRepositoryImpl(
 
     override suspend fun signIn(email: String, password: String): User {
         if (isSignIn()) throw Exception("User is already sign in")
-        return fireBaseAuthentication.signIn(email, password)
+        val user = fireBaseAuthentication.signIn(email, password)
+
+        saveId(user)
+
+        return user
     }
 
-    private suspend fun successfulAuthentication(user: User) {
+    private fun saveId(user: User) {
         sharedPreferenceStorage.userId = user.id
-        fireStoreUserDataSource.createUser(user)
     }
 
     override suspend fun getUser(id: String): User {
-        return if (isSignIn()) {
-            fireStoreUserDataSource.getUser(id)
+        if (isSignIn()) {
+            when (val result = fireStoreUserDataSource.getUser(id)) {
+                is Error -> throw(result.exception)
+                is Result.Success -> return result.data
+                else -> throw IllegalStateException("Something went wrong")
+            }
         } else {
             throw Exception("No user sign in")
         }
@@ -35,6 +43,5 @@ class UserRepositoryImpl(
     override fun isSignIn(): Boolean {
         return fireBaseAuthentication.isSignIn()
     }
-
 
 }

@@ -11,11 +11,11 @@ class FireBaseAuthentication(private val fireBaseAuthenticator: FireBaseAuthenti
         email: String,
         password: String
     ): User {
-        return when (val user = fireBaseAuthenticator.signInWithEmailAndPassword(email, password)) {
+        return when (val result = fireBaseAuthenticator.signInWithEmailAndPassword(email, password)) {
             is Result.Success -> {
-                user.data.mapToDomain()
+                result.data.mapToDomain()
             }
-            is Result.Error -> throw(user.exception)
+            is Result.Error -> throw(result.exception)
             else -> throw(IllegalStateException("Something went wrong"))
         }
     }

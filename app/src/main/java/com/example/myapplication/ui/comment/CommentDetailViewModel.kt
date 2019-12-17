@@ -15,13 +15,11 @@ class CommentDetailViewModel(val getComment: GetComment) : BaseViewModel() {
     val comment: LiveData<Comment>
         get() = _comment
 
-    fun getComment(id: String) {
+    fun fetchComment(id: String) {
         viewModelScope.launch {
-            getComment(id) {
-                when(it){
-                    is Result.Success -> handleComment(it.data)
-                    is Result.Error -> handleFailure(it.exception)
-                }
+            when (val result = getComment(id)) {
+                is Result.Success -> handleComment(result.data)
+                is Result.Error -> handleFailure(result.exception)
             }
         }
     }

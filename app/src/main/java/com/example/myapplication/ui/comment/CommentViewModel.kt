@@ -3,7 +3,6 @@ package com.example.myapplication.ui.comment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.core.interactor.UseCase.None
 import com.example.myapplication.R
 import com.example.myapplication.core.Event
 import com.example.myapplication.core.platform.BaseViewModel
@@ -13,6 +12,7 @@ import com.example.myapplication.domain.usecase.GetComments
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import com.example.core.functional.Result
+import com.example.core.interactor.None
 
 class CommentViewModel @Inject constructor(
     private val getComments: GetComments,
@@ -38,13 +38,12 @@ class CommentViewModel @Inject constructor(
 
     fun fetchComments() {
         viewModelScope.launch {
-            getComments(None()) {
-                when (it) {
-                    is Result.Success -> handleComments(it.data)
+           when (val result = getComments(None())) {
+                    is Result.Success -> handleComments(result.data)
+                    is Result.Error -> handleFailure(result.exception)
                 }
             }
         }
-    }
 
     override fun addToFavourite(comment: Comment) {
 //        viewModelScope.launch {
@@ -59,7 +58,6 @@ class CommentViewModel @Inject constructor(
     override fun openCommentDetail(comment: Comment) {
         _navigateToCommentDetail.value = Event(comment.id.toString())
     }
-
 
     private fun handleComments(comments: List<Comment>) {
         _isRefreshing.value = false
