@@ -10,18 +10,14 @@ class FireBaseAuthentication(private val fireBaseAuthenticator: FireBaseAuthenti
     suspend fun signIn(
         email: String,
         password: String
-    ): Result<User> {
-        return when (val user =
-            fireBaseAuthenticator.signInWithEmailAndPassword(email, password)) {
+    ): User {
+        return when (val user = fireBaseAuthenticator.signInWithEmailAndPassword(email, password)) {
             is Result.Success -> {
-                user.data?.let {
-                    Result.Success(it.mapToDomain())
-                }
+                user.data.mapToDomain()
             }
-            is Result.Error -> user
-            else -> Result.Error(IllegalStateException("Something went wrong"))
+            is Result.Error -> throw(user.exception)
+            else -> throw(IllegalStateException("Something went wrong"))
         }
-
     }
 
     fun isSignIn(): Boolean {

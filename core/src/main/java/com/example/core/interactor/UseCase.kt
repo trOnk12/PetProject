@@ -2,26 +2,21 @@ package com.example.core.interactor
 
 import com.example.core.functional.Result
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 abstract class UseCase<out Type, in Params> where Type : Any {
 
-    abstract suspend fun run(params: Params): Result<Type>
+    abstract suspend fun run(params: Params): Type
 
-    suspend operator fun invoke(params: Params, onResult: (Result<Type>) -> Unit = {}) {
-        try {
+    suspend operator fun invoke(params: Params): Result<Type> {
+        return try {
             withContext(Dispatchers.IO) {
-                val job = async { run(params) }
-                withContext(Dispatchers.Main) {
-                    launch { onResult(job.await()) }
+                run(params).let {
+                    Result.Success(it)
                 }
             }
-        } catch (e: Exception) {
-            onResult(Result.Error(e))
+        } catch (exception: Exception) {
+            return Result.Error(exception)
         }
     }
-
-    class None
 }

@@ -54,7 +54,10 @@ class CommentFragment : Fragment() {
         return binding.root
     }
 
+    private fun handleFailure(exception: Exception) {
 
+    }
+    
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -78,11 +81,7 @@ class CommentFragment : Fragment() {
         viewModel.fetchComments()
     }
 
-    private fun handleFailure(failure: Failure) {
-        when (failure) {
-            is Failure.ServerError -> Log.d("TEST", "failure test")
-        }
-    }
+
 
     private fun renderCommentList(comments: List<Comment>) {
         CoroutineScope(Dispatchers.Main).launch { commentAdapter.updateData(comments) }

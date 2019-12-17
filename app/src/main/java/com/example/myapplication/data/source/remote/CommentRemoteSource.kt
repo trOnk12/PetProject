@@ -14,7 +14,7 @@ class CommentRemoteSource
     private var commentService: CommentService
 ) {
 
-    fun comments(): Result<List<Comment>> {
+    fun comments(): List<Comment> {
         return transform(
             commentService.comments(),
             { it.mapToDomain() },
@@ -22,7 +22,7 @@ class CommentRemoteSource
         )
     }
 
-    fun comment(id: String): Result<Comment> {
+    fun comment(id: String): Comment {
         return transform(
             commentService.comment(id),
             { it.mapToDomain() },
@@ -34,15 +34,15 @@ class CommentRemoteSource
         call: Call<T>,
         transform: (T) -> R,
         default: T
-    ): Result<R> {
+    ): R {
         return try {
             val response = call.execute()
             when (response.isSuccessful) {
-                true -> Result.Success(transform(response.body() ?: default))
-                false -> Result.Error(Exception("Something went wrong"))
+                true -> transform(response.body() ?: default)
+                false -> throw Exception("Something went wrong.")
             }
         } catch (exception: Exception) {
-            Result.Error(exception)
+            throw exception
         }
     }
 

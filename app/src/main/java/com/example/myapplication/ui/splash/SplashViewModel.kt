@@ -12,9 +12,6 @@ class SplashViewModel(private val userRepository: UserRepository) : BaseViewMode
     val userSignStatus: LiveData<Event<LaunchDestination>>
         get() = _userSignInStatus
 
-    //check if getUser logged in
-    //if yes -> retrieve getUser data -> go to main activity
-    //if no -> go to log in activity
     fun shouldSignIn() {
         if (userRepository.isSignIn())
             _userSignInStatus.value = Event(LaunchDestination.MAIN_ACTIVITY)
