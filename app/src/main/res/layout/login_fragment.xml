@@ -5,7 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="com.example.myapplication.domain.model.LoginData"/>
         <variable
                 name="viewModel"
                 type="com.example.myapplication.ui.login.LoginViewModel" />
@@ -22,7 +22,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textEmailAddress"
-                app:email="@{viewModel.loginData.email}"
+                android:text="@={viewModel._loginData.email}"
                 app:layout_constraintBottom_toTopOf="@+id/password"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +38,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/emailAddress"
-                app:password="@{viewModel.loginData.password}" />
+                android:text="@={viewModel._loginData.password}" />
 
         <Button
                 android:id="@+id/signInButton"

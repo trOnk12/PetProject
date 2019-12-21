@@ -1,4 +1,4 @@
-package com.example.myapplication.ui
+package com.example.myapplication.core
 
 import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout

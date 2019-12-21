@@ -1,7 +1,5 @@
 package com.example.myapplication.domain.usecase
 
-import com.example.core.functional.Result
-import com.example.core.interactor.None
 import com.example.core.interactor.UseCase
 import com.example.myapplication.domain.model.LoginData
 import com.example.myapplication.domain.model.User

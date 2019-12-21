@@ -9,7 +9,6 @@ import com.example.myapplication.core.extension.mapToDomain
 import com.example.myapplication.domain.model.User
 import java.lang.IllegalStateException
 
-
 class UserRemoteSourceImpl(
     private val authenticator: Authenticator,
     private val userFireStore: UserFireStore
@@ -17,8 +16,8 @@ class UserRemoteSourceImpl(
 
     override suspend fun signIn(loginData: LoginData): Result<User> {
         val result = authenticator.signInWithEmailAndPassword(
-            loginData.email.value,
-            loginData.password.value
+            loginData.email,
+            loginData.password
         )
 
         return when (result) {
