@@ -7,8 +7,12 @@ import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.resume
 import com.example.core.functional.Result
+import javax.inject.Inject
 
-class FireBaseAuthenticator(private val fireBaseAuth: FirebaseAuth) {
+class Authenticator
+@Inject constructor(
+    private val fireBaseAuth: FirebaseAuth
+) {
 
     suspend fun signInWithEmailAndPassword(
         email: String,

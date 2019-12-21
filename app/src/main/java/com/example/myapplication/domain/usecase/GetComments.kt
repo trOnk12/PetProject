@@ -5,10 +5,14 @@ import com.example.core.interactor.None
 import com.example.core.interactor.UseCase
 import com.example.myapplication.domain.model.Comment
 import com.example.myapplication.domain.repository.CommentRepository
+import javax.inject.Inject
 
-class GetComments(private var commentRepository: CommentRepository) : UseCase<List<Comment>, None>() {
+class GetComments
+@Inject constructor(
+    private var commentRepository: CommentRepository
+) : UseCase<List<Comment>, None>() {
 
-    override suspend fun run(params: None):List<Comment> {
+    override suspend fun run(params: None): List<Comment> {
         return commentRepository.comments()
     }
 

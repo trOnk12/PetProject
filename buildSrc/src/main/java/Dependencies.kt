@@ -3,7 +3,7 @@ object Versions {
     const val compiledSdkVersion = 29
     const val buildToolsVersion = "29.0.2"
     const val applicationId = "com.example.myapplication"
-    const val mindSdkVersion = 15
+    const val mindSdkVersion = 16
     const val targetSdkVersion = 29
     const val versionCode = 1
     const val versionName = "1.0"

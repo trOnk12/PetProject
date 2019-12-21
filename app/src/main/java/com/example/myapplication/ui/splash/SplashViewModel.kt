@@ -5,8 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import com.example.myapplication.core.Event
 import com.example.myapplication.core.platform.BaseViewModel
 import com.example.myapplication.domain.repository.UserRepository
+import javax.inject.Inject
 
-class SplashViewModel(private val userRepository: UserRepository) : BaseViewModel() {
+class SplashViewModel
+@Inject constructor(
+    private val userRepository: UserRepository
+) : BaseViewModel() {
 
     private val _userSignInStatus = MutableLiveData<Event<LaunchDestination>>()
     val userSignStatus: LiveData<Event<LaunchDestination>>

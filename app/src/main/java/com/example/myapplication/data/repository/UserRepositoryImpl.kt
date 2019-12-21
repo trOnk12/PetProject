@@ -2,46 +2,38 @@ package com.example.myapplication.data.repository
 
 import com.example.core.functional.Result
 import com.example.core.functional.Result.Error
-import com.example.myapplication.data.firebase.FireStoreUserDataSource
-import com.example.myapplication.data.local.sharedpreferences.SharedPreferenceStorage
-import com.example.myapplication.data.source.firebase.FireBaseAuthentication
+import com.example.core.interactor.None
+import com.example.myapplication.data.source.UserLocalSource
+import com.example.myapplication.data.source.UserRemoteSource
+import com.example.myapplication.domain.model.LoginData
 import com.example.myapplication.domain.model.User
 import com.example.myapplication.domain.repository.UserRepository
 import java.lang.IllegalStateException
 
 class UserRepositoryImpl(
-    private val fireBaseAuthentication: FireBaseAuthentication,
-    private val fireStoreUserDataSource: FireStoreUserDataSource,
-    private val sharedPreferenceStorage: SharedPreferenceStorage
+    private val userRemoteSource: UserRemoteSource,
+    private val userLocalSource: UserLocalSource
 ) : UserRepository {
 
-    override suspend fun signIn(email: String, password: String): User {
-        if (isSignIn()) throw Exception("User is already sign in")
-        val user = fireBaseAuthentication.signIn(email, password)
-
-        saveId(user)
-
-        return user
-    }
-
-    private fun saveId(user: User) {
-        sharedPreferenceStorage.userId = user.id
-    }
-
     override suspend fun getUser(id: String): User {
-        if (isSignIn()) {
-            when (val result = fireStoreUserDataSource.getUser(id)) {
-                is Error -> throw(result.exception)
-                is Result.Success -> return result.data
-                else -> throw IllegalStateException("Something went wrong")
+
+    }
+
+    override suspend fun logIn(loginData: LoginData): User {
+        if (isSignIn()) throw Exception("User already signed in")
+
+        when (val result = userRemoteSource.signIn(loginData)) {
+            is Result.Success -> {
+                userLocalSource.catchUserId(result.data.id)
+                return result.data
             }
-        } else {
-            throw Exception("No user sign in")
+            is Error -> throw Exception(result.exception)
+            else -> throw IllegalStateException("Illegal state")
         }
     }
 
     override fun isSignIn(): Boolean {
-        return fireBaseAuthentication.isSignIn()
+        return userRemoteSource.isSignIn()
     }
 
 }

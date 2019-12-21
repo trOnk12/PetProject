@@ -1,6 +1,9 @@
 package com.example.myapplication.data.util
 
-class InputValidator {
+import javax.inject.Inject
+
+class InputValidator
+@Inject constructor() {
 
     fun validatePassword(
         password: String,

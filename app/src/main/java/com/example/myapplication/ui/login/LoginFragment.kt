@@ -1,6 +1,8 @@
 package com.example.myapplication.ui.login
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,10 +10,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.myapplication.core.extension.viewModel
 import com.example.myapplication.databinding.LoginFragmentBinding
+import dagger.android.support.AndroidSupportInjection
+import dagger.android.support.DaggerFragment
+import kotlinx.android.synthetic.main.login_fragment.*
 import javax.inject.Inject
 
 class LoginFragment : Fragment() {
-
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -27,11 +31,18 @@ class LoginFragment : Fragment() {
 
         viewModel = viewModel(viewModelFactory)
 
-        binding = LoginFragmentBinding.inflate(inflater, container, false)
-            .apply {
-                viewModel = viewModel
-            }
+        binding = LoginFragmentBinding.inflate(inflater, container, false).apply {
+            viewModel = viewModel
+        }
+
+        binding.signInButton.setOnClickListener { viewModel.logIn() }
 
         return binding.root
     }
+
+    override fun onAttach(context: Context) {
+        AndroidSupportInjection.inject(this)
+        super.onAttach(context)
+    }
+
 }
