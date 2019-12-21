@@ -24,7 +24,6 @@ class LoginFragment : Fragment() {
     @Inject
     lateinit var provider: ViewModelProvider.Factory
 
-    lateinit var viewModel: LoginViewModel
     lateinit var binding: LoginFragmentBinding
 
     override fun onCreateView(
@@ -36,23 +35,24 @@ class LoginFragment : Fragment() {
         return binding.root
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        val viewModel: LoginViewModel = viewModel(provider)
+        viewModel.apply {
+            passwordError.observe(this@LoginFragment, Observer(::handlePasswordError))
+            emailError.observe(this@LoginFragment, Observer(::handleEmailError))
+        }
+
+        binding.apply {
+            binding.lifecycleOwner = this@LoginFragment
+            binding.viewModel = viewModel
+        }
+        binding.signInButton.setOnClickListener { viewModel.logIn() }
+    }
+
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
         super.onAttach(context)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        viewModel = viewModel(provider)
-        viewModel.passwordError.observe(this, Observer(::handlePasswordError))
-        viewModel.emailError.observe(this, Observer(::handleEmailError))
-
-        binding.apply {
-            lifecycleOwner = this@LoginFragment
-            viewModel = viewModel
-            signInButton.setOnClickListener { viewModel.logIn() }
-        }
     }
 
     private fun handlePasswordError(validationError: ValidationError?) {
