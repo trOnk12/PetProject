@@ -28,6 +28,10 @@ class UserRemoteSourceImpl(
         }
     }
 
+    override suspend fun getUser(userId: String): Result<User> {
+            return userFireStore.getUser(userId)
+    }
+
     override fun isSignIn(): Boolean {
         return authenticator.isUserSignedIn()
     }
