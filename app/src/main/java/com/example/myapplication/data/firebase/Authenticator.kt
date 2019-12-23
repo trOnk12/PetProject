@@ -14,10 +14,31 @@ class Authenticator
     private val fireBaseAuth: FirebaseAuth
 ) {
 
-    suspend fun signInWithEmailAndPassword(
+    suspend fun register(email: String, password: String) =
+        withContext(Dispatchers.Main) {
+            suspendCancellableCoroutine<Result<FirebaseUser>> { continuation ->
+                fireBaseAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener {
+                        if (!continuation.isActive) return@addOnCompleteListener
+                        if (it.isSuccessful) {
+                            val user = fireBaseAuth.currentUser
+                            user?.let {
+                                continuation.resume(Result.Success(it))
+                            }
+                        } else {
+                            it.exception?.let {
+                                continuation.resume(Result.Error(it))
+                            }
+
+                        }
+                    }
+            }
+        }
+
+    suspend fun logIn(
         email: String,
         password: String
-    ): Result<FirebaseUser> =
+    ) =
         withContext(Dispatchers.Main) {
             suspendCancellableCoroutine<Result<FirebaseUser>> { continuation ->
                 fireBaseAuth.signInWithEmailAndPassword(email, password)
@@ -41,4 +62,5 @@ class Authenticator
     fun isUserSignedIn(): Boolean {
         return fireBaseAuth.currentUser != null
     }
+
 }

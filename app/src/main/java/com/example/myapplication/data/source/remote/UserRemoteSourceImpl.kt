@@ -6,6 +6,7 @@ import com.example.myapplication.data.source.UserRemoteSource
 import com.example.myapplication.domain.model.LoginData
 import  com.example.core.functional.Result
 import com.example.myapplication.core.extension.mapToDomain
+import com.example.myapplication.domain.model.RegisterData
 import com.example.myapplication.domain.model.User
 import java.lang.IllegalStateException
 
@@ -14,21 +15,28 @@ class UserRemoteSourceImpl(
     private val userFireStore: UserFireStore
 ) : UserRemoteSource {
 
-    override suspend fun signIn(loginData: LoginData): Result<User> {
-        val result = authenticator.signInWithEmailAndPassword(
-            loginData.email,
-            loginData.password
-        )
+    override suspend fun register(registerData: RegisterData): Result<User> {
+        val registerResult = authenticator.register(registerData.email, registerData.password)
 
-        return when (result) {
-            is Result.Success -> userFireStore.createUser(result.data.mapToDomain())
-            is Result.Error -> throw Exception(result.exception)
+        return when (registerResult) {
+            is Result.Success -> userFireStore.createUser(registerResult.data.mapToDomain())
+            is Result.Error -> registerResult
+            else -> throw IllegalStateException("Invalid state")
+        }
+    }
+
+    override suspend fun signIn(loginData: LoginData): Result<User> {
+        val loginResult = authenticator.logIn(loginData.email, loginData.password)
+
+        return when (loginResult) {
+            is Result.Success -> Result.Success(loginResult.data.mapToDomain())
+            is Result.Error -> loginResult
             else -> throw IllegalStateException("Invalid state")
         }
     }
 
     override suspend fun getUser(userId: String): Result<User> {
-            return userFireStore.getUser(userId)
+        return userFireStore.getUser(userId)
     }
 
     override fun isSignIn(): Boolean {

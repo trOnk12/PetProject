@@ -3,10 +3,13 @@ package com.example.myapplication.ui.login
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.core.functional.Result
+import com.example.myapplication.core.Event
 import com.example.myapplication.core.platform.BaseViewModel
 import com.example.myapplication.data.util.ValidationError
 import com.example.myapplication.data.util.Validator
 import com.example.myapplication.domain.model.LoginData
+import com.example.myapplication.domain.model.User
 import com.example.myapplication.domain.usecase.LogInUseCase
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -17,9 +20,7 @@ class LoginViewModel
     private val validator: Validator
 ) : BaseViewModel() {
 
-    val _loginData: MutableLiveData<LoginData> = MutableLiveData(LoginData())
-    val loginData: LiveData<LoginData>
-        get() = _loginData
+    val loginData: MutableLiveData<LoginData> = MutableLiveData(LoginData())
 
     private val _emailError: MutableLiveData<ValidationError> = MutableLiveData()
     val emailError: LiveData<ValidationError>
@@ -29,13 +30,32 @@ class LoginViewModel
     val passwordError: LiveData<ValidationError>
         get() = _passwordError
 
+    private val _navigateToMainActivity: MutableLiveData<Event<User>> = MutableLiveData()
+    val navigateToMainActivity: LiveData<Event<User>>
+        get() = _navigateToMainActivity
+
+    private val _snackBarMessage: MutableLiveData<Event<String>> = MutableLiveData()
+    val snackBarMessage: LiveData<Event<String>>
+        get() = _snackBarMessage
+
     fun logIn() {
-        _loginData.value?.let { data ->
+        loginData.value?.let { data ->
             viewModelScope.launch {
                 if (validator.validatePassword(data.password, ::onPasswordError) &&
-                    (validator.validateEmail(data.email, ::onEmailError))
+                    validator.validateEmail(data.email, ::onEmailError)
                 ) {
-                    logInUseCase(data)
+                    startLogIn(data)
+                }
+            }
+        }
+    }
+
+    private suspend fun startLogIn(data: LoginData) {
+        when (val loginResult = logInUseCase(data)) {
+            is Result.Success -> _navigateToMainActivity.value = Event(loginResult.data)
+            is Result.Error -> {
+                loginResult.exception.message?.let {
+                    _snackBarMessage.value = Event(it)
                 }
             }
         }

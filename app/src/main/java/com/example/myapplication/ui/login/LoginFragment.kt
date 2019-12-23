@@ -10,10 +10,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import com.example.myapplication.core.Event
 import com.example.myapplication.core.extension.viewModel
 import com.example.myapplication.data.util.ValidationError
 import com.example.myapplication.databinding.LoginFragmentBinding
 import com.example.myapplication.domain.model.LoginData
+import com.example.myapplication.domain.model.User
+import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.AndroidSupportInjection
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.login_fragment.*
@@ -41,6 +44,8 @@ class LoginFragment : Fragment() {
         viewModel.apply {
             passwordError.observe(this@LoginFragment, Observer(::handlePasswordError))
             emailError.observe(this@LoginFragment, Observer(::handleEmailError))
+            navigateToMainActivity.observe(this@LoginFragment, Observer(::openMainActivity))
+            snackBarMessage.observe(this@LoginFragment, Observer(::showSnackBar))
         }
 
         binding.apply {
@@ -61,6 +66,22 @@ class LoginFragment : Fragment() {
 
     private fun handleEmailError(validationError: ValidationError) {
         Log.d("TEST", "handleEmailError")
+    }
+
+    private fun openMainActivity(event: Event<User>?) {
+        Log.d("TEST", "openMainActivity")
+    }
+
+    private fun showSnackBar(event: Event<String>?) {
+        Log.d("TEST", "showSnackBar")
+        event?.let {
+            Log.d("TEST", event.getContentIfNotHandled().toString())
+            Snackbar.make(
+                signInButton,
+                event.getContentIfNotHandled().toString(),
+                Snackbar.LENGTH_LONG
+            ).show()
+        }
     }
 
 }
