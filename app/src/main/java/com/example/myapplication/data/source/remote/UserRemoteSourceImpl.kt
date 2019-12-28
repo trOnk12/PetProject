@@ -15,6 +15,10 @@ class UserRemoteSourceImpl(
     private val userFireStore: UserFireStore
 ) : UserRemoteSource {
 
+    override fun isSignIn(): Boolean {
+        return authenticator.isUserSignedIn()
+    }
+
     override suspend fun register(registerData: RegisterData): Result<User> {
         val registerResult = authenticator.register(registerData.email, registerData.password)
 
@@ -39,8 +43,8 @@ class UserRemoteSourceImpl(
         return userFireStore.getUser(userId)
     }
 
-    override fun isSignIn(): Boolean {
-        return authenticator.isUserSignedIn()
+    override suspend fun updateUser(user: User) {
+        userFireStore.updateUser(user)
     }
 
 }

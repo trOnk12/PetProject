@@ -5,6 +5,11 @@ import com.example.myapplication.data.source.UserLocalSource
 
 class UserLocalSourceImpl(private val sharedPreferenceStorage: SharedPreferenceStorage) :
     UserLocalSource {
+
+    override fun getUserId(): String? {
+        return sharedPreferenceStorage.userId
+    }
+
     override fun catchUserId(data: String) {
         sharedPreferenceStorage.userId = data
     }

@@ -4,7 +4,6 @@ package com.example.myapplication.data.firebase
 import com.example.core.functional.Result
 import com.example.myapplication.domain.model.User
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.SetOptions
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.suspendCancellableCoroutine
@@ -33,7 +32,7 @@ class UserFireStore
                 val data = mapOf(
                     ID to user.id,
                     NAME to user.name,
-                    FAVOURITE_COMMENTS to user.favouriteComment
+                    FAVOURITE_COMMENTS to user.favouriteComments
                 )
                 fireStore.collection(USERS_COLLECTION)
                     .add(data)
@@ -69,5 +68,16 @@ class UserFireStore
                     }
             }
         }
+
+    suspend fun updateUser(user: User) {
+        withContext(Dispatchers.Main) {
+            fireStore.collection(USERS_COLLECTION)
+                .document(user.id)
+                .set(user)
+                .addOnFailureListener { exception ->
+                    throw exception
+                }
+        }
+    }
 }
 

@@ -14,6 +14,9 @@ class UserRepositoryImpl(
     private val userLocalSource: UserLocalSource
 ) : UserRepository {
 
+    override fun isSignIn(): Boolean {
+        return userRemoteSource.isSignIn()
+    }
 
     override suspend fun register(registerData: RegisterData): User {
         when (val result = userRemoteSource.register(registerData)) {
@@ -36,6 +39,13 @@ class UserRepositoryImpl(
         }
     }
 
+    override suspend fun addCommentToFavourite(id: String): User {
+        val user = getCachedUser().addCommentToFavourite(id)
+        updateUser(user)
+
+        return user
+    }
+
     override suspend fun getUser(id: String): User {
         return when (val result = userRemoteSource.getUser(id)) {
             is Result.Success -> result.data
@@ -44,8 +54,16 @@ class UserRepositoryImpl(
         }
     }
 
-    override fun isSignIn(): Boolean {
-        return userRemoteSource.isSignIn()
+    override suspend fun getCachedUser(): User {
+        userLocalSource.getUserId()?.let {
+            return getUser(it)
+        }
+
+        throw Exception("No cached user found!")
+    }
+
+    override suspend fun updateUser(user: User) {
+        userRemoteSource.updateUser(user)
     }
 
 }

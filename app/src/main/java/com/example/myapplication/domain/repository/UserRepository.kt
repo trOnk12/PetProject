@@ -8,5 +8,8 @@ interface UserRepository {
     suspend fun logIn(loginData: LoginData): User
     suspend fun register(registerData: RegisterData): User
     suspend fun getUser(id: String): User
+    suspend fun getCachedUser():User?
+    suspend fun updateUser(user: User)
+    suspend fun addCommentToFavourite(id: String): User
     fun isSignIn(): Boolean
 }

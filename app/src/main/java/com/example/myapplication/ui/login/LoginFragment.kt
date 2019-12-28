@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -58,7 +59,6 @@ class LoginFragment : Fragment() {
             signInButton.setOnClickListener { loginViewModel.logIn() }
             registerInfo.setOnClickListener { openRegisterFragment() }
         }
-
     }
 
     override fun onAttach(context: Context) {
@@ -83,8 +83,10 @@ class LoginFragment : Fragment() {
     }
 
     private fun openMainActivity(user: User) {
-        activity?.let {
-
+        activity?.let { activity ->
+            Toast.makeText(activity, user.name + "successfully log in !", Toast.LENGTH_LONG).show()
+            startActivity(MainActivity.callingIntent(activity))
+            activity.finish()
         }
     }
 
