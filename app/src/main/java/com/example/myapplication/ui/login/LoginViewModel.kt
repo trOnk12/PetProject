@@ -30,27 +30,28 @@ class LoginViewModel
     val passwordError: LiveData<ValidationError>
         get() = _passwordError
 
-    private val _navigateToMainActivity: MutableLiveData<Event<User>> = MutableLiveData()
-    val navigateToMainActivity: LiveData<Event<User>>
-        get() = _navigateToMainActivity
-
-    private val _snackBarMessage: MutableLiveData<Event<String>> = MutableLiveData()
+    private val _snackBarMessage = MutableLiveData<Event<String>>()
     val snackBarMessage: LiveData<Event<String>>
         get() = _snackBarMessage
 
+    private val _navigateToMainActivity = MutableLiveData<Event<User>>()
+
+    val navigateToMainActivity: LiveData<Event<User>>
+        get() = _navigateToMainActivity
+
     fun logIn() {
-        loginData.value?.let { data ->
-            viewModelScope.launch {
+        viewModelScope.launch {
+            loginData.value?.let { data ->
                 if (validator.validatePassword(data.password, ::onPasswordError) &&
                     validator.validateEmail(data.email, ::onEmailError)
                 ) {
-                    startLogIn(data)
+                    executeLogIn(data)
                 }
             }
         }
     }
 
-    private suspend fun startLogIn(data: LoginData) {
+    private suspend fun executeLogIn(data: LoginData) {
         when (val loginResult = logInUseCase(data)) {
             is Result.Success -> _navigateToMainActivity.value = Event(loginResult.data)
             is Result.Error -> {

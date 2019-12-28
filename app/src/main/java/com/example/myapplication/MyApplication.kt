@@ -3,6 +3,7 @@ package com.example.myapplication
 import android.app.Application
 import android.content.Context
 import com.example.myapplication.di.components.DaggerApplicationComponent
+import com.example.myapplication.domain.model.User
 import dagger.android.AndroidInjector
 import dagger.android.HasAndroidInjector
 import org.koin.android.ext.koin.androidContext

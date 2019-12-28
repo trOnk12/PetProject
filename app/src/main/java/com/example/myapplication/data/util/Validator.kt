@@ -14,6 +14,23 @@ class Validator
         return true
     }
 
+    fun validatePasswordWithRepeat(
+        password: String,
+        repeatPassword: String,
+        onError: (ValidationError) -> Unit,
+        onRepeatError: (ValidationError) -> Unit
+    ): Boolean {
+        if (!password.equals(repeatPassword, true)) {
+            onError(ValidationError.PasswordIsNotEqual)
+            return false
+        }
+
+        validatePassword(password, onError)
+        validatePassword(repeatPassword, onRepeatError)
+
+        return true
+    }
+
     fun validateEmail(value: String, OnError: (ValidationError) -> Unit): Boolean {
         if (value.isEmpty()) {
             OnError(ValidationError.IsEmpty)
@@ -27,4 +44,5 @@ class Validator
 
 sealed class ValidationError {
     object IsEmpty : ValidationError()
+    object PasswordIsNotEqual : ValidationError()
 }

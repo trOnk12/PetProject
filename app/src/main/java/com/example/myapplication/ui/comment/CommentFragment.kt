@@ -26,9 +26,8 @@ import javax.inject.Inject
 class CommentFragment : Fragment() {
 
     @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+    lateinit var provider: ViewModelProvider.Factory
 
-    private lateinit var viewModel: CommentViewModel
     private lateinit var binding: CommentsFragmentBinding
 
     private lateinit var commentAdapter: CommentAdapter
@@ -38,47 +37,38 @@ class CommentFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
-        viewModel = viewModel(viewModelFactory)
-
         binding = CommentsFragmentBinding.inflate(inflater, container, false)
-            .apply {
-                viewModel = viewModel
-            }
-
-        viewModel.comments.observe(this, Observer(::renderCommentList))
-        viewModel.navigateToCommentDetail.observe(this, EventObserver(::navigateToCommentDetail))
-        viewModel.failure.observe(this, EventObserver(::handleFailure))
-        viewModel.snackBarEvent.observe(this, EventObserver(::handleSnackBar))
-
         return binding.root
-    }
-
-    private fun handleFailure(exception: Exception) {
-
-    }
-    
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        commentAdapter = CommentAdapter(viewModel, this)
-
-        binding.commentList.apply {
-            adapter = this@CommentFragment.commentAdapter
-        }
-
-        swipeContainer.setOnRefreshListener { viewModel.fetchComments() }
-    }
-
-    override fun onAttach(context: Context) {
-        AndroidSupportInjection.inject(this)
-        super.onAttach(context)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        viewModel.fetchComments()
+        val commentViewModel: CommentViewModel = viewModel(provider)
+        commentViewModel.apply {
+            comments.observe(this@CommentFragment, Observer(::renderCommentList))
+            navigateToCommentDetail.observe(this@CommentFragment, EventObserver(this@CommentFragment::navigateToCommentDetail))
+            failure.observe(this@CommentFragment, EventObserver(::handleFailure))
+            snackBarEvent.observe(this@CommentFragment, EventObserver(::handleSnackBar))
+        }
+
+        commentAdapter = CommentAdapter(commentViewModel, this)
+
+        binding.apply {
+            commentList.adapter = commentAdapter
+            swipeContainer.setOnRefreshListener { commentViewModel.fetchComments() }
+        }
+
+        commentViewModel.fetchComments()
+    }
+
+    private fun handleFailure(exception: Exception) {
+
+    }
+
+    override fun onAttach(context: Context) {
+        AndroidSupportInjection.inject(this)
+        super.onAttach(context)
     }
 
     private fun renderCommentList(comments: List<Comment>) {

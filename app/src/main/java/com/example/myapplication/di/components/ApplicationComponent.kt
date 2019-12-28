@@ -12,6 +12,7 @@ import com.example.myapplication.di.modules.RemoteModule
 import com.example.myapplication.di.modules.viewmodel.ViewModelModule
 import com.example.myapplication.ui.comment.CommentFragment
 import com.example.myapplication.ui.login.LoginFragment
+import com.example.myapplication.ui.register.RegisterFragment
 import com.example.myapplication.ui.splash.SplashActivity
 import dagger.BindsInstance
 import dagger.Component
@@ -45,5 +46,6 @@ interface ApplicationComponent {
     fun inject(fragment: CommentFragment)
     fun inject(fragment: LoginFragment)
     fun inject(activity: SplashActivity)
+    fun inject(fragment:RegisterFragment)
 
 }

@@ -1,1 +1,1 @@
-C:\Users\Aleksandra\AndroidStudioProjects\AkaTwitterModulair\buildSrc\build\classes\kotlin\main\Dependencies.class;C:\Users\Aleksandra\AndroidStudioProjects\AkaTwitterModulair\buildSrc\build\classes\kotlin\main\Versions.class
+C:\Users\Gebruiker\AndroidStudioProjects\AkaTwitter\buildSrc\build\classes\kotlin\main\Dependencies.class;C:\Users\Gebruiker\AndroidStudioProjects\AkaTwitter\buildSrc\build\classes\kotlin\main\Versions.class

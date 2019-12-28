@@ -9,8 +9,8 @@ import javax.inject.Inject
 class LogInUseCase
 @Inject constructor(
     private val userRepository: UserRepository
-) :
-    UseCase<User, LoginData>() {
+) : UseCase<User, LoginData>() {
+
     override suspend fun run(params: LoginData): User {
         return userRepository.logIn(params)
     }

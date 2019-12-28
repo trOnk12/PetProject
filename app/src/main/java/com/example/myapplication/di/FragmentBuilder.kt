@@ -2,6 +2,7 @@ package com.example.myapplication.di
 
 import com.example.myapplication.ui.comment.CommentFragment
 import com.example.myapplication.ui.login.LoginFragment
+import com.example.myapplication.ui.register.RegisterFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -9,8 +10,11 @@ import dagger.android.ContributesAndroidInjector
 abstract class FragmentBuilder {
 
     @ContributesAndroidInjector
-    abstract fun bindCommentsFragment() : CommentFragment
+    abstract fun bindLoginFragment() : LoginFragment
 
     @ContributesAndroidInjector
-    abstract fun bindLoginFragment() : LoginFragment
+    abstract fun bindRegisterFragment() : RegisterFragment
+
+    @ContributesAndroidInjector
+    abstract fun bindCommentsFragment() : CommentFragment
 }

@@ -6,7 +6,8 @@ import com.example.myapplication.domain.model.User
 import com.example.myapplication.domain.repository.UserRepository
 import javax.inject.Inject
 
-class RegisterUseCase @Inject constructor(
+class RegisterUseCase
+@Inject constructor(
     private val userRepository: UserRepository
 ) : UseCase<User, RegisterData>() {
 
