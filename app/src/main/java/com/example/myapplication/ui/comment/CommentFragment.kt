@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.coroutineScope
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import com.example.core.exception.Failure
 import com.example.myapplication.core.EventObserver
@@ -47,7 +49,10 @@ class CommentFragment : Fragment() {
         val commentViewModel: CommentViewModel = viewModel(provider)
         commentViewModel.apply {
             comments.observe(this@CommentFragment, Observer(::renderCommentList))
-            navigateToCommentDetail.observe(this@CommentFragment, EventObserver(this@CommentFragment::navigateToCommentDetail))
+            navigateToCommentDetail.observe(
+                this@CommentFragment,
+                EventObserver(this@CommentFragment::navigateToCommentDetail)
+            )
             failure.observe(this@CommentFragment, EventObserver(::handleFailure))
             snackBarEvent.observe(this@CommentFragment, EventObserver(::handleSnackBar))
         }
@@ -72,7 +77,7 @@ class CommentFragment : Fragment() {
     }
 
     private fun renderCommentList(comments: List<Comment>) {
-        CoroutineScope(Dispatchers.Main).launch { commentAdapter.updateData(comments) }
+        lifecycle.coroutineScope.launch { commentAdapter.updateData(comments) }
     }
 
     private fun handleSnackBar(i: Int) {
