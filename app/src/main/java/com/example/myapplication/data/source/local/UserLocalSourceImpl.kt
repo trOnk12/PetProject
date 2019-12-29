@@ -10,7 +10,7 @@ class UserLocalSourceImpl(private val sharedPreferenceStorage: SharedPreferenceS
         return sharedPreferenceStorage.userId
     }
 
-    override fun catchUserId(data: String) {
+    override fun cacheUserId(data: String) {
         sharedPreferenceStorage.userId = data
     }
 }

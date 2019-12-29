@@ -17,7 +17,7 @@ class SplashViewModel
         get() = _userSignInStatus
 
     fun shouldSignIn() {
-        if (userRepository.isSignIn())
+        if (userRepository.isUserSignIn())
             _userSignInStatus.value = Event(LaunchDestination.MAIN_ACTIVITY)
         else
             _userSignInStatus.value = Event(LaunchDestination.LOGIN)

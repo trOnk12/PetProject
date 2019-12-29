@@ -15,14 +15,8 @@ class UserRemoteSourceImpl(
     private val userFireStore: UserFireStore
 ) : UserRemoteSource {
 
-    override fun isSignIn(): Boolean {
-        return authenticator.isUserSignedIn()
-    }
-
     override suspend fun register(registerData: RegisterData): Result<User> {
-        val registerResult = authenticator.register(registerData.email, registerData.password)
-
-        return when (registerResult) {
+        return when (val registerResult = authenticator.register(registerData.email, registerData.password)) {
             is Result.Success -> userFireStore.createUser(registerResult.data.mapToDomain())
             is Result.Error -> registerResult
             else -> throw IllegalStateException("Invalid state")
@@ -30,13 +24,15 @@ class UserRemoteSourceImpl(
     }
 
     override suspend fun signIn(loginData: LoginData): Result<User> {
-        val loginResult = authenticator.logIn(loginData.email, loginData.password)
-
-        return when (loginResult) {
+        return when (val loginResult = authenticator.logIn(loginData.email, loginData.password)) {
             is Result.Success -> Result.Success(loginResult.data.mapToDomain())
             is Result.Error -> loginResult
             else -> throw IllegalStateException("Invalid state")
         }
+    }
+
+    override fun isSignIn(): Boolean {
+        return authenticator.isUserSignedIn()
     }
 
     override suspend fun getUser(userId: String): Result<User> {

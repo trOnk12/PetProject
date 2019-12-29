@@ -14,6 +14,6 @@ interface UserRemoteSource {
 }
 
 interface UserLocalSource {
-    fun catchUserId(data: String)
+    fun cacheUserId(data: String)
     fun getUserId(): String?
 }

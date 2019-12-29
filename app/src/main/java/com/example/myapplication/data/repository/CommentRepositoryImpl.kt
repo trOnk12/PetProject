@@ -11,6 +11,6 @@ class CommentRepositoryImpl(
 ) : CommentRepository {
 
     override fun comment(id: String): Comment = remoteSource.comment(id)
-
     override fun comments(): List<Comment> = remoteSource.comments()
+
 }

@@ -5,11 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.core.platform.BaseViewModel
 import com.example.myapplication.domain.model.Comment
-import com.example.myapplication.domain.usecase.GetComment
+import com.example.myapplication.domain.usecase.GetCommentUseCase
 import kotlinx.coroutines.launch
 import com.example.core.functional.Result
 
-class CommentDetailViewModel(val getComment: GetComment) : BaseViewModel() {
+class CommentDetailViewModel(val getCommentUseCase: GetCommentUseCase) : BaseViewModel() {
 
     private val _comment = MutableLiveData<Comment>()
     val comment: LiveData<Comment>
@@ -17,7 +17,7 @@ class CommentDetailViewModel(val getComment: GetComment) : BaseViewModel() {
 
     fun fetchComment(id: String) {
         viewModelScope.launch {
-            when (val result = getComment(id)) {
+            when (val result = getCommentUseCase(id)) {
                 is Result.Success -> handleComment(result.data)
                 is Result.Error -> handleFailure(result.exception)
             }

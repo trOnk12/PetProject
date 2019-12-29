@@ -14,10 +14,6 @@ class UserRepositoryImpl(
     private val userLocalSource: UserLocalSource
 ) : UserRepository {
 
-    override fun isSignIn(): Boolean {
-        return userRemoteSource.isSignIn()
-    }
-
     override suspend fun register(registerData: RegisterData): User {
         when (val result = userRemoteSource.register(registerData)) {
             is Result.Success -> return result.data
@@ -27,11 +23,11 @@ class UserRepositoryImpl(
     }
 
     override suspend fun logIn(loginData: LoginData): User {
-        if (isSignIn()) throw Exception("User already signed in")
+        if (isUserSignIn()) throw Exception("User already signed in")
 
         when (val result = userRemoteSource.signIn(loginData)) {
             is Result.Success -> {
-                userLocalSource.catchUserId(result.data.id)
+                userLocalSource.cacheUserId(result.data.id)
                 return result.data
             }
             is Error -> throw result.exception
@@ -39,11 +35,8 @@ class UserRepositoryImpl(
         }
     }
 
-    override suspend fun addCommentToFavourite(id: String): User {
-        val user = getCachedUser().addCommentToFavourite(id)
-        updateUser(user)
-
-        return user
+    override fun isUserSignIn(): Boolean {
+        return userRemoteSource.isSignIn()
     }
 
     override suspend fun getUser(id: String): User {
@@ -54,12 +47,19 @@ class UserRepositoryImpl(
         }
     }
 
-    override suspend fun getCachedUser(): User {
+    override suspend fun getUser(): User {
         userLocalSource.getUserId()?.let {
             return getUser(it)
         }
 
         throw Exception("No cached user found!")
+    }
+
+    override suspend fun addCommentToFavourite(id: String): User {
+        val user = getUser().addCommentToFavourite(id)
+        updateUser(user)
+
+        return user
     }
 
     override suspend fun updateUser(user: User) {

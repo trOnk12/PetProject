@@ -10,5 +10,5 @@ data class CommentEntity(
     @SerializedName("body") val body: String
 )
 
-fun CommentEntity.mapToDomain(): Comment = Comment(userId, id, title, body)
+fun CommentEntity.mapToDomain(): Comment = Comment(userId, id.toString(), title, body)
 fun List<CommentEntity>.mapToDomain(): List<Comment> = map { it.mapToDomain() }

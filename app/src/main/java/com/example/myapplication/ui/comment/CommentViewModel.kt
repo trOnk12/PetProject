@@ -3,20 +3,20 @@ package com.example.myapplication.ui.comment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.myapplication.R
 import com.example.myapplication.core.Event
 import com.example.myapplication.core.platform.BaseViewModel
 import com.example.myapplication.domain.model.Comment
-import com.example.myapplication.domain.usecase.AddCommentToFavourite
-import com.example.myapplication.domain.usecase.GetComments
+import com.example.myapplication.domain.usecase.AddCommentToFavouriteUseCase
+import com.example.myapplication.domain.usecase.GetCommentsUseCase
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import com.example.core.functional.Result
 import com.example.core.interactor.None
+import com.example.myapplication.domain.model.User
 
 class CommentViewModel @Inject constructor(
-    private val getComments: GetComments,
-    private val addCommentToFavourite: AddCommentToFavourite
+    private val getCommentsUseCase: GetCommentsUseCase,
+    private val addCommentToFavouriteUseCase: AddCommentToFavouriteUseCase
 ) : BaseViewModel(), CommentEventListener {
 
     private val _comments = MutableLiveData<List<Comment>>()
@@ -35,28 +35,30 @@ class CommentViewModel @Inject constructor(
     val snackBarEvent: LiveData<Event<Int>>
         get() = _snackBarEvent
 
-
     fun fetchComments() {
         viewModelScope.launch {
-           when (val result = getComments(None())) {
-                    is Result.Success -> handleComments(result.data)
-                    is Result.Error -> handleFailure(result.exception)
-                }
+            when (val result = getCommentsUseCase(None())) {
+                is Result.Success -> handleComments(result.data)
+                is Result.Error -> handleFailure(result.exception)
             }
         }
+    }
 
     override fun addToFavourite(comment: Comment) {
-//        viewModelScope.launch {
-//            addCommentToFavourite(comment.id.toString()) {
-//                when (it) {
-//                    is Result.Success -> addFavouriteSuccess(it.data)
-//                }
-//            }
-//        }
+        viewModelScope.launch {
+            when (val result = addCommentToFavouriteUseCase(comment.id)) {
+                is Result.Success -> updateComments(result.data)
+                is Result.Error -> handleFailure(result.exception)
+            }
+        }
+    }
+
+    private fun updateComments(data: User) {
+
     }
 
     override fun openCommentDetail(comment: Comment) {
-        _navigateToCommentDetail.value = Event(comment.id.toString())
+        _navigateToCommentDetail.value = Event(comment.id)
     }
 
     private fun handleComments(comments: List<Comment>) {

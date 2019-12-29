@@ -1,13 +1,10 @@
 package com.example.myapplication.domain.model
 
-import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
-
-@Parcelize
 data class Comment(
     val userId: Int,
-    val id: Int,
+    val id: String,
     val title: String?,
-    val body: String
-) : Parcelable
+    val body: String,
+    var isFavourite : Boolean = false
+)
 
