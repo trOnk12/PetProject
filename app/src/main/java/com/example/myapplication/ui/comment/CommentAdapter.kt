@@ -13,8 +13,7 @@ import kotlinx.coroutines.withContext
 class CommentAdapter(
     private val commentEventListener: CommentEventListener,
     private val lifecycleOwner: LifecycleOwner
-) :
-    RecyclerView.Adapter<CommentAdapter.CommentViewHolder>() {
+) : RecyclerView.Adapter<CommentAdapter.CommentViewHolder>() {
 
     var comments: List<Comment> = emptyList()
 
