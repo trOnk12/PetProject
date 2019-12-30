@@ -32,4 +32,5 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
+
 task x(type: GradleBuild) { tasks = ["detekt", "ktlint", "lintDebug", "testDebugUnitTest"] }
