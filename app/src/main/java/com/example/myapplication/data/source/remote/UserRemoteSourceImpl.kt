@@ -39,8 +39,8 @@ class UserRemoteSourceImpl(
         return userFireStore.getUser(userId)
     }
 
-    override suspend fun updateUser(user: User) {
-        userFireStore.updateUser(user)
+    override suspend fun updateUser(user: User): Result<User> {
+        return userFireStore.updateUser(user)
     }
 
 }

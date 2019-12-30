@@ -9,7 +9,7 @@ interface UserRemoteSource {
     suspend fun register(registerData: RegisterData): Result<User>
     suspend fun signIn(loginData: LoginData): Result<User>
     suspend fun getUser(userId: String): Result<User>
-    suspend fun updateUser(user: User)
+    suspend fun updateUser(user: User) : Result<User>
     fun isSignIn(): Boolean
 }
 

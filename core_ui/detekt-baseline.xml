@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <Blacklist timestamp="1577712894613"></Blacklist>
+  <Whitelist timestamp="1577712894613">
+    <ID>MaxLineLength:KParcelable.kt$fun &lt;T : Parcelable&gt; Parcel.writeTypedObjectCompat(value: T?, parcelableFlags: Int)</ID>
+    <ID>NewLineAtEndOfFile:BaseActivity.kt$com.example.core_ui.platform.BaseActivity.kt</ID>
+    <ID>NewLineAtEndOfFile:BaseFragment.kt$com.example.core_ui.platform.BaseFragment.kt</ID>
+    <ID>PackageNaming:BaseActivity.kt$package com.example.core_ui.platform</ID>
+    <ID>PackageNaming:BaseFragment.kt$package com.example.core_ui.platform</ID>
+    <ID>PackageNaming:KParcelable.kt$package com.example.core_ui.platform</ID>
+    <ID>TooManyFunctions:KParcelable.kt$com.example.core_ui.platform.KParcelable.kt</ID>
+  </Whitelist>
+</SmellBaseline>

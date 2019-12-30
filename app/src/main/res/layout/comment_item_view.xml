@@ -45,10 +45,10 @@
                 android:id="@+id/favouriteIcon"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:onClick="@{(view) -> commentEventListener.addToFavourite(view,comment)}"
+                android:onClick="@{() -> commentEventListener.onStarClicked(comment)}"
                 android:checked="@{comment.isFavourite}"
                 android:background="?selectableItemBackgroundBorderless"
-                app:srcCompat="@drawable/favourite_star"
+                android:src="@drawable/favourite_star"
             />
 
     </LinearLayout>

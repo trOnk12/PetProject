@@ -4,6 +4,7 @@ import com.example.core.functional.Result
 import com.example.core.functional.Result.Error
 import com.example.myapplication.data.source.UserLocalSource
 import com.example.myapplication.data.source.UserRemoteSource
+import com.example.myapplication.domain.model.Comment
 import com.example.myapplication.domain.model.LoginData
 import com.example.myapplication.domain.model.RegisterData
 import com.example.myapplication.domain.model.User
@@ -55,15 +56,22 @@ class UserRepositoryImpl(
         throw Exception("No cached user found!")
     }
 
-    override suspend fun addCommentToFavourite(id: String): User {
-        val user = getUser().addCommentToFavourite(id)
-        updateUser(user)
+    override suspend fun addCommentToFavourite(comment: Comment): Comment {
+        val newUserState = getUser().addCommentToFavourite(comment.id)
 
-        return user
+        return when (val result = userRemoteSource.updateUser(newUserState)) {
+            is Result.Success -> comment
+            is Error -> throw result.exception
+            else -> throw IllegalStateException()
+        }
     }
 
-    override suspend fun updateUser(user: User) {
-        userRemoteSource.updateUser(user)
+    override suspend fun updateUser(user: User): User {
+        return when (val result = userRemoteSource.updateUser(user)) {
+            is Result.Success -> result.data
+            is Error -> throw result.exception
+            else -> throw IllegalStateException()
+        }
     }
 
 }

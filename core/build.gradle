@@ -10,7 +10,6 @@ dependencies {
     implementation Dependencies.gson
     implementation Dependencies.couroutines_core
     implementation Dependencies.kotlinCoroutinesAndroid
-
 }
 
 kotlin {

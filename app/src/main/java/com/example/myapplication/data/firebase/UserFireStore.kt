@@ -78,22 +78,31 @@ class UserFireStore
             }
         }
 
-    suspend fun updateUser(user: User) {
+    suspend fun updateUser(user: User): Result<User> =
         withContext(Dispatchers.Main) {
+            suspendCancellableCoroutine<Result<User>> { continuation ->
 
-            val data = mapOf(
-                ID to user.id,
-                NAME to user.name,
-                FAVOURITE_COMMENTS to user.favouriteComments
-            )
+                val data = mapOf(
+                    ID to user.id,
+                    NAME to user.name,
+                    FAVOURITE_COMMENTS to user.favouriteComments
+                )
+                fireStore.collection(USERS_COLLECTION)
+                    .document(user.id)
+                    .set(data)
+                    .addOnSuccessListener {
+                        if (!continuation.isActive) return@addOnSuccessListener
+                        continuation.resume(
+                            Result.Success(user)
+                        )
+                    }
+                    .addOnFailureListener {
+                        if (!continuation.isActive) return@addOnFailureListener
+                        continuation.resumeWithException(it)
+                    }
 
-            fireStore.collection(USERS_COLLECTION)
-                .document(user.id)
-                .set(data)
-                .addOnFailureListener { exception ->
-                    throw exception
-                }
+            }
         }
-    }
+
 }
 

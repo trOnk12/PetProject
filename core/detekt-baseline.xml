@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <Blacklist timestamp="1577712893429"></Blacklist>
+  <Whitelist timestamp="1577712893429">
+    <ID>NewLineAtEndOfFile:Failure.kt$com.example.core.exception.Failure.kt</ID>
+    <ID>NewLineAtEndOfFile:Network.kt$com.example.core.network.Network.kt</ID>
+    <ID>TooGenericExceptionCaught:UseCase.kt$UseCase$exception: Exception</ID>
+  </Whitelist>
+</SmellBaseline>

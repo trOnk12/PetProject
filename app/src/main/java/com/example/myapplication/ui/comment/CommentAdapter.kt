@@ -33,10 +33,10 @@ class CommentAdapter(
     }
 
     private fun calculateDiff(
-        oldValue: List<Comment>,
-        newValue: List<Comment>
+        newValue: List<Comment>,
+        oldValue: List<Comment>
     ): DiffUtil.DiffResult {
-        val diffCallBack = CommentDiffCallBack(oldValue, newValue)
+        val diffCallBack = CommentDiffCallBack(newValue, oldValue)
         return DiffUtil.calculateDiff(diffCallBack)
     }
 
@@ -67,30 +67,30 @@ class CommentAdapter(
 
 }
 
-class CommentDiffCallBack(private var currentValues: List<Comment>, var newValues: List<Comment>) :
+class CommentDiffCallBack(private var newValue: List<Comment>, var oldValue: List<Comment>) :
     DiffUtil.Callback() {
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return currentValues[oldItemPosition].id == newValues[newItemPosition].id
+        return newValue[oldItemPosition].id == oldValue[newItemPosition].id
     }
 
     override fun getOldListSize(): Int {
-        return currentValues.size
+        return oldValue.size
     }
 
     override fun getNewListSize(): Int {
-        return newValues.size
+        return newValue.size
     }
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return currentValues[oldItemPosition] == newValues[newItemPosition]
+        return newValue[oldItemPosition] == oldValue[newItemPosition]
     }
 
 }
 
 interface CommentEventListener {
 
-    fun addToFavourite(comment: Comment)
+    fun onStarClicked(comment: Comment)
 
-    fun openCommentDetail(comment: Comment)
+    fun onCommentClicked(comment: Comment)
 }

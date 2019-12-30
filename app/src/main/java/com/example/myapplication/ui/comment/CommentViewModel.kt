@@ -12,7 +12,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 import com.example.core.functional.Result
 import com.example.core.interactor.None
-import com.example.myapplication.domain.model.User
+import com.example.myapplication.core.extension.replace
+
 
 class CommentViewModel @Inject constructor(
     private val getCommentsUseCase: GetCommentsUseCase,
@@ -38,33 +39,39 @@ class CommentViewModel @Inject constructor(
     fun fetchComments() {
         viewModelScope.launch {
             when (val result = getCommentsUseCase(None())) {
-                is Result.Success -> handleComments(result.data)
+                is Result.Success -> handleSuccess(result.data)
                 is Result.Error -> handleFailure(result.exception)
             }
         }
     }
 
-    override fun addToFavourite(comment: Comment) {
+    private fun handleSuccess(comments: List<Comment>) {
+        _comments.value = comments
+    }
+
+    override fun onStarClicked(comment: Comment) {
         viewModelScope.launch {
-            when (val result = addCommentToFavouriteUseCase(comment.id)) {
-                is Result.Success -> updateComments(result.data)
+            when (val result = addCommentToFavouriteUseCase(comment)) {
+                is Result.Success -> handleSuccess(result.data)
                 is Result.Error -> handleFailure(result.exception)
             }
         }
     }
 
-    private fun updateComments(data: User) {
+    private fun handleSuccess(comment: Comment) {
+        val newComment: Comment = comment
+            .apply { isFavourite != isFavourite }
 
+        _comments.value = _comments.value
+            ?.apply {
+                replace(comment, newComment)
+            }
     }
 
-    override fun openCommentDetail(comment: Comment) {
+    override fun onCommentClicked(comment: Comment) {
         _navigateToCommentDetail.value = Event(comment.id)
     }
 
-    private fun handleComments(comments: List<Comment>) {
-        _isRefreshing.value = false
-        _comments.value = comments
-    }
 
 }
 
