@@ -1,5 +1,6 @@
 package com.example.myapplication.data.repository
 
+import androidx.core.net.toUri
 import com.example.core.functional.Result
 import com.example.core.functional.Result.Error
 import com.example.myapplication.data.source.UserLocalSource
@@ -48,7 +49,7 @@ class UserRepositoryImpl(
         }
     }
 
-    override suspend fun getUser(): User {
+    override suspend fun getLocalUser(): User {
         userLocalSource.getUserId()?.let {
             return getUser(it)
         }
@@ -57,10 +58,18 @@ class UserRepositoryImpl(
     }
 
     override suspend fun addCommentToFavourite(comment: Comment): Comment {
-        val newUserState = getUser().addCommentToFavourite(comment.id)
+        val newUserState = getLocalUser().addCommentToFavourite(comment.id)
 
         return when (val result = userRemoteSource.updateUser(newUserState)) {
             is Result.Success -> comment
+            is Error -> throw result.exception
+            else -> throw IllegalStateException()
+        }
+    }
+
+    override suspend fun uploadProfilePicture(uri: String): User {
+        return when (val result = userRemoteSource.uploadProfilePicture(getLocalUser(), uri.toUri())) {
+            is Result.Success -> getLocalUser().updateProfileImageUrl(result.data.toString())
             is Error -> throw result.exception
             else -> throw IllegalStateException()
         }

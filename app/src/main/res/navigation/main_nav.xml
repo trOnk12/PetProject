@@ -40,4 +40,9 @@
                 app:argType="string" />
     </fragment>
 
+    <dialog
+    android:id="@+id/optionDialog"
+    android:name="com.example.myapplication.ui.dialog.ProfileImageChooserFragment"
+    tools:layout="@layout/option_dialog"/>
+
 </navigation>

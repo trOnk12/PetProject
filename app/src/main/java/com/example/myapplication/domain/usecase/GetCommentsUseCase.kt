@@ -15,7 +15,7 @@ class GetCommentsUseCase
 
     override suspend fun run(params: None): List<Comment> {
         val comments = commentRepository.comments()
-        val user = userRepository.getUser()
+        val user = userRepository.getLocalUser()
 
         user?.let {
             comments.forEach {comment ->

@@ -1,5 +1,6 @@
 package com.example.myapplication.ui.comment
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -12,13 +13,13 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 import com.example.core.functional.Result
 import com.example.core.interactor.None
-import com.example.myapplication.core.extension.replace
-
+import com.example.myapplication.domain.usecase.UpdateProfilePictureUseCase
 
 class CommentViewModel @Inject constructor(
     private val getCommentsUseCase: GetCommentsUseCase,
-    private val addCommentToFavouriteUseCase: AddCommentToFavouriteUseCase
-) : BaseViewModel(), CommentEventListener {
+    private val addCommentToFavouriteUseCase: AddCommentToFavouriteUseCase,
+    private val updateProfilePictureUseCase: UpdateProfilePictureUseCase
+) : BaseViewModel(), CommentEventListener, ToolBarEventListener {
 
     private val _comments = MutableLiveData<List<Comment>>()
     val comments: LiveData<List<Comment>>
@@ -28,9 +29,9 @@ class CommentViewModel @Inject constructor(
     val isRefreshing: LiveData<Boolean>
         get() = _isRefreshing
 
-    private val _navigateToCommentDetail = MutableLiveData<Event<String>>()
-    val navigateToCommentDetail: LiveData<Event<String>>
-        get() = _navigateToCommentDetail
+    private val _navigationState = MutableLiveData<Event<NavigationState>>()
+    val navigationState: LiveData<Event<NavigationState>>
+        get() = _navigationState
 
     private val _snackBarEvent = MutableLiveData<Event<Int>>()
     val snackBarEvent: LiveData<Event<Int>>
@@ -59,19 +60,39 @@ class CommentViewModel @Inject constructor(
     }
 
     private fun handleSuccess(comment: Comment) {
-        val newComment: Comment = comment
-            .apply { isFavourite != isFavourite }
-
+        comment.apply {
+            isFavourite = !isFavourite
+        }
         _comments.value = _comments.value
-            ?.apply {
-                replace(comment, newComment)
-            }
+    }
+
+    fun uploadProfileImage(chosenImageUri: Uri?) {
+        chosenImageUri?.let {
+            updateProfilePictureUseCase
+        }
     }
 
     override fun onCommentClicked(comment: Comment) {
-        _navigateToCommentDetail.value = Event(comment.id)
+        _navigationState.value = Event(NavigationState.CommentDetail(comment))
     }
 
+    override fun onProfilePictureClicked() {
+        _navigationState.value = Event(NavigationState.OptionDialog)
+    }
 
+}
+
+sealed class NavigationState {
+    data class CommentDetail(val comment: Comment) : NavigationState()
+    object OptionDialog : NavigationState()
+}
+
+interface CommentEventListener {
+    fun onStarClicked(comment: Comment)
+    fun onCommentClicked(comment: Comment)
+}
+
+interface ToolBarEventListener {
+    fun onProfilePictureClicked()
 }
 

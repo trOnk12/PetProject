@@ -2,43 +2,55 @@
 
 <layout>
 
-<com.google.android.material.appbar.AppBarLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+    <data>
+        <variable
+                name="toolBarEventListener"
+                type="com.example.myapplication.ui.comment.ToolBarEventListener"/>
+    </data>
 
-    <FrameLayout
-            android:id="@+id/toolbar"
+    <com.google.android.material.appbar.AppBarLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|enterAlways|snap">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        <LinearLayout
+        <FrameLayout
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:layout_scrollFlags="scroll|enterAlways|snap">
 
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="AkaTwitter"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="32sp" />
-
-            <ImageView
-                    android:id="@+id/search_icon"
+            <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@color/colorWhite" />
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-        </LinearLayout>
+                <ImageView
+                        android:onClick="@{() -> toolBarEventListener.onProfilePictureClicked()}"
+                        android:id="@+id/profile_picture"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:src="@drawable/favourite_star"/>
 
-    </FrameLayout>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="AkaTwitter"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="32sp"/>
 
-</com.google.android.material.appbar.AppBarLayout>
+                <ImageView
+                        android:id="@+id/search_icon"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@color/colorWhite"/>
 
+            </LinearLayout>
+
+        </FrameLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
 </layout>

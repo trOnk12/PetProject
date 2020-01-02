@@ -36,5 +36,4 @@ abstract class ViewModelModule {
     @ViewModelKey(CommentViewModel::class)
     internal abstract fun commentViewModel(viewModel: CommentViewModel): ViewModel
 
-
 }
