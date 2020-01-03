@@ -2,16 +2,15 @@ package com.example.myapplication.ui.comment
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
 import com.example.myapplication.core.EventObserver
+import com.example.myapplication.core.extension.showToast
 import com.example.myapplication.core.extension.viewModel
 import com.example.myapplication.databinding.CommentsFragmentBinding
 import com.example.myapplication.domain.model.Comment
@@ -30,7 +29,9 @@ class CommentFragment : Fragment() {
     @Inject
     lateinit var provider: ViewModelProvider.Factory
     private lateinit var binding: CommentsFragmentBinding
-    private lateinit var commentAdapter: CommentAdapter
+    private lateinit var viewModel: CommentViewModel
+
+    private lateinit var adapter: CommentAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,23 +45,25 @@ class CommentFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val commentViewModel: CommentViewModel = viewModel(provider)
-        commentViewModel.apply {
-            comments.observe(this@CommentFragment, Observer(::renderCommentList))
-            navigationState.observe(this@CommentFragment, EventObserver(this@CommentFragment::handleNavigationState))
-            failure.observe(this@CommentFragment, EventObserver(::handleFailure))
-            snackBarMessage.observe(this@CommentFragment, EventObserver(::handleSnackBar))
+        viewModel = viewModel(provider)
+
+        viewModel.apply {
+            navigationState.observe(this@CommentFragment, EventObserver(::navigate))
+            snackBarMessage.observe(this@CommentFragment, EventObserver(::showSnackBar))
+            comments.observe(this@CommentFragment, Observer(::renderComments))
+            user.observe(this@CommentFragment, Observer(::renderUser))
+            failure.observe(this@CommentFragment, EventObserver(::processFailure))
         }
 
-        commentAdapter = CommentAdapter(commentViewModel, this)
+        adapter = CommentAdapter(viewModel, this)
 
         binding.apply {
-            commentList.adapter = commentAdapter
-            toolbar.toolBarEventListener = commentViewModel
-            swipeContainer.setOnRefreshListener { commentViewModel.fetchComments() }
+            toolbar.toolBarEventListener = this@CommentFragment.viewModel
+            swipeContainer.setOnRefreshListener { this@CommentFragment.viewModel.loadComments() }
+            commentList.adapter = adapter
         }
 
-        commentViewModel.fetchComments()
+        viewModel.loadComments()
     }
 
     override fun onAttach(context: Context) {
@@ -73,45 +76,45 @@ class CommentFragment : Fragment() {
         EventBus.getDefault().register(this)
     }
 
-    override fun onStop() {
-        super.onStop()
-        EventBus.getDefault().unregister(this)
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onUploadCompletion(updatedUser: User) {
+        viewModel.apply {
+            user.value = updatedUser
+        }
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onUploadCompletedEvent(user: User) {
+    private fun renderComments(comments: List<Comment>) {
+        lifecycleScope.launch {
+            adapter.submitList(comments)
+        }
+    }
+
+    private fun renderUser(user: User) {
         binding.toolbar.user = user
     }
 
-    private fun renderCommentList(comments: List<Comment>) {
-        lifecycleScope.launch {
-            commentAdapter.submitList(comments)
-        }
-    }
-
-    private fun handleFailure(exception: Exception) {
-        Toast.makeText(activity, exception.message, Toast.LENGTH_LONG).show()
-    }
-
-    private fun handleSnackBar(message: String) {
-        Snackbar.make(commentList, message, Snackbar.LENGTH_LONG).show()
-    }
-
-    private fun handleNavigationState(navigationState: NavigationState) {
-        when (navigationState) {
-            is NavigationState.CommentDetail -> navigateToCommentDetail(navigationState.comment)
-            is NavigationState.OptionDialog -> navigateToOptionDialog()
-        }
-    }
-
-    private fun navigateToCommentDetail(comment: Comment) {
+    private fun showCommentDetail(comment: Comment) {
         CommentFragmentDirections.actionCommentFragmentToCommentDetailFragment(comment.id).also { action ->
             findNavController().navigate(action)
         }
     }
 
-    private fun navigateToOptionDialog() {
-        findNavController().navigate(R.id.optionDialog)
+    private fun showImageSourceDialog() = findNavController().navigate(R.id.optionDialog)
+
+    private fun showSnackBar(message: String) = Snackbar.make(commentList, message, Snackbar.LENGTH_LONG).show()
+
+    private fun processFailure(exception: Exception) = showToast(exception.message)
+
+    private fun navigate(navigationState: NavigationState) {
+        when (navigationState) {
+            is NavigationState.CommentDetail -> showCommentDetail(navigationState.comment)
+            is NavigationState.OptionDialog -> showImageSourceDialog()
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        EventBus.getDefault().unregister(this)
     }
 
 }

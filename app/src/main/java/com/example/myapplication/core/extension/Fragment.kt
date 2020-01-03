@@ -1,5 +1,7 @@
 package com.example.myapplication.core.extension
 
+import android.app.Activity
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
@@ -15,3 +17,7 @@ inline fun <reified VM : ViewModel> FragmentActivity.viewModelProvider(
     provider: ViewModelProvider.Factory
 ) =
     ViewModelProviders.of(this, provider).get(VM::class.java)
+
+fun Fragment.showToast(message: String?) {
+    Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
+}

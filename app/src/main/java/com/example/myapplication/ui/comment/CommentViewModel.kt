@@ -37,7 +37,7 @@ class CommentViewModel @Inject constructor(
 
     val user = MutableLiveData<User>()
 
-    fun fetchComments() {
+    fun loadComments() {
         viewModelScope.launch {
             when (val result = getCommentsUseCase(None())) {
                 is Result.Success -> handleSuccess(result.data)
