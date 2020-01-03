@@ -16,7 +16,7 @@ class MainActivity : DaggerAppCompatActivity() {
             return Intent(context, MainActivity::class.java)
         }
     }
-
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)

@@ -79,7 +79,7 @@ class UserFireStore
         }
 
     suspend fun updateUser(user: User): Result<User> =
-        withContext(Dispatchers.Main) {
+        withContext(Dispatchers.IO) {
             suspendCancellableCoroutine<Result<User>> { continuation ->
 
                 val data = mapOf(

@@ -1,7 +1,6 @@
 package com.example.myapplication.data.service
 
 import android.app.Service
-import android.app.Service.START_NOT_STICKY
 import android.content.Context
 import android.content.Intent
 import android.os.IBinder
@@ -10,13 +9,13 @@ import androidx.core.app.NotificationManagerCompat
 import com.example.myapplication.MyApplication.Companion.CHANNEL_ID
 import com.example.myapplication.R
 import com.example.myapplication.domain.repository.UserRepository
-import com.example.myapplication.ui.MainActivity
-import com.example.myapplication.ui.dialog.ProfileImageChooserFragment.Companion.IMAGE_URI
+import com.example.myapplication.ui.dialog.ProfileImageChooserFragment.Companion.IMAGE_URI_EXTRA
 import dagger.android.AndroidInjection
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import org.greenrobot.eventbus.EventBus
 import javax.inject.Inject
 
 class FireStorageService : Service() {
@@ -59,12 +58,14 @@ class FireStorageService : Service() {
                 notify(FIRE_STORAGE_NOTIFICATION_ID, builder.build())
 
                 intent?.let {
-                    it.getStringExtra(IMAGE_URI)?.let { uri ->
-                        userRepository.uploadProfilePicture(uri)
+                    it.getStringExtra(IMAGE_URI_EXTRA)?.let { uri ->
+                        userRepository.uploadProfilePicture(uri).also { user ->
+                            EventBus.getDefault().post(user)
+                        }
                     }
                 }
 
-                builder.setContentText("Download complete")
+                builder.setContentText("Upload complete")
                     .setProgress(0, 0, false)
                 notify(FIRE_STORAGE_NOTIFICATION_ID, builder.build())
             }

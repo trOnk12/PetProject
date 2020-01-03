@@ -5,7 +5,7 @@
               android:orientation="horizontal">
 
     <LinearLayout
-            android:id="@+id/file_source"
+            android:id="@+id/fileSource"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -25,7 +25,7 @@
     </LinearLayout>
 
     <LinearLayout
-            android:id="@+id/camera_source"
+            android:id="@+id/cameraSource"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"

@@ -18,10 +18,11 @@ class FireBaseStorage
         withContext(Dispatchers.IO) {
             suspendCancellableCoroutine<Uri> { continuation ->
                 val profilePictureRef = storageReference.child("images/$pathString")
-                profilePictureRef.putFile(uri)
+                    profilePictureRef.putFile(uri)
                     .addOnSuccessListener {
-                        it?.uploadSessionUri?.let {
-                            continuation.resume(it)
+                        val downloadUri = it.storage.downloadUrl
+                        downloadUri.addOnSuccessListener {
+                                continuation.resume(it)
                         }
                     }
                     .addOnFailureListener {

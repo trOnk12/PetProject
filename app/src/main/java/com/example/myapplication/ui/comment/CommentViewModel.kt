@@ -1,26 +1,22 @@
 package com.example.myapplication.ui.comment
 
-import android.net.Uri
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.core.functional.Result
+import com.example.core.interactor.None
 import com.example.myapplication.core.Event
 import com.example.myapplication.core.platform.BaseViewModel
 import com.example.myapplication.domain.model.Comment
+import com.example.myapplication.domain.model.User
 import com.example.myapplication.domain.usecase.AddCommentToFavouriteUseCase
 import com.example.myapplication.domain.usecase.GetCommentsUseCase
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import com.example.core.functional.Result
-import com.example.core.interactor.None
-import com.example.myapplication.domain.model.User
-import com.example.myapplication.domain.usecase.UpdateProfilePictureUseCase
 
 class CommentViewModel @Inject constructor(
     private val getCommentsUseCase: GetCommentsUseCase,
-    private val addCommentToFavouriteUseCase: AddCommentToFavouriteUseCase,
-    private val updateProfilePictureUseCase: UpdateProfilePictureUseCase
+    private val addCommentToFavouriteUseCase: AddCommentToFavouriteUseCase
 ) : BaseViewModel(), CommentEventListener, ToolBarEventListener {
 
     private val _comments = MutableLiveData<List<Comment>>()
@@ -38,6 +34,8 @@ class CommentViewModel @Inject constructor(
     private val _snackBarMessage = MutableLiveData<Event<String>>()
     val snackBarMessage: LiveData<Event<String>>
         get() = _snackBarMessage
+
+    val user = MutableLiveData<User>()
 
     fun fetchComments() {
         viewModelScope.launch {
@@ -68,21 +66,6 @@ class CommentViewModel @Inject constructor(
         _comments.value = _comments.value
     }
 
-    fun uploadProfileImage(chosenImageUri: Uri?) {
-        chosenImageUri?.let {
-            viewModelScope.launch {
-                when (val result = updateProfilePictureUseCase(it.toString())) {
-                    is Result.Success -> handleSuccess(result.data)
-                    is Result.Error -> handleFailure(result.exception)
-                }
-            }
-        }
-    }
-
-    private fun handleSuccess(updatedUser: User) {
-        Log.d("TEST","test")
-        _snackBarMessage.value = Event("Profile image successfully updated")
-    }
 
     override fun onCommentClicked(comment: Comment) {
         _navigationState.value = Event(NavigationState.CommentDetail(comment))

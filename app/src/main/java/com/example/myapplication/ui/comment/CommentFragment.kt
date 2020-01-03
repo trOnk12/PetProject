@@ -15,10 +15,14 @@ import com.example.myapplication.core.EventObserver
 import com.example.myapplication.core.extension.viewModel
 import com.example.myapplication.databinding.CommentsFragmentBinding
 import com.example.myapplication.domain.model.Comment
+import com.example.myapplication.domain.model.User
 import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.comments_fragment.*
 import kotlinx.coroutines.launch
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import javax.inject.Inject
 
 class CommentFragment : Fragment() {
@@ -64,6 +68,21 @@ class CommentFragment : Fragment() {
         super.onAttach(context)
     }
 
+    override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        EventBus.getDefault().unregister(this)
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onUploadCompletedEvent(user: User) {
+        binding.toolbar.user = user
+    }
+
     private fun renderCommentList(comments: List<Comment>) {
         lifecycleScope.launch {
             commentAdapter.submitList(comments)
@@ -75,7 +94,6 @@ class CommentFragment : Fragment() {
     }
 
     private fun handleSnackBar(message: String) {
-        Log.d("TEST","testtesttesttesttest")
         Snackbar.make(commentList, message, Snackbar.LENGTH_LONG).show()
     }
 
@@ -87,9 +105,9 @@ class CommentFragment : Fragment() {
     }
 
     private fun navigateToCommentDetail(comment: Comment) {
-        val action =
-            CommentFragmentDirections.actionCommentFragmentToCommentDetailFragment(comment.id)
-        findNavController().navigate(action)
+        CommentFragmentDirections.actionCommentFragmentToCommentDetailFragment(comment.id).also { action ->
+            findNavController().navigate(action)
+        }
     }
 
     private fun navigateToOptionDialog() {
