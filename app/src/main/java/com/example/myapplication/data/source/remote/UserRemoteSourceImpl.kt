@@ -45,7 +45,7 @@ class UserRemoteSourceImpl(
 
     override suspend fun uploadProfilePicture(user: User, uri: Uri): Result<Uri> {
         return try {
-            val profilePictureUri = fireBaseStorage.uploadFile(uri, "{${user.id}}")
+            val profilePictureUri = fireBaseStorage.uploadFile(uri, user.id)
             Result.Success(profilePictureUri)
         } catch (exception: Exception) {
             Result.Error(exception)

@@ -6,6 +6,9 @@
         <variable
                 name="toolBarEventListener"
                 type="com.example.myapplication.ui.comment.ToolBarEventListener"/>
+        <variable
+                name="user"
+                type="com.example.myapplication.domain.model.User"/>
     </data>
 
     <com.google.android.material.appbar.AppBarLayout
@@ -29,11 +32,12 @@
                     android:orientation="horizontal">
 
                 <ImageView
-                        android:onClick="@{() -> toolBarEventListener.onProfilePictureClicked()}"
                         android:id="@+id/profile_picture"
                         android:layout_width="64dp"
                         android:layout_height="64dp"
-                        android:src="@drawable/favourite_star"/>
+                        android:onClick="@{() -> toolBarEventListener.onProfilePictureClicked()}"
+                        android:src="@drawable/favourite_star"
+                        app:profileImage="@{user.profileImageUrl}"/>
 
                 <TextView
                         android:layout_width="wrap_content"

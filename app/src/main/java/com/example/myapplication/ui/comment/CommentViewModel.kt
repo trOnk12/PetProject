@@ -1,6 +1,7 @@
 package com.example.myapplication.ui.comment
 
 import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -13,6 +14,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 import com.example.core.functional.Result
 import com.example.core.interactor.None
+import com.example.myapplication.domain.model.User
 import com.example.myapplication.domain.usecase.UpdateProfilePictureUseCase
 
 class CommentViewModel @Inject constructor(
@@ -33,9 +35,9 @@ class CommentViewModel @Inject constructor(
     val navigationState: LiveData<Event<NavigationState>>
         get() = _navigationState
 
-    private val _snackBarEvent = MutableLiveData<Event<Int>>()
-    val snackBarEvent: LiveData<Event<Int>>
-        get() = _snackBarEvent
+    private val _snackBarMessage = MutableLiveData<Event<String>>()
+    val snackBarMessage: LiveData<Event<String>>
+        get() = _snackBarMessage
 
     fun fetchComments() {
         viewModelScope.launch {
@@ -68,8 +70,18 @@ class CommentViewModel @Inject constructor(
 
     fun uploadProfileImage(chosenImageUri: Uri?) {
         chosenImageUri?.let {
-            updateProfilePictureUseCase
+            viewModelScope.launch {
+                when (val result = updateProfilePictureUseCase(it.toString())) {
+                    is Result.Success -> handleSuccess(result.data)
+                    is Result.Error -> handleFailure(result.exception)
+                }
+            }
         }
+    }
+
+    private fun handleSuccess(updatedUser: User) {
+        Log.d("TEST","test")
+        _snackBarMessage.value = Event("Profile image successfully updated")
     }
 
     override fun onCommentClicked(comment: Comment) {

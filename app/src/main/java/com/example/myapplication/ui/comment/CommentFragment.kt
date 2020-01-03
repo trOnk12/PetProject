@@ -1,8 +1,8 @@
 package com.example.myapplication.ui.comment
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,12 +40,12 @@ class CommentFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val commentViewModel : CommentViewModel = viewModel(provider)
+        val commentViewModel: CommentViewModel = viewModel(provider)
         commentViewModel.apply {
             comments.observe(this@CommentFragment, Observer(::renderCommentList))
             navigationState.observe(this@CommentFragment, EventObserver(this@CommentFragment::handleNavigationState))
             failure.observe(this@CommentFragment, EventObserver(::handleFailure))
-            snackBarEvent.observe(this@CommentFragment, EventObserver(::handleSnackBar))
+            snackBarMessage.observe(this@CommentFragment, EventObserver(::handleSnackBar))
         }
 
         commentAdapter = CommentAdapter(commentViewModel, this)
@@ -74,8 +74,9 @@ class CommentFragment : Fragment() {
         Toast.makeText(activity, exception.message, Toast.LENGTH_LONG).show()
     }
 
-    private fun handleSnackBar(i: Int) {
-        Snackbar.make(commentList, i, Snackbar.LENGTH_LONG).show()
+    private fun handleSnackBar(message: String) {
+        Log.d("TEST","testtesttesttesttest")
+        Snackbar.make(commentList, message, Snackbar.LENGTH_LONG).show()
     }
 
     private fun handleNavigationState(navigationState: NavigationState) {

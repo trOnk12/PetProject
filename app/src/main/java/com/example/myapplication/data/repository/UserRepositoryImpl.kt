@@ -57,27 +57,30 @@ class UserRepositoryImpl(
         throw Exception("No cached user found!")
     }
 
+    override suspend fun uploadProfilePicture(uri: String): User {
+        return when (val result = userRemoteSource.uploadProfilePicture(getLocalUser(), uri.toUri())) {
+            is Result.Success -> {
+                val newUser = getLocalUser().updateProfileImageUrl(result.data.toString())
+                updateUser(newUser)
+            }
+            is Error -> throw result.exception
+            else -> throw IllegalStateException()
+        }
+    }
+
+        override suspend fun updateUser(user: User): User {
+        return when (val result = userRemoteSource.updateUser(user)) {
+            is Result.Success -> result.data
+            is Error -> throw result.exception
+            else -> throw IllegalStateException()
+        }
+    }
+
     override suspend fun addCommentToFavourite(comment: Comment): Comment {
         val newUserState = getLocalUser().addCommentToFavourite(comment.id)
 
         return when (val result = userRemoteSource.updateUser(newUserState)) {
             is Result.Success -> comment
-            is Error -> throw result.exception
-            else -> throw IllegalStateException()
-        }
-    }
-
-    override suspend fun uploadProfilePicture(uri: String): User {
-        return when (val result = userRemoteSource.uploadProfilePicture(getLocalUser(), uri.toUri())) {
-            is Result.Success -> getLocalUser().updateProfileImageUrl(result.data.toString())
-            is Error -> throw result.exception
-            else -> throw IllegalStateException()
-        }
-    }
-
-    override suspend fun updateUser(user: User): User {
-        return when (val result = userRemoteSource.updateUser(user)) {
-            is Result.Success -> result.data
             is Error -> throw result.exception
             else -> throw IllegalStateException()
         }

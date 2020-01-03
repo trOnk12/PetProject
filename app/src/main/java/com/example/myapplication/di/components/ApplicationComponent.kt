@@ -2,8 +2,10 @@ package com.example.myapplication.di.components
 
 import android.content.Context
 import com.example.myapplication.MyApplication
+import com.example.myapplication.data.service.FireStorageService
 import com.example.myapplication.di.ActivityBuilder
 import com.example.myapplication.di.FragmentBuilder
+import com.example.myapplication.di.ServiceBuilder
 import com.example.myapplication.di.modules.FireStoreModule
 import com.example.myapplication.di.modules.LocalStorageModule
 import com.example.myapplication.di.modules.NetworkModule
@@ -26,6 +28,7 @@ import javax.inject.Singleton
         AndroidInjectionModule::class,
         ActivityBuilder::class,
         FragmentBuilder::class,
+        ServiceBuilder::class,
         NetworkModule::class,
         RepositoryModule::class,
         FireStoreModule::class,
@@ -49,5 +52,6 @@ interface ApplicationComponent {
     fun inject(activity: SplashActivity)
     fun inject(fragment: RegisterFragment)
     fun inject(fragment: ProfileImageChooserFragment)
+    fun inject(service: FireStorageService)
 
 }
