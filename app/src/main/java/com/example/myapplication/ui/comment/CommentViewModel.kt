@@ -11,13 +11,14 @@ import com.example.myapplication.domain.model.Comment
 import com.example.myapplication.domain.model.User
 import com.example.myapplication.domain.usecase.AddCommentToFavouriteUseCase
 import com.example.myapplication.domain.usecase.GetCommentsUseCase
+import com.example.myapplication.ui.model.NavigationState
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class CommentViewModel @Inject constructor(
     private val getCommentsUseCase: GetCommentsUseCase,
     private val addCommentToFavouriteUseCase: AddCommentToFavouriteUseCase
-) : BaseViewModel(), CommentEventListener, ToolBarEventListener {
+) : BaseViewModel(), Events.CommentEventListener, Events.ToolBarEventListener {
 
     private val _comments = MutableLiveData<List<Comment>>()
     val comments: LiveData<List<Comment>>
@@ -37,10 +38,18 @@ class CommentViewModel @Inject constructor(
 
     val user = MutableLiveData<User>()
 
+    override fun onCommentClicked(comment: Comment) {
+        _navigationState.value = Event(NavigationState.CommentDetail(comment))
+    }
+
+    override fun onProfilePictureClicked() {
+        _navigationState.value = Event(NavigationState.OptionDialog)
+    }
+
     fun loadComments() {
         viewModelScope.launch {
             when (val result = getCommentsUseCase(None())) {
-                is Result.Success -> handleSuccess(result.data)
+                is Result.Success -> handleSuccess(comments = result.data)
                 is Result.Error -> handleFailure(result.exception)
             }
         }
@@ -53,7 +62,7 @@ class CommentViewModel @Inject constructor(
     override fun onStarClicked(comment: Comment) {
         viewModelScope.launch {
             when (val result = addCommentToFavouriteUseCase(comment)) {
-                is Result.Success -> handleSuccess(result.data)
+                is Result.Success -> handleSuccess(comment = result.data)
                 is Result.Error -> handleFailure(result.exception)
             }
         }
@@ -66,28 +75,6 @@ class CommentViewModel @Inject constructor(
         _comments.value = _comments.value
     }
 
-
-    override fun onCommentClicked(comment: Comment) {
-        _navigationState.value = Event(NavigationState.CommentDetail(comment))
-    }
-
-    override fun onProfilePictureClicked() {
-        _navigationState.value = Event(NavigationState.OptionDialog)
-    }
-
 }
 
-sealed class NavigationState {
-    data class CommentDetail(val comment: Comment) : NavigationState()
-    object OptionDialog : NavigationState()
-}
-
-interface CommentEventListener {
-    fun onStarClicked(comment: Comment)
-    fun onCommentClicked(comment: Comment)
-}
-
-interface ToolBarEventListener {
-    fun onProfilePictureClicked()
-}
 
