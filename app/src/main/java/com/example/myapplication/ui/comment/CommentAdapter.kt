@@ -7,9 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.databinding.CommentItemViewBinding
-import com.example.myapplication.domain.model.Comment
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import com.example.myapplication.domain.entity.Comment
 
 class CommentAdapter(
     private val commentEventListener: Events.CommentEventListener,

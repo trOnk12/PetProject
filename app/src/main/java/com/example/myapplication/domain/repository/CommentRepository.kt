@@ -1,7 +1,6 @@
 package com.example.myapplication.domain.repository
 
-import com.example.core.functional.Result
-import com.example.myapplication.domain.model.Comment
+import com.example.myapplication.domain.entity.Comment
 
 interface CommentRepository {
     fun comments(): List<Comment>

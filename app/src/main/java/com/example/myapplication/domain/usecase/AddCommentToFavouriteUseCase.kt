@@ -1,8 +1,7 @@
 package com.example.myapplication.domain.usecase
 
 import com.example.core.interactor.UseCase
-import com.example.myapplication.domain.model.Comment
-import com.example.myapplication.domain.model.User
+import com.example.myapplication.domain.entity.Comment
 import com.example.myapplication.domain.repository.UserRepository
 import javax.inject.Inject
 

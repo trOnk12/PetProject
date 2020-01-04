@@ -5,10 +5,9 @@ import com.example.core.functional.Result
 import com.example.core.functional.Result.Error
 import com.example.myapplication.data.source.UserLocalSource
 import com.example.myapplication.data.source.UserRemoteSource
-import com.example.myapplication.domain.model.Comment
-import com.example.myapplication.domain.model.LoginData
-import com.example.myapplication.domain.model.RegisterData
-import com.example.myapplication.domain.model.User
+import com.example.myapplication.domain.entity.Comment
+import com.example.myapplication.domain.entity.LoginData
+import com.example.myapplication.domain.entity.User
 import com.example.myapplication.domain.repository.UserRepository
 
 class UserRepositoryImpl(

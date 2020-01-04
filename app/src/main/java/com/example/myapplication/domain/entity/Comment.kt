@@ -1,4 +1,4 @@
-package com.example.myapplication.domain.model
+package com.example.myapplication.domain.entity
 
 data class Comment(
     val userId: Int,

@@ -2,11 +2,9 @@ package com.example.myapplication.ui.register
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -16,7 +14,6 @@ import com.example.myapplication.core.Event
 import com.example.myapplication.core.extension.viewModel
 import com.example.myapplication.data.util.ValidationError
 import com.example.myapplication.databinding.RegisterFragmentBinding
-import com.example.myapplication.domain.model.User
 import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.register_fragment.*

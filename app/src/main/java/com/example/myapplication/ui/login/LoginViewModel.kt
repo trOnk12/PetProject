@@ -8,8 +8,8 @@ import com.example.myapplication.core.Event
 import com.example.myapplication.core.platform.BaseViewModel
 import com.example.myapplication.data.util.ValidationError
 import com.example.myapplication.data.util.Validator
-import com.example.myapplication.domain.model.LoginData
-import com.example.myapplication.domain.model.User
+import com.example.myapplication.domain.entity.LoginData
+import com.example.myapplication.domain.entity.User
 import com.example.myapplication.domain.usecase.LogInUseCase
 import kotlinx.coroutines.launch
 import javax.inject.Inject

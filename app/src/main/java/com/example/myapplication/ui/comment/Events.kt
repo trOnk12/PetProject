@@ -1,6 +1,6 @@
 package com.example.myapplication.ui.comment
 
-import com.example.myapplication.domain.model.Comment
+import com.example.myapplication.domain.entity.Comment
 
 interface Events{
     interface CommentEventListener {

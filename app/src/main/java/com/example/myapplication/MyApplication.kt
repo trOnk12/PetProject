@@ -5,13 +5,9 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
-import androidx.core.content.ContextCompat
 import com.example.myapplication.di.components.DaggerApplicationComponent
-import com.example.myapplication.domain.model.User
 import dagger.android.AndroidInjector
 import dagger.android.HasAndroidInjector
-import org.koin.android.ext.koin.androidContext
-import org.koin.core.context.startKoin
 import javax.inject.Inject
 import dagger.android.DispatchingAndroidInjector
 

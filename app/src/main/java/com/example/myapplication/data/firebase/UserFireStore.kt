@@ -2,7 +2,7 @@ package com.example.myapplication.data.firebase
 
 
 import com.example.core.functional.Result
-import com.example.myapplication.domain.model.User
+import com.example.myapplication.domain.entity.User
 import com.google.firebase.firestore.FirebaseFirestore
 
 import kotlinx.coroutines.Dispatchers
@@ -22,7 +22,7 @@ class UserFireStore
         private const val USERS_COLLECTION = "users"
         internal const val ID = "id"
         internal const val NAME = "userName"
-        internal const val FAVOURITE_COMMENTS = "favouriteComments"
+        internal const val FAVOURITE_COMMENTS = "favouriteCommentsId"
     }
 
     suspend fun createUser(user: User): Result<User> =
@@ -32,7 +32,7 @@ class UserFireStore
                 val data = mapOf(
                     ID to user.id,
                     NAME to user.name,
-                    FAVOURITE_COMMENTS to user.favouriteComments
+                    FAVOURITE_COMMENTS to user.favouriteCommentsId
                 )
                 fireStore.collection(USERS_COLLECTION)
                     .document(user.id)
@@ -85,7 +85,7 @@ class UserFireStore
                 val data = mapOf(
                     ID to user.id,
                     NAME to user.name,
-                    FAVOURITE_COMMENTS to user.favouriteComments
+                    FAVOURITE_COMMENTS to user.favouriteCommentsId
                 )
                 fireStore.collection(USERS_COLLECTION)
                     .document(user.id)

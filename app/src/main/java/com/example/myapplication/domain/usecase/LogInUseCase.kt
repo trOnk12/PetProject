@@ -1,8 +1,7 @@
 package com.example.myapplication.domain.usecase
 
 import com.example.core.interactor.UseCase
-import com.example.myapplication.domain.model.LoginData
-import com.example.myapplication.domain.model.User
+import com.example.myapplication.domain.entity.User
 import com.example.myapplication.domain.repository.UserRepository
 import javax.inject.Inject
 
@@ -16,3 +15,8 @@ class LogInUseCase
     }
 
 }
+
+data class LoginData(
+    var password: String = "",
+    var email: String = ""
+)

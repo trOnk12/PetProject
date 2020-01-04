@@ -4,7 +4,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <import type="com.example.myapplication.domain.model.LoginData"/>
+        <import type="com.example.myapplication.domain.entity.LoginData"/>
         <variable
                 name="viewModel"
                 type="com.example.myapplication.ui.login.LoginViewModel" />

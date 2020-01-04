@@ -1,9 +1,9 @@
 package com.example.myapplication.domain.repository
 
-import com.example.myapplication.domain.model.Comment
-import com.example.myapplication.domain.model.LoginData
-import com.example.myapplication.domain.model.RegisterData
-import com.example.myapplication.domain.model.User
+import com.example.myapplication.domain.entity.Comment
+import com.example.myapplication.domain.entity.User
+import com.example.myapplication.domain.usecase.LoginData
+import com.example.myapplication.domain.usecase.RegisterData
 
 interface UserRepository {
     suspend fun logIn(loginData: LoginData): User

@@ -4,7 +4,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <import type="com.example.myapplication.domain.model.RegisterData"/>
+        <import type="com.example.myapplication.domain.entity.RegisterData"/>
         <variable
                 name="viewModel"
                 type="com.example.myapplication.ui.register.RegisterViewModel" />

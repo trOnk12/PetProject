@@ -7,8 +7,8 @@ import com.example.core.functional.Result
 import com.example.core.interactor.None
 import com.example.myapplication.core.Event
 import com.example.myapplication.core.platform.BaseViewModel
-import com.example.myapplication.domain.model.Comment
-import com.example.myapplication.domain.model.User
+import com.example.myapplication.domain.entity.Comment
+import com.example.myapplication.domain.entity.User
 import com.example.myapplication.domain.usecase.AddCommentToFavouriteUseCase
 import com.example.myapplication.domain.usecase.GetCommentsUseCase
 import com.example.myapplication.domain.usecase.GetUserUseCase
@@ -21,6 +21,10 @@ class CommentViewModel @Inject constructor(
     private val addCommentToFavouriteUseCase: AddCommentToFavouriteUseCase,
     private val getUserUseCase: GetUserUseCase
 ) : BaseViewModel(), Events.CommentEventListener, Events.ToolBarEventListener {
+    init {
+        loadComments()
+        loadUser()
+    }
 
     private val _comments = MutableLiveData<List<Comment>>()
     val comments: LiveData<List<Comment>>

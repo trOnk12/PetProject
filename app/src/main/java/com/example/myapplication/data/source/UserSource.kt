@@ -2,9 +2,8 @@ package com.example.myapplication.data.source
 
 import android.net.Uri
 import com.example.core.functional.Result
-import com.example.myapplication.domain.model.LoginData
-import com.example.myapplication.domain.model.RegisterData
-import com.example.myapplication.domain.model.User
+import com.example.myapplication.domain.entity.LoginData
+import com.example.myapplication.domain.entity.User
 
 interface UserRemoteSource {
     suspend fun register(registerData: RegisterData): Result<User>

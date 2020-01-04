@@ -1,6 +1,6 @@
 package com.example.myapplication.data.entity
 
-import com.example.myapplication.domain.model.Comment
+import com.example.myapplication.domain.entity.Comment
 import com.google.gson.annotations.SerializedName
 
 data class CommentEntity(

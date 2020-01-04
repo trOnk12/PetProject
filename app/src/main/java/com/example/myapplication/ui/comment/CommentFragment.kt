@@ -13,8 +13,8 @@ import com.example.myapplication.core.EventObserver
 import com.example.myapplication.core.extension.showToast
 import com.example.myapplication.core.extension.viewModel
 import com.example.myapplication.databinding.CommentsFragmentBinding
-import com.example.myapplication.domain.model.Comment
-import com.example.myapplication.domain.model.User
+import com.example.myapplication.domain.entity.Comment
+import com.example.myapplication.domain.entity.User
 import com.example.myapplication.ui.model.NavigationState
 import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.AndroidSupportInjection
@@ -64,8 +64,6 @@ class CommentFragment : Fragment() {
             commentList.adapter = adapter
         }
 
-        viewModel.loadComments()
-        viewModel.loadUser()
     }
 
     override fun onAttach(context: Context) {

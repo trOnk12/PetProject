@@ -4,7 +4,7 @@
     <data>
         <variable
                 name="comment"
-                type="com.example.myapplication.domain.model.Comment"/>
+                type="com.example.myapplication.domain.entity.Comment"/>
 
         <variable
                 name="commentEventListener"

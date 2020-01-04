@@ -4,12 +4,11 @@ import android.net.Uri
 import com.example.myapplication.data.firebase.Authenticator
 import com.example.myapplication.data.firebase.UserFireStore
 import com.example.myapplication.data.source.UserRemoteSource
-import com.example.myapplication.domain.model.LoginData
+import com.example.myapplication.domain.entity.LoginData
 import  com.example.core.functional.Result
 import com.example.myapplication.core.extension.mapToDomain
 import com.example.myapplication.data.firebase.FireBaseStorage
-import com.example.myapplication.domain.model.RegisterData
-import com.example.myapplication.domain.model.User
+import com.example.myapplication.domain.entity.User
 import java.lang.Exception
 import java.lang.IllegalStateException
 

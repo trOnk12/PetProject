@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.core.platform.BaseViewModel
-import com.example.myapplication.domain.model.Comment
+import com.example.myapplication.domain.entity.Comment
 import com.example.myapplication.domain.usecase.GetCommentUseCase
 import kotlinx.coroutines.launch
 import com.example.core.functional.Result

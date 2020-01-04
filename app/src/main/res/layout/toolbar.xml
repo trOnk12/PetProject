@@ -8,7 +8,7 @@
                 type="com.example.myapplication.ui.comment.Events.ToolBarEventListener"/>
         <variable
                 name="user"
-                type="com.example.myapplication.domain.model.User"/>
+                type="com.example.myapplication.domain.entity.User"/>
     </data>
 
     <com.google.android.material.appbar.AppBarLayout

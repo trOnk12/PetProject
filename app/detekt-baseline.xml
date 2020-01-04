@@ -5,7 +5,7 @@
     <ID>EmptyClassBlock:CommentDetailFragment.kt$CommentDetailFragment</ID>
     <ID>EmptyClassBlock:PostRepository.kt$PostRepository</ID>
     <ID>FunctionParameterNaming:Validator.kt$Validator$OnError: (ValidationError) -&gt; Unit</ID>
-    <ID>MatchingDeclarationName:Login.kt$com.example.myapplication.domain.model.Login.kt</ID>
+    <ID>MatchingDeclarationName:Login.kt$com.example.myapplication.domain.entity.Login.kt</ID>
     <ID>NewLineAtEndOfFile:Activity.kt$com.example.myapplication.core.extension.Activity.kt</ID>
     <ID>NewLineAtEndOfFile:ActivityBuilder.kt$com.example.myapplication.di.ActivityBuilder.kt</ID>
     <ID>NewLineAtEndOfFile:AddCommentToFavouriteUseCase.kt$com.example.myapplication.domain.usecase.AddCommentToFavouriteUseCase.kt</ID>
@@ -35,7 +35,7 @@
     <ID>NewLineAtEndOfFile:NetworkModule.kt$com.example.myapplication.di.modules.NetworkModule.kt</ID>
     <ID>NewLineAtEndOfFile:Pair.kt$com.example.myapplication.core.extension.Pair.kt</ID>
     <ID>NewLineAtEndOfFile:PostRepository.kt$com.example.myapplication.domain.repository.PostRepository.kt</ID>
-    <ID>NewLineAtEndOfFile:RegisterData.kt$com.example.myapplication.domain.model.RegisterData.kt</ID>
+    <ID>NewLineAtEndOfFile:RegisterData.kt$com.example.myapplication.domain.entity.RegisterData.kt</ID>
     <ID>NewLineAtEndOfFile:RegisterUseCase.kt$com.example.myapplication.domain.usecase.RegisterUseCase.kt</ID>
     <ID>NewLineAtEndOfFile:RegisterViewModel.kt$com.example.myapplication.ui.register.RegisterViewModel.kt</ID>
     <ID>NewLineAtEndOfFile:RemoteModule.kt$com.example.myapplication.di.modules.RemoteModule.kt</ID>
