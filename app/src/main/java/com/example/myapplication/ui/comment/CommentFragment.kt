@@ -15,6 +15,7 @@ import com.example.myapplication.core.extension.viewModel
 import com.example.myapplication.databinding.CommentsFragmentBinding
 import com.example.myapplication.domain.model.Comment
 import com.example.myapplication.domain.model.User
+import com.example.myapplication.ui.model.NavigationState
 import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.comments_fragment.*
@@ -51,7 +52,7 @@ class CommentFragment : Fragment() {
             navigationState.observe(this@CommentFragment, EventObserver(::navigate))
             snackBarMessage.observe(this@CommentFragment, EventObserver(::showSnackBar))
             comments.observe(this@CommentFragment, Observer(::renderComments))
-            user.observe(this@CommentFragment, Observer(::renderUser))
+            userSession.observe(this@CommentFragment, Observer(::renderUser))
             failure.observe(this@CommentFragment, EventObserver(::processFailure))
         }
 
@@ -64,6 +65,7 @@ class CommentFragment : Fragment() {
         }
 
         viewModel.loadComments()
+        viewModel.loadUser()
     }
 
     override fun onAttach(context: Context) {
@@ -79,7 +81,7 @@ class CommentFragment : Fragment() {
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onUploadCompletion(updatedUser: User) {
         viewModel.apply {
-            user.value = updatedUser
+            userSession.value = updatedUser
         }
     }
 

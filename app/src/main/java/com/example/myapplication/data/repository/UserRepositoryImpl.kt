@@ -49,18 +49,18 @@ class UserRepositoryImpl(
         }
     }
 
-    override suspend fun getLocalUser(): User {
+    override suspend fun getUser(): User {
         userLocalSource.getUserId()?.let {
             return getUser(it)
         }
 
-        throw Exception("No cached user found!")
+        throw Exception("No cached userSession found!")
     }
 
     override suspend fun uploadProfilePicture(uri: String): User {
-        return when (val result = userRemoteSource.uploadProfilePicture(getLocalUser(), uri.toUri())) {
+        return when (val result = userRemoteSource.uploadProfilePicture(getUser(), uri.toUri())) {
             is Result.Success -> {
-                val newUser = getLocalUser().updateProfileImageUrl(result.data.toString())
+                val newUser = getUser().updateProfileImageUrl(result.data.toString())
                 updateUser(newUser)
             }
             is Error -> throw result.exception
@@ -77,7 +77,7 @@ class UserRepositoryImpl(
     }
 
     override suspend fun addCommentToFavourite(comment: Comment): Comment {
-        val newUserState = getLocalUser().addCommentToFavourite(comment.id)
+        val newUserState = getUser().addCommentToFavourite(comment.id)
 
         return when (val result = userRemoteSource.updateUser(newUserState)) {
             is Result.Success -> comment

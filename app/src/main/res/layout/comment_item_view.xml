@@ -2,14 +2,13 @@
 <layout>
 
     <data>
-
         <variable
                 name="comment"
                 type="com.example.myapplication.domain.model.Comment"/>
 
         <variable
                 name="commentEventListener"
-                type="com.example.myapplication.ui.comment.CommentEventListener"/>
+                type="com.example.myapplication.ui.comment.Events.CommentEventListener"/>
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -22,10 +21,11 @@
                 android:layout_height="wrap_content">
 
             <ImageView
+                    android:scaleType="centerInside"
                     android:id="@+id/background_image"
                     android:layout_width="match_parent"
-                    android:layout_height="128dp"
-                    android:background="@color/colorPrimary"/>
+                    android:layout_height="172dp"
+                    android:src="@drawable/placeholder"/>
         </LinearLayout>
 
         <TextView

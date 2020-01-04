@@ -11,13 +11,15 @@ import com.example.myapplication.domain.model.Comment
 import com.example.myapplication.domain.model.User
 import com.example.myapplication.domain.usecase.AddCommentToFavouriteUseCase
 import com.example.myapplication.domain.usecase.GetCommentsUseCase
+import com.example.myapplication.domain.usecase.GetUserUseCase
 import com.example.myapplication.ui.model.NavigationState
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class CommentViewModel @Inject constructor(
     private val getCommentsUseCase: GetCommentsUseCase,
-    private val addCommentToFavouriteUseCase: AddCommentToFavouriteUseCase
+    private val addCommentToFavouriteUseCase: AddCommentToFavouriteUseCase,
+    private val getUserUseCase: GetUserUseCase
 ) : BaseViewModel(), Events.CommentEventListener, Events.ToolBarEventListener {
 
     private val _comments = MutableLiveData<List<Comment>>()
@@ -36,7 +38,7 @@ class CommentViewModel @Inject constructor(
     val snackBarMessage: LiveData<Event<String>>
         get() = _snackBarMessage
 
-    val user = MutableLiveData<User>()
+    val userSession = MutableLiveData<User>()
 
     override fun onCommentClicked(comment: Comment) {
         _navigationState.value = Event(NavigationState.CommentDetail(comment))
@@ -44,6 +46,19 @@ class CommentViewModel @Inject constructor(
 
     override fun onProfilePictureClicked() {
         _navigationState.value = Event(NavigationState.OptionDialog)
+    }
+
+    fun loadUser() {
+        viewModelScope.launch {
+            when (val result = getUserUseCase(None())) {
+                is Result.Success -> handleSuccess(user = result.data)
+                is Result.Error -> handleFailure(result.exception)
+            }
+        }
+    }
+
+    private fun handleSuccess(user: User) {
+        userSession.value = user
     }
 
     fun loadComments() {
@@ -74,6 +89,7 @@ class CommentViewModel @Inject constructor(
         }
         _comments.value = _comments.value
     }
+
 
 }
 

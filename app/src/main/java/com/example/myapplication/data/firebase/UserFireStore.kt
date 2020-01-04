@@ -63,7 +63,7 @@ class UserFireStore
                             result?.let {
                                 val user = result.toObject(User::class.java)
                                 if (user == null) {
-                                    continuation.resumeWithException(Exception("No user found"))
+                                    continuation.resumeWithException(Exception("No userSession found"))
                                 } else {
                                     continuation.resume(Result.Success(user))
                                 }

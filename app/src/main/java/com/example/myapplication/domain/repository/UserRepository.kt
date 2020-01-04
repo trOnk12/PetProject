@@ -9,7 +9,7 @@ interface UserRepository {
     suspend fun logIn(loginData: LoginData): User
     suspend fun register(registerData: RegisterData): User
     suspend fun getUser(id: String): User
-    suspend fun getLocalUser(): User?
+    suspend fun getUser(): User
     suspend fun updateUser(user: User): User
     suspend fun uploadProfilePicture(uri: String): User
     suspend fun addCommentToFavourite(comment: Comment): Comment

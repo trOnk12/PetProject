@@ -12,7 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class CommentAdapter(
-    private val commentEventListener: CommentEventListener,
+    private val commentEventListener: Events.CommentEventListener,
     private val lifecycleOwner: LifecycleOwner
 ) : ListAdapter<Comment, CommentViewHolder>(CommentDiff) {
 
@@ -30,7 +30,7 @@ class CommentAdapter(
 
 class CommentViewHolder(
     private val binding: CommentItemViewBinding,
-    private val commentEventListener: CommentEventListener,
+    private val commentEventListener: Events.CommentEventListener,
     private val lifecycleOwner: LifecycleOwner
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(comment: Comment) {
