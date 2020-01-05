@@ -7,16 +7,22 @@ import com.example.myapplication.feature.commentlist.ui.list.adapter.CommentAdap
 import dagger.Module
 import dagger.Provides
 
-
 @Module
-class CommentListModule {
+class CommentListModule(
+    private val fragment: CommentsListFragment
+) {
+
+    @Provides
+    fun provideCommentListFragment(): CommentsListFragment {
+        return fragment
+    }
 
     @Provides
     fun provideCommentListAdapter(
-        commentsListViewModel: CommentsListViewModel,
-        commentsListFragment: CommentsListFragment
+        viewModel: CommentsListViewModel,
+        fragment: CommentsListFragment
     ): CommentAdapter {
-        return CommentAdapter(commentsListViewModel as CommentListListeners.CommentEventListener, commentsListFragment)
+        return CommentAdapter(viewModel as CommentListListeners.CommentEventListener, fragment)
     }
 
 }

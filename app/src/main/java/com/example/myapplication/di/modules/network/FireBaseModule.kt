@@ -1,4 +1,4 @@
-package com.example.myapplication.di.modules
+package com.example.myapplication.di.modules.network
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -8,7 +8,7 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class FireStoreModule {
+class FireBaseModule {
 
     @Provides
     fun provideFireStore(): FirebaseFirestore {

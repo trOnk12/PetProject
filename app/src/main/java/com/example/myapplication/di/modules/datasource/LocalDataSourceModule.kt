@@ -1,4 +1,4 @@
-package com.example.myapplication.di.modules
+package com.example.myapplication.di.modules.datasource
 
 import android.content.Context
 import com.example.myapplication.data.local.sharedpreferences.SharedPreferenceStorage
@@ -9,12 +9,7 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class LocalStorageModule {
-
-    @Provides
-    fun provideCommentLocalSource(sharedPreferenceStorage: SharedPreferenceStorage): CommentLocalSource {
-        return CommentLocalSource(sharedPreferenceStorage)
-    }
+class LocalDataSourceModule {
 
     @Provides
     fun provideUserLocalSource(userLocalSource: UserLocalSourceImpl): UserLocalSource {

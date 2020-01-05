@@ -6,8 +6,8 @@ import android.content.Intent
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import com.example.myapplication.PetProject.Companion.CHANNEL_ID
 import com.example.myapplication.R
+import com.example.myapplication.core.constants.CHANNEL_ID
 import com.example.myapplication.domain.repository.UserRepository
 import com.example.myapplication.feature.commentlist.ui.list.dialog.ImageSourceDialogFragment.Companion.IMAGE_URI_EXTRA
 import dagger.android.AndroidInjection

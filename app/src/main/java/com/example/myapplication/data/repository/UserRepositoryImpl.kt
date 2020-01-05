@@ -10,8 +10,9 @@ import com.example.myapplication.domain.entity.User
 import com.example.myapplication.domain.repository.UserRepository
 import com.example.myapplication.domain.usecase.LoginData
 import com.example.myapplication.domain.usecase.RegisterData
+import javax.inject.Inject
 
-class UserRepositoryImpl(
+class UserRepositoryImpl @Inject constructor(
     private val userRemoteSource: UserRemoteSource,
     private val userLocalSource: UserLocalSource
 ) : UserRepository {
@@ -68,7 +69,7 @@ class UserRepositoryImpl(
         }
     }
 
-        override suspend fun updateUser(user: User): User {
+    override suspend fun updateUser(user: User): User {
         return when (val result = userRemoteSource.updateUser(user)) {
             is Result.Success -> result.data
             is Error -> throw result.exception

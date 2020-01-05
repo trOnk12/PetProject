@@ -12,8 +12,9 @@ import com.example.myapplication.domain.usecase.LoginData
 import com.example.myapplication.domain.usecase.RegisterData
 import java.lang.Exception
 import java.lang.IllegalStateException
+import javax.inject.Inject
 
-class UserRemoteSourceImpl(
+class UserRemoteSourceImpl @Inject constructor(
     private val authenticator: Authenticator,
     private val userFireStore: UserFireStore,
     private val fireBaseStorage: FireBaseStorage

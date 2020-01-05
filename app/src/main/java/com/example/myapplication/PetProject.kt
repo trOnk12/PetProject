@@ -5,33 +5,37 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
+import com.example.myapplication.core.constants.CHANNEL_ID
+import com.example.myapplication.di.components.CoreComponent
 import com.example.myapplication.di.components.DaggerAppComponent
-import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasAndroidInjector
-import javax.inject.Inject
+import com.example.myapplication.di.components.DaggerCoreComponent
+import com.example.myapplication.di.modules.ContextModule
 
-class PetProject : Application(), HasAndroidInjector {
-    companion object {
-        const val CHANNEL_ID = "FIRE_STORAGE"
-    }
+class PetProject : Application() {
 
-    @Inject
-    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Any>
+    lateinit var coreComponent: CoreComponent
 
     override fun onCreate() {
         super.onCreate()
-        DaggerAppComponent
-            .builder()
-            .applicationContext(this)
-            .build()
-            .inject(this)
 
+        initializeDaggerCoreComponent()
+        initializeDaggerAppComponent()
         createNotificationChannel()
     }
 
-    override fun androidInjector(): AndroidInjector<Any> {
-        return dispatchingAndroidInjector
+    private fun initializeDaggerCoreComponent() {
+        coreComponent = DaggerCoreComponent
+            .builder()
+            .contextModule(ContextModule(this))
+            .build()
+    }
+
+    private fun initializeDaggerAppComponent() {
+        DaggerAppComponent
+            .builder()
+            .coreComponent(coreComponent)
+            .build()
+            .inject(this)
     }
 
     private fun createNotificationChannel() {

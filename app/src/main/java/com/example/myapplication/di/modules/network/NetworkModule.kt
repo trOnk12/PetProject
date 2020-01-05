@@ -1,4 +1,4 @@
-package com.example.myapplication.di.modules
+package com.example.myapplication.di.modules.network
 
 import com.example.myapplication.BuildConfig
 import com.example.myapplication.data.network.CommentApi

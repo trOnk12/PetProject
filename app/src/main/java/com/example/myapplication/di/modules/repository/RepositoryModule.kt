@@ -1,4 +1,4 @@
-package com.example.myapplication.di.modules
+package com.example.myapplication.di.modules.repository
 
 import com.example.myapplication.data.repository.CommentRepositoryImpl
 import com.example.myapplication.data.repository.UserRepositoryImpl
@@ -16,20 +16,15 @@ class RepositoryModule {
 
     @Provides
     fun provideCommentRepository(
-        commentLocalSource: CommentLocalSource,
-        commentRemoteSource: CommentRemoteSource
+        repository: CommentRepositoryImpl
     ): CommentRepository {
-        return CommentRepositoryImpl(commentRemoteSource, commentLocalSource)
+        return repository
     }
 
     @Provides
     fun provideUserRepository(
-        userRemoteSource: UserRemoteSource,
-        userLocalSource: UserLocalSource
+        repository: UserRepositoryImpl
     ): UserRepository {
-        return UserRepositoryImpl(
-            userRemoteSource,
-            userLocalSource
-        )
+        return repository
     }
 }
