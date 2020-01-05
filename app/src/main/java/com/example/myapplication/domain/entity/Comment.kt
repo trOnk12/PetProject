@@ -5,6 +5,10 @@ data class Comment(
     val id: String,
     val title: String?,
     val body: String,
-    var isFavourite : Boolean = false
-)
+    val isFavourite: Boolean = false
+) {
 
+    fun toggleIsFavourite(): Comment {
+        return this.copy(isFavourite = !isFavourite)
+    }
+}

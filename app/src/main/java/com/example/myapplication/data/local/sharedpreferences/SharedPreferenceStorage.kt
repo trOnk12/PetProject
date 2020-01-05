@@ -10,13 +10,12 @@ import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
 class SharedPreferenceStorage
-@Inject constructor
-    (context: Context) {
+@Inject constructor(context: Context) {
 
     private val preferences =
         context.applicationContext.getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
 
-    var userId by StringPreference(preferences,userID,null)
+    var userId by StringPreference(preferences, userID, null)
 
     companion object {
         const val PREFS_NAME = "akatwitter"
@@ -39,7 +38,3 @@ class StringPreference(
         preferences.edit { putString(name, value) }
     }
 }
-
-
-
-

@@ -14,6 +14,5 @@ interface CommentApi {
     fun comments(): Call<List<CommentEntity>>
 
     @GET(COMMENT)
-    fun comment(id:String): Call<CommentEntity>
-
+    fun comment(id: String): Call<CommentEntity>
 }

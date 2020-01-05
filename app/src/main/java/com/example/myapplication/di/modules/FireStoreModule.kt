@@ -21,7 +21,7 @@ class FireStoreModule {
     }
 
     @Provides
-    fun provideFireBaseStorage() : StorageReference {
+    fun provideFireBaseStorage(): StorageReference {
         return FirebaseStorage.getInstance().reference
     }
 }

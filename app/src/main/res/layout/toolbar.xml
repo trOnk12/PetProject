@@ -4,8 +4,8 @@
 
     <data>
         <variable
-                name="toolBarEventListener"
-                type="com.example.myapplication.ui.comment.Events.ToolBarEventListener"/>
+                name="toolbarEventListener"
+                type="com.example.myapplication.feature.commentlist.ui.list.CommentListListeners.ToolBarEventListener"/>
         <variable
                 name="user"
                 type="com.example.myapplication.domain.entity.User"/>
@@ -31,38 +31,38 @@
                     android:gravity="center_vertical">
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toLeftOf="@id/title"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         android:id="@+id/profile_picture"
                         android:layout_width="64dp"
                         android:layout_height="match_parent"
-                        android:onClick="@{() -> toolBarEventListener.onProfilePictureClicked()}"
+                        android:onClick="@{() -> toolbarEventListener.onProfilePictureClicked()}"
                         android:src="@drawable/favourite_star"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toLeftOf="@id/title"
+                        app:layout_constraintTop_toTopOf="parent"
                         app:profileImage="@{user.profileImageUrl}"/>
 
                 <TextView
                         android:id="@+id/title"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Pet project"
                         android:textColor="@color/colorWhite"
-                        android:textSize="32sp"/>
+                        android:textSize="32sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
 
                 <ImageView
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintLeft_toRightOf="@id/title"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
                         android:id="@+id/search_icon"
                         android:layout_width="32dp"
                         android:layout_height="32dp"
-                        android:src="@color/colorWhite"/>
+                        android:src="@color/colorWhite"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toRightOf="@id/title"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

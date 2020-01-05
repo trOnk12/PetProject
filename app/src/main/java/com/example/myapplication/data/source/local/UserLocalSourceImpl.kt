@@ -2,9 +2,13 @@ package com.example.myapplication.data.source.local
 
 import com.example.myapplication.data.local.sharedpreferences.SharedPreferenceStorage
 import com.example.myapplication.data.source.UserLocalSource
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class UserLocalSourceImpl(private val sharedPreferenceStorage: SharedPreferenceStorage) :
-    UserLocalSource {
+
+class UserLocalSourceImpl @Inject constructor(
+    private val sharedPreferenceStorage: SharedPreferenceStorage
+) : UserLocalSource {
 
     override fun getUserId(): String? {
         return sharedPreferenceStorage.userId

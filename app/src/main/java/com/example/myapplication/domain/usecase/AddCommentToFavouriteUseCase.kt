@@ -13,5 +13,4 @@ class AddCommentToFavouriteUseCase
     override suspend fun run(params: Comment): Comment {
         return userRepository.addCommentToFavourite(params)
     }
-
 }

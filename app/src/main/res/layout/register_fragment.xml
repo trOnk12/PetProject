@@ -4,10 +4,10 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <import type="com.example.myapplication.domain.entity.RegisterData"/>
+        <import type="com.example.myapplication.domain.usecase.RegisterData"/>
         <variable
                 name="viewModel"
-                type="com.example.myapplication.ui.register.RegisterViewModel" />
+                type="com.example.myapplication.feature.register.ui.RegisterViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

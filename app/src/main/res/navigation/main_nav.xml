@@ -7,7 +7,7 @@
 
     <fragment
             android:id="@id/bottomNavigationComment"
-            android:name="com.example.myapplication.ui.comment.CommentFragment"
+            android:name="com.example.myapplication.feature.commentlist.ui.list.CommentsListFragment"
             android:label="Comments"
             tools:layout="@layout/comments_fragment">
         <action
@@ -21,19 +21,19 @@
 
     <fragment
             android:id="@id/bottomNavigationEvent"
-            android:name="com.example.myapplication.ui.feed.FeedFragment"
+            android:name="com.example.myapplication.feature.feed.FeedFragment"
             android:label="Feed"
             tools:layout="@layout/feed_fragment" />
 
     <fragment
             android:id="@id/bottomNavigationFriends"
-            android:name="com.example.myapplication.ui.friend.FriendsFragment"
+            android:name="com.example.myapplication.feature.friend.FriendsFragment"
             android:label="Friends"
             tools:layout="@layout/friends_fragment" />
 
     <fragment
             android:id="@+id/commentDetailFragment"
-            android:name="com.example.myapplication.ui.comment.CommentFragment"
+            android:name="com.example.myapplication.feature.commentlist.ui.list.CommentsListFragment"
             tools:layout="@layout/fragment_comment">
         <argument
                 android:name="commentId"
@@ -42,7 +42,7 @@
 
     <dialog
     android:id="@+id/optionDialog"
-    android:name="com.example.myapplication.ui.dialog.ProfileImageChooserFragment"
+    android:name="com.example.myapplication.feature.commentlist.ui.list.dialog.ImageSourceDialogFragment"
     tools:layout="@layout/option_dialog"/>
 
 </navigation>

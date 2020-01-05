@@ -6,17 +6,17 @@ import android.content.Intent
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import com.example.myapplication.MyApplication.Companion.CHANNEL_ID
+import com.example.myapplication.PetProject.Companion.CHANNEL_ID
 import com.example.myapplication.R
 import com.example.myapplication.domain.repository.UserRepository
-import com.example.myapplication.ui.dialog.ProfileImageChooserFragment.Companion.IMAGE_URI_EXTRA
+import com.example.myapplication.feature.commentlist.ui.list.dialog.ImageSourceDialogFragment.Companion.IMAGE_URI_EXTRA
 import dagger.android.AndroidInjection
+import javax.inject.Inject
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import org.greenrobot.eventbus.EventBus
-import javax.inject.Inject
 
 class FireStorageService : Service() {
     companion object {
@@ -37,7 +37,7 @@ class FireStorageService : Service() {
     private val PROGRESS_CURRENT = 0
 
     override fun onCreate() {
-        AndroidInjection.inject(this);
+        AndroidInjection.inject(this)
         super.onCreate()
     }
 
@@ -82,5 +82,4 @@ class FireStorageService : Service() {
         super.onDestroy()
         serviceJob.cancel()
     }
-
 }

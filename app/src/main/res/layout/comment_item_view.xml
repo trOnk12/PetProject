@@ -8,7 +8,7 @@
 
         <variable
                 name="commentEventListener"
-                type="com.example.myapplication.ui.comment.Events.CommentEventListener"/>
+                type="com.example.myapplication.feature.commentlist.ui.list.CommentListListeners.CommentEventListener"/>
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"

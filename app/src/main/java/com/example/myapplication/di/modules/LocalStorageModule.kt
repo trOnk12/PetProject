@@ -17,14 +17,8 @@ class LocalStorageModule {
     }
 
     @Provides
-    fun provideUserLocalSource(sharedPreferenceStorage: SharedPreferenceStorage): UserLocalSource {
-        return UserLocalSourceImpl(sharedPreferenceStorage)
+    fun provideUserLocalSource(userLocalSource: UserLocalSourceImpl): UserLocalSource {
+        return userLocalSource
     }
-
-    @Provides
-    fun providesharedPreferenceStorage(context: Context): SharedPreferenceStorage {
-        return SharedPreferenceStorage(context)
-    }
-
 
 }

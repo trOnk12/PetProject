@@ -10,6 +10,7 @@ class GetUserUseCase
 @Inject constructor(
     private val userRepository: UserRepository
 ) : UseCase<User, None>() {
+
     override suspend fun run(params: None): User {
         return userRepository.getUser()
     }

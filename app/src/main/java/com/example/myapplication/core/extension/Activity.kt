@@ -4,11 +4,11 @@ import android.app.Activity
 import android.content.Intent
 import android.widget.Toast
 
-fun Activity.startWithFinish(intent: Intent){
+fun Activity.startWithFinish(intent: Intent) {
     startActivity(intent)
     finish()
 }
 
-fun Activity.showToast(message:String){
-    Toast.makeText(this,message,Toast.LENGTH_LONG).show()
+fun Activity.showToast(message: String) {
+    Toast.makeText(this, message, Toast.LENGTH_LONG).show()
 }

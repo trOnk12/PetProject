@@ -1,13 +1,13 @@
 package com.example.myapplication.data.firebase
 
+import com.example.core.functional.Result
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import javax.inject.Inject
+import kotlin.coroutines.resume
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
-import kotlin.coroutines.resume
-import com.example.core.functional.Result
-import javax.inject.Inject
 
 class Authenticator
 @Inject constructor(
@@ -29,7 +29,6 @@ class Authenticator
                             it.exception?.let {
                                 continuation.resume(Result.Error(it))
                             }
-
                         }
                     }
             }
@@ -53,7 +52,6 @@ class Authenticator
                             it.exception?.let {
                                 continuation.resume(Result.Error(it))
                             }
-
                         }
                     }
             }
@@ -62,5 +60,4 @@ class Authenticator
     fun isUserSignedIn(): Boolean {
         return fireBaseAuth.currentUser != null
     }
-
 }

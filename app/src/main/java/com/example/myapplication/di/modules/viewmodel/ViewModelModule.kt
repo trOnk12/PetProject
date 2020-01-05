@@ -2,10 +2,10 @@ package com.example.myapplication.di.modules.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.myapplication.ui.comment.CommentViewModel
-import com.example.myapplication.ui.login.LoginViewModel
-import com.example.myapplication.ui.register.RegisterViewModel
-import com.example.myapplication.ui.splash.SplashViewModel
+import com.example.myapplication.feature.commentlist.ui.list.CommentsListViewModel
+import com.example.myapplication.feature.login.ui.LoginViewModel
+import com.example.myapplication.feature.register.ui.RegisterViewModel
+import com.example.myapplication.feature.splash.SplashViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -19,7 +19,7 @@ abstract class ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(SplashViewModel::class)
-    internal abstract fun splashViewModel(viewModel:SplashViewModel) : ViewModel
+    internal abstract fun splashViewModel(viewModel: SplashViewModel): ViewModel
 
     @Binds
     @IntoMap
@@ -29,11 +29,10 @@ abstract class ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(RegisterViewModel::class)
-    internal abstract fun registerViewModel(viewModel:RegisterViewModel) : ViewModel
+    internal abstract fun registerViewModel(viewModel: RegisterViewModel): ViewModel
 
     @Binds
     @IntoMap
-    @ViewModelKey(CommentViewModel::class)
-    internal abstract fun commentViewModel(viewModel: CommentViewModel): ViewModel
-
+    @ViewModelKey(CommentsListViewModel::class)
+    internal abstract fun commentViewModel(viewModel: CommentsListViewModel): ViewModel
 }

@@ -1,17 +1,14 @@
 package com.example.myapplication.data.firebase
 
-
 import com.example.core.functional.Result
 import com.example.myapplication.domain.entity.User
 import com.google.firebase.firestore.FirebaseFirestore
-
+import javax.inject.Inject
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
-import javax.inject.Inject
-
-import kotlin.coroutines.resume
-import kotlin.coroutines.resumeWithException
 
 class UserFireStore
 @Inject constructor(
@@ -47,7 +44,6 @@ class UserFireStore
                         if (!continuation.isActive) return@addOnFailureListener
                         continuation.resumeWithException(it)
                     }
-
             }
         }
 
@@ -68,7 +64,6 @@ class UserFireStore
                                     continuation.resume(Result.Success(user))
                                 }
                             }
-
                         } else {
                             it.exception?.let {
                                 continuation.resume(Result.Error(it))
@@ -100,9 +95,6 @@ class UserFireStore
                         if (!continuation.isActive) return@addOnFailureListener
                         continuation.resumeWithException(it)
                     }
-
             }
         }
-
 }
-

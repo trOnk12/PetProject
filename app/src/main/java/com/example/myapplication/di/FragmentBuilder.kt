@@ -1,9 +1,10 @@
 package com.example.myapplication.di
 
-import com.example.myapplication.ui.comment.CommentFragment
-import com.example.myapplication.ui.dialog.ProfileImageChooserFragment
-import com.example.myapplication.ui.login.LoginFragment
-import com.example.myapplication.ui.register.RegisterFragment
+import com.example.myapplication.feature.commentlist.di.CommentListModule
+import com.example.myapplication.feature.commentlist.ui.list.CommentsListFragment
+import com.example.myapplication.feature.commentlist.ui.list.dialog.ImageSourceDialogFragment
+import com.example.myapplication.feature.login.ui.LoginFragment
+import com.example.myapplication.feature.register.ui.RegisterFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -11,14 +12,14 @@ import dagger.android.ContributesAndroidInjector
 abstract class FragmentBuilder {
 
     @ContributesAndroidInjector
-    abstract fun bindLoginFragment() : LoginFragment
+    abstract fun bindLoginFragment(): LoginFragment
 
     @ContributesAndroidInjector
-    abstract fun bindRegisterFragment() : RegisterFragment
+    abstract fun bindRegisterFragment(): RegisterFragment
+
+    @ContributesAndroidInjector(modules = [CommentListModule::class])
+    abstract fun bindCommentsFragment(): CommentsListFragment
 
     @ContributesAndroidInjector
-    abstract fun bindCommentsFragment() : CommentFragment
-
-    @ContributesAndroidInjector
-    abstract fun bindProfileImageChooserFragment() : ProfileImageChooserFragment
+    abstract fun bindProfileImageChooserFragment(): ImageSourceDialogFragment
 }

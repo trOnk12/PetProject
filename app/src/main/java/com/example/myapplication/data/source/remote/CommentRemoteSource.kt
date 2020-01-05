@@ -1,12 +1,11 @@
 package com.example.myapplication.data.source.remote
 
-
 import com.example.myapplication.data.entity.CommentEntity
 import com.example.myapplication.data.entity.mapToDomain
 import com.example.myapplication.data.network.CommentService
 import com.example.myapplication.domain.entity.Comment
-import retrofit2.Call
 import javax.inject.Inject
+import retrofit2.Call
 
 class CommentRemoteSource
 @Inject constructor(
@@ -44,5 +43,4 @@ class CommentRemoteSource
             throw exception
         }
     }
-
 }

@@ -39,7 +39,6 @@ class Validator
 
         return true
     }
-
 }
 
 sealed class ValidationError {

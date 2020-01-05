@@ -1,7 +1,5 @@
 package com.example.myapplication.di.modules
 
-import com.example.myapplication.data.firebase.UserFireStore
-import com.example.myapplication.data.local.sharedpreferences.SharedPreferenceStorage
 import com.example.myapplication.data.repository.CommentRepositoryImpl
 import com.example.myapplication.data.repository.UserRepositoryImpl
 import com.example.myapplication.data.source.UserLocalSource
@@ -34,5 +32,4 @@ class RepositoryModule {
             userLocalSource
         )
     }
-
 }

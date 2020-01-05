@@ -15,9 +15,6 @@ data class User(
     }
 
     fun updateProfileImageUrl(uri: String): User {
-        return User(id, name, uri, favouriteCommentsId)
+        return this.copy(id = uri)
     }
-
 }
-
-

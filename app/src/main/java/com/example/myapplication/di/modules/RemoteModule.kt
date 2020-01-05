@@ -19,5 +19,4 @@ class RemoteModule {
     ): UserRemoteSource {
         return UserRemoteSourceImpl(authenticator, userFireStore, fireBaseStorage)
     }
-
 }

@@ -13,7 +13,6 @@ class RegisterUseCase
     override suspend fun run(params: RegisterData): User {
         return userRepository.register(params)
     }
-
 }
 
 data class RegisterData(

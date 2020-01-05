@@ -9,5 +9,4 @@ abstract class ServiceBuilder {
 
     @ContributesAndroidInjector
     abstract fun bindFireStorageService(): FireStorageService
-
 }

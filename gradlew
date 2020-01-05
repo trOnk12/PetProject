@@ -73,7 +73,7 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/myapplication/ui/comments/CommentViewModel.kt">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/myapplication/ui/comments/CommentsListViewModel.kt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="340">
               <caret line="29" column="5" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
@@ -94,7 +94,7 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/myapplication/ui/comments/CommentFragment.kt">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/myapplication/ui/comments/CommentsListFragment.kt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1003">
               <caret line="79" selection-start-line="79" selection-end-line="79" />

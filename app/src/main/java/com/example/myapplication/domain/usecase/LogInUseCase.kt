@@ -13,7 +13,6 @@ class LogInUseCase
     override suspend fun run(params: LoginData): User {
         return userRepository.logIn(params)
     }
-
 }
 
 data class LoginData(

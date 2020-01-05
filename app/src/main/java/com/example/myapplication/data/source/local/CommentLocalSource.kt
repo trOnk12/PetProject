@@ -1,6 +1,5 @@
 package com.example.myapplication.data.source.local
 
-
 import com.example.myapplication.data.local.sharedpreferences.SharedPreferenceStorage
 import javax.inject.Inject
 
@@ -10,8 +9,5 @@ class CommentLocalSource
 ) {
 
     fun addToFavourite(id: String) {
-
     }
-
-
 }

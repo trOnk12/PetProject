@@ -1,6 +1,5 @@
 package com.example.myapplication.core
 
-import android.net.Uri
 import android.widget.ImageView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter

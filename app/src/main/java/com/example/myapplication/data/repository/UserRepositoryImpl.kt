@@ -6,9 +6,10 @@ import com.example.core.functional.Result.Error
 import com.example.myapplication.data.source.UserLocalSource
 import com.example.myapplication.data.source.UserRemoteSource
 import com.example.myapplication.domain.entity.Comment
-import com.example.myapplication.domain.entity.LoginData
 import com.example.myapplication.domain.entity.User
 import com.example.myapplication.domain.repository.UserRepository
+import com.example.myapplication.domain.usecase.LoginData
+import com.example.myapplication.domain.usecase.RegisterData
 
 class UserRepositoryImpl(
     private val userRemoteSource: UserRemoteSource,
@@ -76,13 +77,12 @@ class UserRepositoryImpl(
     }
 
     override suspend fun addCommentToFavourite(comment: Comment): Comment {
-        val newUserState = getUser().addCommentToFavourite(comment.id)
+        val user = getUser().addCommentToFavourite(comment.id)
 
-        return when (val result = userRemoteSource.updateUser(newUserState)) {
-            is Result.Success -> comment
+        return when (val result = userRemoteSource.updateUser(user)) {
+            is Result.Success -> comment.toggleIsFavourite()
             is Error -> throw result.exception
             else -> throw IllegalStateException()
         }
     }
-
 }
