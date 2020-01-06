@@ -10,7 +10,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
 
-class UserFireStore
+class FireStoreUserDataSource
 @Inject constructor(
     private val fireStore: FirebaseFirestore
 ) {
@@ -22,7 +22,7 @@ class UserFireStore
         internal const val FAVOURITE_COMMENTS = "favouriteCommentsId"
     }
 
-    suspend fun createUser(user: User): Result<User> =
+    suspend fun create(user: User): Result<User> =
         withContext(Dispatchers.Main) {
             suspendCancellableCoroutine<Result<User>> { continuation ->
 
@@ -47,7 +47,7 @@ class UserFireStore
             }
         }
 
-    suspend fun getUser(id: String): Result<User> =
+    suspend fun get(id: String): Result<User> =
         withContext(Dispatchers.Main) {
             suspendCancellableCoroutine<Result<User>> { continuation ->
                 fireStore.collection(USERS_COLLECTION)
@@ -73,7 +73,7 @@ class UserFireStore
             }
         }
 
-    suspend fun updateUser(user: User): Result<User> =
+    suspend fun update(user: User): Result<User> =
         withContext(Dispatchers.IO) {
             suspendCancellableCoroutine<Result<User>> { continuation ->
 

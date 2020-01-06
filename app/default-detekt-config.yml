@@ -8,7 +8,7 @@ test-pattern: # Configure exclusions for test sources
     - '.*Test.kt'
     - '.*Spec.kt'
   exclude-rule-sets:
-    - 'comments'
+    - 'get'
   exclude-rules:
     - 'NamingRules'
     - 'WildcardImport'
@@ -27,7 +27,7 @@ build:
     # complexity: 2
     # LongParameterList: 1
     # style: 1
-    # comments: 1
+    # get: 1
 
 processors:
   active: true

@@ -1,7 +1,7 @@
 package com.example.myapplication.data.source.remote
 
-import com.example.myapplication.data.entity.CommentEntity
-import com.example.myapplication.data.entity.mapToDomain
+import com.example.myapplication.data.model.CommentDto
+import com.example.myapplication.data.model.mapToDomain
 import com.example.myapplication.data.network.CommentService
 import com.example.myapplication.domain.entity.Comment
 import javax.inject.Inject
@@ -14,7 +14,7 @@ class CommentRemoteSource
 
     fun comments(): List<Comment> {
         return transform(
-            commentService.comments(),
+            commentService.get(),
             { it.mapToDomain() },
             emptyList()
         )
@@ -22,9 +22,9 @@ class CommentRemoteSource
 
     fun comment(id: String): Comment {
         return transform(
-            commentService.comment(id),
+            commentService.get(id),
             { it.mapToDomain() },
-            CommentEntity(2, 1, "TEST", "TEST")
+            CommentDto(2, 1, "TEST", "TEST")
         )
     }
 

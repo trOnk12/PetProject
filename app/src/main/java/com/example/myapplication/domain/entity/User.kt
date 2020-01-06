@@ -2,7 +2,7 @@ package com.example.myapplication.domain.entity
 
 data class User(
     val id: String = "",
-    val name: String = "",
+    val name: String? = "",
     val profileImageUrl: String = "",
     val favouriteCommentsId: ArrayList<String> = arrayListOf()
 ) {
@@ -17,4 +17,5 @@ data class User(
     fun updateProfileImageUrl(uri: String): User {
         return this.copy(id = uri)
     }
+
 }

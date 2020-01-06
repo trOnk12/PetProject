@@ -1,18 +1,18 @@
 package com.example.myapplication.data.network
 
-import com.example.myapplication.data.entity.CommentEntity
+import com.example.myapplication.data.model.CommentDto
 import retrofit2.Call
 import retrofit2.http.GET
 
 interface CommentApi {
     companion object {
-        private const val COMMENTS = "/comments"
-        private const val COMMENT = "/comments"
+        private const val COMMENTS = "/get"
+        private const val COMMENT = "/get"
     }
 
     @GET(COMMENTS)
-    fun comments(): Call<List<CommentEntity>>
+    fun get(): Call<List<CommentDto>>
 
     @GET(COMMENT)
-    fun comment(id: String): Call<CommentEntity>
+    fun get(id: String): Call<CommentDto>
 }

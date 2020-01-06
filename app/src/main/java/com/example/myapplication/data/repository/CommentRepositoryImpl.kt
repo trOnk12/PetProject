@@ -11,6 +11,6 @@ class CommentRepositoryImpl @Inject constructor(
     private val localSource: CommentLocalSource
 ) : CommentRepository {
 
-    override fun comment(id: String): Comment = remoteSource.comment(id)
-    override fun comments(): List<Comment> = remoteSource.comments()
+    override fun get(id: String): Comment = remoteSource.comment(id)
+    override fun get(): List<Comment> = remoteSource.comments()
 }

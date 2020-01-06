@@ -10,10 +10,12 @@ import com.example.myapplication.domain.repository.CommentRepository
 import com.example.myapplication.domain.repository.UserRepository
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
 
 @Module
 class RepositoryModule {
 
+    @Singleton
     @Provides
     fun provideCommentRepository(
         repository: CommentRepositoryImpl
@@ -21,10 +23,12 @@ class RepositoryModule {
         return repository
     }
 
+    @Singleton
     @Provides
     fun provideUserRepository(
         repository: UserRepositoryImpl
     ): UserRepository {
         return repository
     }
+
 }

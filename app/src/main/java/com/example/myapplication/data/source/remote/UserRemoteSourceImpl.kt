@@ -5,7 +5,7 @@ import com.example.core.functional.Result
 import com.example.myapplication.core.extension.mapToDomain
 import com.example.myapplication.data.firebase.Authenticator
 import com.example.myapplication.data.firebase.FireBaseStorage
-import com.example.myapplication.data.firebase.UserFireStore
+import com.example.myapplication.data.firebase.FireStoreUserDataSource
 import com.example.myapplication.data.source.UserRemoteSource
 import com.example.myapplication.domain.entity.User
 import com.example.myapplication.domain.usecase.LoginData
@@ -16,32 +16,28 @@ import javax.inject.Inject
 
 class UserRemoteSourceImpl @Inject constructor(
     private val authenticator: Authenticator,
-    private val userFireStore: UserFireStore,
+    private val fireStoreUserDataSource: FireStoreUserDataSource,
     private val fireBaseStorage: FireBaseStorage
 ) : UserRemoteSource {
+
+    override suspend fun create(user: User): User {
+        return when (val result = fireStoreUserDataSource.create(user)) {
+            is Result.Success -> result.data
+            is Result.Error -> throw result.exception
+            else -> throw IllegalStateException()
+        }
+    }
 
     override fun isSignIn(): Boolean {
         return authenticator.isUserSignedIn()
     }
 
-    override suspend fun register(registerData: RegisterData): Result<User> {
-        return when (val registerResult = authenticator.register(registerData.email, registerData.password)) {
-            is Result.Success -> userFireStore.createUser(registerResult.data.mapToDomain())
-            is Result.Error -> registerResult
-            else -> throw IllegalStateException("Invalid state")
+    override suspend fun get(userId: String): User {
+        return when (val result = fireStoreUserDataSource.get(userId)) {
+            is Result.Success -> result.data
+            is Result.Error -> throw result.exception
+            else -> throw IllegalStateException()
         }
-    }
-
-    override suspend fun signIn(loginData: LoginData): Result<User> {
-        return when (val loginResult = authenticator.logIn(loginData.email, loginData.password)) {
-            is Result.Success -> Result.Success(loginResult.data.mapToDomain())
-            is Result.Error -> loginResult
-            else -> throw IllegalStateException("Invalid state")
-        }
-    }
-
-    override suspend fun getUser(userId: String): Result<User> {
-        return userFireStore.getUser(userId)
     }
 
     override suspend fun uploadProfilePicture(user: User, uri: Uri): Result<Uri> {
@@ -53,7 +49,11 @@ class UserRemoteSourceImpl @Inject constructor(
         }
     }
 
-    override suspend fun updateUser(user: User): Result<User> {
-        return userFireStore.updateUser(user)
+    override suspend fun update(user: User): User {
+        return when (val result = fireStoreUserDataSource.update(user)) {
+            is Result.Success -> result.data
+            is Result.Error -> throw result.exception
+            else -> throw IllegalStateException()
+        }
     }
 }

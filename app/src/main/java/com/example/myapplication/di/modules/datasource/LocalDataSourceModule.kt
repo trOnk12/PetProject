@@ -7,12 +7,16 @@ import com.example.myapplication.data.source.local.CommentLocalSource
 import com.example.myapplication.data.source.local.UserLocalSourceImpl
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
 
 @Module
 class LocalDataSourceModule {
 
+    @Singleton
     @Provides
-    fun provideUserLocalSource(userLocalSource: UserLocalSourceImpl): UserLocalSource {
+    fun provideUserLocalSource(
+        userLocalSource: UserLocalSourceImpl
+    ): UserLocalSource {
         return userLocalSource
     }
 

@@ -6,6 +6,6 @@ class CommentService
 @Inject constructor(
     private val commentApi: CommentApi
 ) : CommentApi {
-    override fun comment(id: String) = commentApi.comment(id)
-    override fun comments() = commentApi.comments()
+    override fun get(id: String) = commentApi.get(id)
+    override fun get() = commentApi.get()
 }

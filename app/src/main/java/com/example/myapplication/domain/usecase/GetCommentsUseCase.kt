@@ -12,7 +12,7 @@ class GetCommentsUseCase
 ) : UseCase<List<Comment>, User?>() {
 
     override suspend fun run(params: User?): List<Comment> {
-        val comments = commentRepository.comments()
+        val comments = commentRepository.get()
 
         return if (params == null) comments else mapCommentToFavourite(comments, params)
     }

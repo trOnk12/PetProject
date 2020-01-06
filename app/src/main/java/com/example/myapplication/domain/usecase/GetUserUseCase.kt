@@ -12,6 +12,7 @@ class GetUserUseCase
 ) : UseCase<User, None>() {
 
     override suspend fun run(params: None): User {
-        return userRepository.getUser()
+        return userRepository.get()
     }
+
 }
