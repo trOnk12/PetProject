@@ -2,7 +2,7 @@ package com.example.myapplication.data.util
 
 import javax.inject.Inject
 
-class Validator
+class InputValidator
 @Inject constructor() {
 
     fun validatePassword(value: String, onError: (ValidationError) -> Unit): Boolean {

@@ -3,6 +3,7 @@ package com.example.myapplication.domain.usecase
 import com.example.core.interactor.UseCase
 import com.example.myapplication.domain.entity.Comment
 import com.example.myapplication.domain.repository.CommentRepository
+
 import javax.inject.Inject
 
 class GetCommentUseCase

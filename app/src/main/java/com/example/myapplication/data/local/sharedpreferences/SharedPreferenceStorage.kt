@@ -11,15 +11,16 @@ import kotlin.reflect.KProperty
 
 class SharedPreferenceStorage
 @Inject constructor(context: Context) {
+    companion object {
+        const val PREFS_NAME = "akatwitter"
+        const val userID = "userid"
+    }
 
     private val preferences =
         context.applicationContext.getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
 
-    var userId by StringPreference(preferences, userID, null)
-
-    companion object {
-        const val PREFS_NAME = "akatwitter"
-        const val userID = "userid"
+    inner class UserSharedPreferenceStorage {
+        var userId by StringPreference(preferences, userID, null)
     }
 }
 

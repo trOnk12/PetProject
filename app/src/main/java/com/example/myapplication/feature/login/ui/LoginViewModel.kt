@@ -7,7 +7,7 @@ import com.example.core.functional.Result
 import com.example.myapplication.core.livedata.SingleLiveData
 import com.example.myapplication.core.platform.BaseViewModel
 import com.example.myapplication.data.util.ValidationError
-import com.example.myapplication.data.util.Validator
+import com.example.myapplication.data.util.InputValidator
 import com.example.myapplication.domain.usecase.LogInUseCase
 import com.example.myapplication.domain.usecase.LoginData
 import javax.inject.Inject
@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 class LoginViewModel
 @Inject constructor(
     private val logInUseCase: LogInUseCase,
-    private val validator: Validator
+    private val inputValidator: InputValidator
 ) : BaseViewModel() {
 
     val loginData: MutableLiveData<LoginData> = MutableLiveData(LoginData())
@@ -40,8 +40,8 @@ class LoginViewModel
     fun logIn() {
         viewModelScope.launch {
             loginData.value?.let { data ->
-                if (validator.validatePassword(data.password, ::onPasswordError) &&
-                    validator.validateEmail(data.email, ::onEmailError)
+                if (inputValidator.validatePassword(data.password, ::onPasswordError) &&
+                    inputValidator.validateEmail(data.email, ::onEmailError)
                 ) {
                     executeLogIn(data)
                 }

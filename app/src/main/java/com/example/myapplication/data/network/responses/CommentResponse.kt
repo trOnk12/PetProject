@@ -1,4 +1,4 @@
-package com.example.myapplication.data.model
+package com.example.myapplication.data.network.responses
 
 import com.example.myapplication.domain.entity.Comment
 import com.google.gson.annotations.SerializedName

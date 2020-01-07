@@ -1,7 +1,7 @@
 package com.example.myapplication.di.modules.network
 
 import com.example.myapplication.BuildConfig
-import com.example.myapplication.data.network.CommentApi
+import com.example.myapplication.data.network.service.CommentService
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
@@ -16,8 +16,8 @@ class NetworkModule {
 
     @Reusable
     @Provides
-    fun provideCommentService(retrofit: Retrofit): CommentApi {
-        return retrofit.create(CommentApi::class.java)
+    fun provideCommentService(retrofit: Retrofit): CommentService {
+        return retrofit.create(CommentService::class.java)
     }
 
     @Singleton

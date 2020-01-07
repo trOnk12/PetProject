@@ -1,8 +1,8 @@
-package com.example.myapplication.data.source.remote
+package com.example.myapplication.data.source.comment.remote
 
-import com.example.myapplication.data.model.CommentDto
-import com.example.myapplication.data.model.mapToDomain
-import com.example.myapplication.data.network.CommentService
+import com.example.myapplication.data.network.responses.CommentDto
+import com.example.myapplication.data.network.responses.mapToDomain
+import com.example.myapplication.data.network.service.CommentService
 import com.example.myapplication.domain.entity.Comment
 import javax.inject.Inject
 import retrofit2.Call

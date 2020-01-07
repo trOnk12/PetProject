@@ -9,7 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
 
-class FireBaseStorage
+class FirebaseFileStorage
 @Inject constructor(
     private val storageReference: StorageReference
 ) {
@@ -18,11 +18,11 @@ class FireBaseStorage
         withContext(Dispatchers.IO) {
             suspendCancellableCoroutine<Uri> { continuation ->
                 val profilePictureRef = storageReference.child("images/$pathString")
-                    profilePictureRef.putFile(uri)
+                profilePictureRef.putFile(uri)
                     .addOnSuccessListener {
                         val downloadUri = it.storage.downloadUrl
                         downloadUri.addOnSuccessListener {
-                                continuation.resume(it)
+                            continuation.resume(it)
                         }
                     }
                     .addOnFailureListener {

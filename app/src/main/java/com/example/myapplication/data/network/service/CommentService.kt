@@ -1,10 +1,10 @@
-package com.example.myapplication.data.network
+package com.example.myapplication.data.network.service
 
-import com.example.myapplication.data.model.CommentDto
+import com.example.myapplication.data.network.responses.CommentDto
 import retrofit2.Call
 import retrofit2.http.GET
 
-interface CommentApi {
+interface CommentService {
     companion object {
         private const val COMMENTS = "/get"
         private const val COMMENT = "/get"
@@ -15,4 +15,5 @@ interface CommentApi {
 
     @GET(COMMENT)
     fun get(id: String): Call<CommentDto>
+
 }

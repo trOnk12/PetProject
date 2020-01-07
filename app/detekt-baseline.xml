@@ -4,7 +4,7 @@
   <Whitelist timestamp="1577712892278">
     <ID>EmptyClassBlock:CommentDetailFragment.kt$CommentDetailFragment</ID>
     <ID>EmptyClassBlock:PostRepository.kt$PostRepository</ID>
-    <ID>FunctionParameterNaming:Validator.kt$Validator$OnError: (ValidationError) -&gt; Unit</ID>
+    <ID>FunctionParameterNaming:InputValidator.kt$Validator$OnError: (ValidationError) -&gt; Unit</ID>
     <ID>MatchingDeclarationName:Login.kt$com.example.myapplication.domain.entity.Login.kt</ID>
     <ID>NewLineAtEndOfFile:Activity.kt$com.example.myapplication.core.extension.Activity.kt</ID>
     <ID>NewLineAtEndOfFile:ActivityBuilder.kt$com.example.myapplication.di.ActivityBuilder.kt</ID>
@@ -14,14 +14,14 @@
     <ID>NewLineAtEndOfFile:BaseViewModel.kt$com.example.myapplication.core.platform.BaseViewModel.kt</ID>
     <ID>NewLineAtEndOfFile:BindingAdapter.kt$com.example.myapplication.core.BindingAdapter.kt</ID>
     <ID>NewLineAtEndOfFile:CommentAdapter.kt$com.example.myapplication.feature.commentlist.ui.list.adapter.CommentAdapter.kt</ID>
-    <ID>NewLineAtEndOfFile:CommentApi.kt$com.example.myapplication.data.network.CommentApi.kt</ID>
+    <ID>NewLineAtEndOfFile:CommentApi.kt$com.example.myapplication.data.network.service.CommentService.kt</ID>
     <ID>NewLineAtEndOfFile:CommentDetailFragment.kt$com.example.myapplication.feature.commentlist.ui.detail.CommentDetailFragment.kt</ID>
     <ID>NewLineAtEndOfFile:CommentDetailViewModel.kt$com.example.myapplication.feature.commentlist.ui.detail.CommentDetailViewModel.kt</ID>
     <ID>NewLineAtEndOfFile:CommentLocalSource.kt$com.example.myapplication.data.source.local.CommentLocalSource.kt</ID>
-    <ID>NewLineAtEndOfFile:CommentRemoteSource.kt$com.example.myapplication.data.source.remote.CommentRemoteSource.kt</ID>
+    <ID>NewLineAtEndOfFile:CommentRemoteSource.kt$com.example.myapplication.data.source.comment.remote.CommentRemoteSource.kt</ID>
     <ID>NewLineAtEndOfFile:CommentRepository.kt$com.example.myapplication.domain.repository.CommentRepository.kt</ID>
-    <ID>NewLineAtEndOfFile:CommentRepositoryImpl.kt$com.example.myapplication.data.repository.CommentRepositoryImpl.kt</ID>
-    <ID>NewLineAtEndOfFile:CommentService.kt$com.example.myapplication.data.network.CommentService.kt</ID>
+    <ID>NewLineAtEndOfFile:CommentRepository.kt$com.example.myapplication.data.repository.CommentRepository.kt</ID>
+    <ID>NewLineAtEndOfFile:CommentService.kt$com.example.myapplication.data.network.service.CommentService.kt</ID>
     <ID>NewLineAtEndOfFile:FeedFragment.kt$com.example.myapplication.feature.feed.FeedFragment.kt</ID>
     <ID>NewLineAtEndOfFile:FireBaseModule.kt$com.example.myapplication.di.modules.network.FireBaseModule.kt</ID>
     <ID>NewLineAtEndOfFile:FirebaseUser.kt$com.example.myapplication.core.extension.FirebaseUser.kt</ID>
@@ -44,17 +44,17 @@
     <ID>NewLineAtEndOfFile:SearchFragment.kt$com.example.myapplication.feature.search.SearchFragment.kt</ID>
     <ID>NewLineAtEndOfFile:SplashActivity.kt$com.example.myapplication.feature.splash.SplashActivity.kt</ID>
     <ID>NewLineAtEndOfFile:SplashViewModel.kt$com.example.myapplication.feature.splash.SplashViewModel.kt</ID>
-    <ID>NewLineAtEndOfFile:UserLocalSourceImpl.kt$com.example.myapplication.data.source.local.UserLocalSourceImpl.kt</ID>
-    <ID>NewLineAtEndOfFile:UserRemoteSourceImpl.kt$com.example.myapplication.data.source.remote.UserRemoteSourceImpl.kt</ID>
+    <ID>NewLineAtEndOfFile:UserLocalSourceImpl.kt$com.example.myapplication.data.source.user.local.UserLocalSourceImpl.kt</ID>
+    <ID>NewLineAtEndOfFile:UserRemoteSource.kt$com.example.myapplication.data.source.user.remote.UserRemoteSource.kt</ID>
     <ID>NewLineAtEndOfFile:UserRepository.kt$com.example.myapplication.domain.repository.UserRepository.kt</ID>
-    <ID>NewLineAtEndOfFile:UserRepositoryImpl.kt$com.example.myapplication.data.repository.UserRepositoryImpl.kt</ID>
+    <ID>NewLineAtEndOfFile:UserRepository.kt$com.example.myapplication.data.repository.UserRepository.kt</ID>
     <ID>NewLineAtEndOfFile:UserSource.kt$com.example.myapplication.data.source.UserSource.kt</ID>
     <ID>NewLineAtEndOfFile:ViewModelKey.kt$com.example.myapplication.di.modules.viewmodel.ViewModelKey.kt</ID>
     <ID>NewLineAtEndOfFile:ViewModelModule.kt$com.example.myapplication.di.modules.viewmodel.ViewModelModule.kt</ID>
     <ID>TooGenericExceptionCaught:CommentRemoteSource.kt$CommentRemoteSource$exception: Exception</ID>
     <ID>TooGenericExceptionThrown:CommentRemoteSource.kt$CommentRemoteSource$throw Exception("Something went wrong.")</ID>
-    <ID>TooGenericExceptionThrown:UserRepositoryImpl.kt$UserRepositoryImpl$throw Exception("No cached user found!")</ID>
-    <ID>TooGenericExceptionThrown:UserRepositoryImpl.kt$UserRepositoryImpl$throw Exception("User already signed in")</ID>
+    <ID>TooGenericExceptionThrown:UserRepository.kt$UserRepositoryImpl$throw Exception("No cached user found!")</ID>
+    <ID>TooGenericExceptionThrown:UserRepository.kt$UserRepositoryImpl$throw Exception("User already signed in")</ID>
     <ID>WildcardImport:CommentsListFragment.kt$import androidx.lifecycle.*</ID>
   </Whitelist>
 </SmellBaseline>

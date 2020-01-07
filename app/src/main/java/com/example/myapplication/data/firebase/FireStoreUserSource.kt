@@ -10,7 +10,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
 
-class FireStoreUserDataSource
+class FireStoreUserSource
 @Inject constructor(
     private val fireStore: FirebaseFirestore
 ) {

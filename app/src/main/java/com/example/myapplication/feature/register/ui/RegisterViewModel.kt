@@ -7,7 +7,7 @@ import com.example.core.functional.Result
 import com.example.myapplication.core.livedata.SingleLiveData
 import com.example.myapplication.core.platform.BaseViewModel
 import com.example.myapplication.data.util.ValidationError
-import com.example.myapplication.data.util.Validator
+import com.example.myapplication.data.util.InputValidator
 import com.example.myapplication.domain.entity.User
 import com.example.myapplication.domain.usecase.RegisterData
 import com.example.myapplication.domain.usecase.RegisterUseCase
@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 class RegisterViewModel
 @Inject constructor(
     private val registerUseCase: RegisterUseCase,
-    private val validator: Validator
+    private val inputValidator: InputValidator
 ) : BaseViewModel() {
 
     val registerData: MutableLiveData<RegisterData> = MutableLiveData(RegisterData())
@@ -41,13 +41,12 @@ class RegisterViewModel
     fun register() {
         viewModelScope.launch {
             registerData.value?.let { data ->
-                if (validator.validatePasswordWithRepeat(
+                if (inputValidator.validatePasswordWithRepeat(
                         data.password,
                         data.repeatPassword,
                         ::onPasswordError,
                         ::onRepeatPasswordError
-                    ) &&
-                    validator.validateEmail(data.email, ::onEmailError)
+                    ) && inputValidator.validateEmail(data.email, ::onEmailError)
                 ) {
                     executeRegistration(data)
                 }
