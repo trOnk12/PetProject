@@ -1,19 +1,19 @@
 package com.example.myapplication.domain.usecase
 
 import com.example.core.interactor.UseCase
-import com.example.myapplication.domain.authentication.AuthenticationService
+import com.example.myapplication.domain.authentication.AuthenticationProvider
 import com.example.myapplication.domain.entity.User
 import com.example.myapplication.domain.repository.UserRepository
 import javax.inject.Inject
 
 class RegisterUseCase
 @Inject constructor(
-    private val authenticationService: AuthenticationService,
+    private val authenticationProvider: AuthenticationProvider,
     private val userRepository: UserRepository
 ) : UseCase<User, RegisterData>() {
 
     override suspend fun run(params: RegisterData): User {
-        return authenticationService.register(params).also { user ->
+        return authenticationProvider.register(params).also { user ->
             userRepository.create(user)
         }
     }

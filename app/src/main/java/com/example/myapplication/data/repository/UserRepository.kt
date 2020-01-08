@@ -5,7 +5,8 @@ import com.example.myapplication.domain.entity.User
 import com.example.myapplication.domain.repository.UserRepository
 import javax.inject.Inject
 
-class UserRepository @Inject constructor(
+class UserRepository
+@Inject constructor(
     private val remoteSource: RemoteSource
 ) : UserRepository {
 

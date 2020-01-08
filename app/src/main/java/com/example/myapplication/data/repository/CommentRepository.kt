@@ -5,7 +5,8 @@ import com.example.myapplication.domain.entity.Comment
 import com.example.myapplication.domain.repository.CommentRepository
 import javax.inject.Inject
 
-class CommentRepository @Inject constructor(
+class CommentRepository
+@Inject constructor(
     private val remoteSource: CommentRemoteSource
 ) : CommentRepository {
 

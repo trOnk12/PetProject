@@ -24,7 +24,7 @@ abstract class BaseFragment<B : ViewDataBinding, VM : ViewModel>(@LayoutRes priv
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        AndroidSupportInjection.inject(this)
+        onInitDependency()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -35,8 +35,14 @@ abstract class BaseFragment<B : ViewDataBinding, VM : ViewModel>(@LayoutRes priv
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        onInitViewModel()
         onInitDataBinding()
     }
 
+    abstract fun onInitDependency()
+
+    abstract fun onInitViewModel()
+
     abstract fun onInitDataBinding()
+
 }

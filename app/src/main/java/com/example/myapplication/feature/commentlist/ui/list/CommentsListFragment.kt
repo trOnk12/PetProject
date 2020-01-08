@@ -12,6 +12,7 @@ import com.example.myapplication.core.platform.BaseFragment
 import com.example.myapplication.databinding.CommentsFragmentBinding
 import com.example.myapplication.domain.entity.Comment
 import com.example.myapplication.domain.entity.User
+import com.example.myapplication.feature.commentlist.di.CommentListComponent
 import com.example.myapplication.feature.commentlist.ui.list.adapter.CommentAdapter
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.comments_fragment.*
@@ -26,16 +27,6 @@ class CommentsListFragment : BaseFragment<CommentsFragmentBinding, CommentsListV
     @Inject
     lateinit var adapter: CommentAdapter
 
-    override fun onInitDataBinding() {
-        viewModel = viewModel(provider)
-
-        viewBinding.apply {
-            toolbar.toolbarEventListener = this@CommentsListFragment.viewModel
-            swipeContainer.setOnRefreshListener { this@CommentsListFragment.viewModel.loadComments() }
-            commentList.adapter = adapter
-        }
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -47,6 +38,22 @@ class CommentsListFragment : BaseFragment<CommentsFragmentBinding, CommentsListV
             observe(failure, ::onFailure)
         }
 
+    }
+
+    override fun onInitDependency() {
+
+    }
+
+    override fun onInitViewModel() {
+        viewModel = viewModel(provider)
+    }
+
+    override fun onInitDataBinding() {
+        viewBinding.apply {
+            toolbar.toolbarEventListener = this@CommentsListFragment.viewModel
+            swipeContainer.setOnRefreshListener { this@CommentsListFragment.viewModel.loadComments() }
+            commentList.adapter = adapter
+        }
     }
 
     override fun onStart() {

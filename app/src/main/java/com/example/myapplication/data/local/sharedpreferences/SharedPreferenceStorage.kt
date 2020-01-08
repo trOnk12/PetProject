@@ -22,6 +22,7 @@ class SharedPreferenceStorage
     inner class UserSharedPreferenceStorage {
         var userId by StringPreference(preferences, userID, null)
     }
+
 }
 
 class StringPreference(

@@ -15,24 +15,29 @@ class LoginFragment : BaseFragment
 <LoginFragmentBinding, LoginViewModel>
     (R.layout.login_fragment) {
 
-    override fun onInitDataBinding() {
-        viewModel = viewModel(provider)
-
-        viewBinding.apply {
-            viewModel = viewModel
-            signInButton.setOnClickListener { this@LoginFragment.viewModel.logIn() }
-            registerInfo.setOnClickListener { findNavController().navigate(R.id.registerFragment) }
-        }
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         viewModel.apply {
             observe(passwordError, ::onPasswordError)
             observe(emailError, ::onEmailError)
             observe(event, ::onViewEvent)
             observe(snackBarMessage) { showSnackBar(signInButton, it) }
+        }
+    }
+
+    override fun onInitDependency() {
+
+    }
+
+    override fun onInitViewModel() {
+        viewModel = viewModel(provider)
+    }
+
+    override fun onInitDataBinding() {
+        viewBinding.apply {
+            viewModel = viewModel
+            signInButton.setOnClickListener { this@LoginFragment.viewModel.logIn() }
+            registerInfo.setOnClickListener { findNavController().navigate(R.id.registerFragment) }
         }
     }
 
