@@ -1,13 +1,14 @@
 package com.example.myapplication.domain.usecase
 
+import com.example.core.functional.Result
 import com.example.core.interactor.None
 import com.example.core.interactor.UseCase
+import com.example.myapplication.data.repository.UserRepository
 import com.example.myapplication.domain.entity.Comment
-import com.example.myapplication.domain.repository.UserRepository
-import javax.inject.Inject
-import com.example.core.functional.Result
 import com.example.myapplication.domain.entity.User
+import com.example.myapplication.domain.repository.UserRepository
 import java.lang.IllegalStateException
+import javax.inject.Inject
 
 class AddCommentToFavouriteUseCase
 @Inject constructor(
@@ -17,7 +18,7 @@ class AddCommentToFavouriteUseCase
 
     override suspend fun run(params: Comment): Comment {
         return when (val result = getUserUseCase(None())) {
-            is Result.Success -> updateComment(result.data, params)
+            is Result.Success -> updateUser(result.data, params)
             is Result.Error -> throw result.exception
             else -> throw IllegalStateException()
         }
@@ -41,5 +42,4 @@ class AddCommentToFavouriteUseCase
 
         userRepository.update(user)
     }
-
 }

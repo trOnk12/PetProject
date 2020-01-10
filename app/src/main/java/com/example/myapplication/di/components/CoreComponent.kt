@@ -3,11 +3,11 @@ package com.example.myapplication.di.components
 import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import com.example.myapplication.di.modules.*
-import com.example.myapplication.di.modules.datasource.LocalDataSourceModule
-import com.example.myapplication.di.modules.datasource.RemoteDataSourceModule
 import com.example.myapplication.di.modules.network.FireBaseModule
 import com.example.myapplication.di.modules.network.NetworkModule
 import com.example.myapplication.di.modules.repository.RepositoryModule
+import com.example.myapplication.di.modules.source.LocalDataSourceModule
+import com.example.myapplication.di.modules.source.RemoteDataSourceModule
 import com.example.myapplication.di.modules.viewmodel.ViewModelModule
 import com.example.myapplication.domain.repository.CommentRepository
 import com.example.myapplication.domain.repository.UserRepository
@@ -34,5 +34,4 @@ interface CoreComponent {
     fun userRepository(): UserRepository
 
     fun commentRepository(): CommentRepository
-
 }

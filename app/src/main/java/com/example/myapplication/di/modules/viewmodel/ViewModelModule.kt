@@ -35,5 +35,4 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(CommentsListViewModel::class)
     internal abstract fun commentViewModel(viewModel: CommentsListViewModel): ViewModel
-
 }

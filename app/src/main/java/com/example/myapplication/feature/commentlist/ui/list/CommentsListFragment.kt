@@ -4,25 +4,28 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.myapplication.R
-import com.example.myapplication.core.extension.observe
-import com.example.myapplication.core.extension.showToast
-import com.example.myapplication.core.extension.viewModel
-import com.example.myapplication.core.platform.BaseFragment
+import com.example.myapplication.core.extensions.observe
+import com.example.myapplication.core.extensions.showToast
+import com.example.myapplication.core.extensions.viewModel
+import com.example.myapplication.core.commons.base.BaseFragment
 import com.example.myapplication.databinding.CommentsFragmentBinding
 import com.example.myapplication.domain.entity.Comment
 import com.example.myapplication.domain.entity.User
-import com.example.myapplication.feature.commentlist.di.CommentListComponent
 import com.example.myapplication.feature.commentlist.ui.list.adapter.CommentAdapter
 import com.google.android.material.snackbar.Snackbar
+import javax.inject.Inject
 import kotlinx.android.synthetic.main.comments_fragment.*
 import kotlinx.coroutines.launch
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
-import javax.inject.Inject
 
-class CommentsListFragment : BaseFragment<CommentsFragmentBinding, CommentsListViewModel>(R.layout.comments_fragment) {
+class CommentsListFragment :
+    BaseFragment<CommentsFragmentBinding, CommentsListViewModel>(
+        layoutId = R.layout.comments_fragment
+    ) {
 
     @Inject
     lateinit var adapter: CommentAdapter
@@ -31,13 +34,11 @@ class CommentsListFragment : BaseFragment<CommentsFragmentBinding, CommentsListV
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.apply {
-            observe(event, ::onViewEvent)
-            observe(snackBarMessage, ::onSnackBarMessage)
             observe(comments, ::onCommentsFetched)
             observe(userSession, ::onUserFetched)
+            observe(event, ::onViewEvent)
             observe(failure, ::onFailure)
         }
-
     }
 
     override fun onInitDependency() {
@@ -78,7 +79,7 @@ class CommentsListFragment : BaseFragment<CommentsFragmentBinding, CommentsListV
         viewBinding.toolbar.user = user
     }
 
-    private fun onSnackBarMessage(message: String) =
+    private fun showSnackBarMessage(message: String) =
         Snackbar.make(commentList, message, Snackbar.LENGTH_LONG).show()
 
     private fun onFailure(exception: Exception) =
@@ -88,6 +89,7 @@ class CommentsListFragment : BaseFragment<CommentsFragmentBinding, CommentsListV
         when (viewState) {
             is CommentsListViewEvent.OpenCommentDetail -> openCommentDetail(viewState.comment)
             is CommentsListViewEvent.OpenImageSourceDialog -> openImageSourceDialog()
+            is CommentsListViewEvent.ShowSnackBarMessage -> showSnackBarMessage(viewState.message)
         }
     }
 

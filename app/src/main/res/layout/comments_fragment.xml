@@ -22,7 +22,7 @@
                 android:id="@+id/swipeContainer"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:isRefreshing="@{viewModel.isRefreshing}">
+                app:isRefreshing="@{viewModel.isLoading}">
 
             <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/commentList"

@@ -1,7 +1,7 @@
 package com.example.myapplication.feature.splash
 
-import com.example.myapplication.core.livedata.SingleLiveData
-import com.example.myapplication.core.platform.BaseViewModel
+import com.example.myapplication.core.commons.livedata.SingleLiveData
+import com.example.myapplication.core.commons.base.BaseViewModel
 import com.example.myapplication.domain.repository.UserRepository
 import javax.inject.Inject
 

@@ -1,4 +1,4 @@
-package com.example.myapplication.core.livedata
+package com.example.myapplication.core.commons.livedata
 
 import androidx.annotation.MainThread
 import androidx.lifecycle.LifecycleOwner

@@ -28,5 +28,4 @@ class FireBaseModule {
     fun provideFireBaseStorage(): StorageReference {
         return FirebaseStorage.getInstance().reference
     }
-
 }

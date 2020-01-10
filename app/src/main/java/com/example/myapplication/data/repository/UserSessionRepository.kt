@@ -21,5 +21,4 @@ class UserSessionRepository
     override suspend fun update(userSession: UserSession) {
         userSessionLocalSource.update(userSession)
     }
-
 }

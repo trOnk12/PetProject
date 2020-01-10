@@ -24,5 +24,4 @@ class CommentListModule(
     ): CommentAdapter {
         return CommentAdapter(viewModel as CommentListListeners.CommentEventListener, fragment)
     }
-
 }

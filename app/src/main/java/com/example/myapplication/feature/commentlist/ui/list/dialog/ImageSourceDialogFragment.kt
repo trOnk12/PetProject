@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.myapplication.core.extension.viewModel
+import com.example.myapplication.core.extensions.viewModel
 import com.example.myapplication.data.service.FireStorageService
 import com.example.myapplication.feature.commentlist.ui.list.CommentsListViewModel
 import dagger.android.support.AndroidSupportInjection

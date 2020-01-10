@@ -1,7 +1,6 @@
 package com.example.myapplication.domain.repository
 
-interface ProfilePictureRepository {
+interface IProfilePictureRepository {
 
     fun upload(uri: String): String
-
 }

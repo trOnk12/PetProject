@@ -1,6 +1,6 @@
 package com.example.myapplication.data.network.service
 
-import com.example.myapplication.data.network.responses.CommentDto
+import com.example.myapplication.data.network.responses.CommentResponse
 import retrofit2.Call
 import retrofit2.http.GET
 
@@ -11,9 +11,8 @@ interface CommentService {
     }
 
     @GET(COMMENTS)
-    fun get(): Call<List<CommentDto>>
+    fun get(): Call<List<CommentResponse>>
 
     @GET(COMMENT)
-    fun get(id: String): Call<CommentDto>
-
+    fun get(id: String): Call<CommentResponse>
 }

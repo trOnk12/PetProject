@@ -9,5 +9,4 @@ class UserDataMapper : Mapper<FirebaseUser, User> {
     override fun map(input: FirebaseUser): User {
         return (User(id = input.uid, name = input.displayName))
     }
-
 }

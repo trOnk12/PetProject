@@ -1,4 +1,4 @@
-package com.example.myapplication.core.platform
+package com.example.myapplication.core.commons.base
 
 import androidx.lifecycle.ViewModelProvider
 import dagger.android.support.DaggerAppCompatActivity

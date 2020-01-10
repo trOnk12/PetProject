@@ -1,6 +1,5 @@
 package com.example.myapplication.di.modules.repository
 
-import com.example.myapplication.data.source.UserLocalSource
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -23,5 +22,4 @@ class RepositoryModule {
     ): com.example.myapplication.domain.repository.UserRepository {
         return repository
     }
-
 }

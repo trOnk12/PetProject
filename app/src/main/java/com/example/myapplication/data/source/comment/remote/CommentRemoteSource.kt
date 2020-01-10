@@ -1,8 +1,8 @@
 package com.example.myapplication.data.source.comment.remote
 
-import com.example.myapplication.data.network.responses.CommentDto
 import com.example.myapplication.data.network.responses.mapToDomain
 import com.example.myapplication.data.network.service.CommentService
+import com.example.myapplication.data.source.ICommentRemoteSource
 import com.example.myapplication.domain.entity.Comment
 import javax.inject.Inject
 import retrofit2.Call
@@ -10,9 +10,9 @@ import retrofit2.Call
 class CommentRemoteSource
 @Inject constructor(
     private var commentService: CommentService
-) {
+) : ICommentRemoteSource {
 
-    fun comments(): List<Comment> {
+    override fun get(): List<Comment> {
         return transform(
             commentService.get(),
             { it.mapToDomain() },
@@ -20,11 +20,11 @@ class CommentRemoteSource
         )
     }
 
-    fun comment(id: String): Comment {
+    override fun get(id: String): Comment {
         return transform(
             commentService.get(id),
             { it.mapToDomain() },
-            CommentDto(2, 1, "TEST", "TEST")
+            Comment.EMPTY
         )
     }
 

@@ -5,8 +5,8 @@ import javax.inject.Inject
 class InputValidator
 @Inject constructor() {
 
-    fun validatePassword(value: String, onError: (ValidationError) -> Unit): Boolean {
-        if (value.isEmpty()) {
+    fun validatePassword(password: String, onError: (ValidationError) -> Unit): Boolean {
+        if (password.isEmpty()) {
             onError(ValidationError.IsEmpty)
             return false
         }
@@ -31,8 +31,8 @@ class InputValidator
         return true
     }
 
-    fun validateEmail(value: String, OnError: (ValidationError) -> Unit): Boolean {
-        if (value.isEmpty()) {
+    fun validateEmail(email: String, OnError: (ValidationError) -> Unit): Boolean {
+        if (email.isEmpty()) {
             OnError(ValidationError.IsEmpty)
             return false
         }

@@ -3,10 +3,10 @@ package com.example.myapplication.feature.splash
 import android.os.Bundle
 import androidx.navigation.findNavController
 import com.example.myapplication.R
-import com.example.myapplication.core.extension.observe
-import com.example.myapplication.core.extension.startWithFinish
-import com.example.myapplication.core.extension.viewModel
-import com.example.myapplication.core.platform.BaseActivity
+import com.example.myapplication.core.extensions.observe
+import com.example.myapplication.core.extensions.startWithFinish
+import com.example.myapplication.core.extensions.viewModel
+import com.example.myapplication.core.commons.base.BaseActivity
 import com.example.myapplication.feature.MainActivity
 
 class SplashActivity : BaseActivity() {

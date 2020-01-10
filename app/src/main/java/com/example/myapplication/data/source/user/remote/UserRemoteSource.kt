@@ -2,13 +2,13 @@ package com.example.myapplication.data.source.user.remote
 
 import com.example.core.functional.Result
 import com.example.myapplication.data.firebase.FireStoreUserSource
-import com.example.myapplication.data.source.RemoteSource
+import com.example.myapplication.data.source.IUserRemoteSource
 import com.example.myapplication.domain.entity.User
 import javax.inject.Inject
 
 class UserRemoteSource @Inject constructor(
     private val fireStoreUserSource: FireStoreUserSource
-) : RemoteSource {
+) : IUserRemoteSource {
 
     override suspend fun create(user: User): User {
         return when (val result = fireStoreUserSource.create(user)) {

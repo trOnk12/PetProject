@@ -4,11 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.core.functional.Result
-import com.example.myapplication.core.livedata.SingleLiveData
-import com.example.myapplication.core.platform.BaseViewModel
-import com.example.myapplication.data.util.ValidationError
+import com.example.myapplication.core.commons.livedata.SingleLiveData
+import com.example.myapplication.core.commons.base.BaseViewModel
 import com.example.myapplication.data.util.InputValidator
-import com.example.myapplication.domain.entity.User
+import com.example.myapplication.data.util.ValidationError
+import com.example.myapplication.domain.authentication.AuthenticationSource
 import com.example.myapplication.domain.usecase.RegisterData
 import com.example.myapplication.domain.usecase.RegisterUseCase
 import javax.inject.Inject
@@ -22,64 +22,53 @@ class RegisterViewModel
 
     val registerData: MutableLiveData<RegisterData> = MutableLiveData(RegisterData())
 
-    private val _emailError: MutableLiveData<ValidationError> = MutableLiveData()
-    val emailError: LiveData<ValidationError>
-        get() = _emailError
+    private val _event = SingleLiveData<RegisterViewEvent>()
+    val event: LiveData<RegisterViewEvent>
+        get() = _event
 
-    private val _passwordError: MutableLiveData<ValidationError> = MutableLiveData()
-    val passwordError: LiveData<ValidationError>
-        get() = _passwordError
-
-    private val _repeatPasswordError: MutableLiveData<ValidationError> = MutableLiveData()
-    val repeatPasswordError: LiveData<ValidationError>
-        get() = _repeatPasswordError
-
-    private val _snackBarMessage: SingleLiveData<String> = SingleLiveData()
-    val snackBarMessage: LiveData<String>
-        get() = _snackBarMessage
-
-    fun register() {
+    fun register(source: AuthenticationSource) {
         viewModelScope.launch {
             registerData.value?.let { data ->
+                val inputData = data.copy(source = source)
                 if (inputValidator.validatePasswordWithRepeat(
-                        data.password,
-                        data.repeatPassword,
-                        ::onPasswordError,
-                        ::onRepeatPasswordError
-                    ) && inputValidator.validateEmail(data.email, ::onEmailError)
+                        password = inputData.password,
+                        repeatPassword = inputData.repeatPassword,
+                        onError = ::onPasswordError,
+                        onRepeatError = ::onRepeatPasswordError
+                    ) && inputValidator.validateEmail(
+                        email = inputData.email,
+                        OnError = ::onEmailError
+                    )
                 ) {
-                    executeRegistration(data)
+                    register(inputData)
                 }
             }
         }
     }
 
-    private suspend fun executeRegistration(data: RegisterData) {
-        when (val registerResult = registerUseCase(data)) {
-            is Result.Success -> handleSuccess(registerResult.data)
-            is Result.Error -> handleError(registerResult.exception)
+    private suspend fun register(inputData: RegisterData) {
+        when (val result = registerUseCase(inputData)) {
+            is Result.Success -> _event.value =
+                RegisterViewEvent.ShowSnackBarMessage(message = result.data.name + "successfully registered")
+            is Result.Error -> result.exception.message?.let { message ->
+                RegisterViewEvent.ShowSnackBarMessage(message)
+            }
         }
     }
 
-    private fun handleSuccess(data: User) {
-        _snackBarMessage.value = data.name + "successfully registered"
+    private fun onEmailError(error: ValidationError) {
+        _event.value =
+            RegisterViewEvent.ShowEmailError(error)
     }
 
-    private fun handleError(exception: Exception) {
-        exception.message?.let {
-            _snackBarMessage.value = it
-        }
+    private fun onPasswordError(error: ValidationError) {
+        _event.value =
+            RegisterViewEvent.ShowPasswordError(error)
     }
 
-    private fun onEmailError(validationError: ValidationError) {
-        _emailError.value = validationError
+    private fun onRepeatPasswordError(error: ValidationError) {
+        _event.value =
+            RegisterViewEvent.ShowRepeatPasswordError(error)
     }
 
-    private fun onPasswordError(validationError: ValidationError) {
-        _passwordError.value = validationError
-    }
-
-    private fun onRepeatPasswordError(validationError: ValidationError) {
-        _repeatPasswordError.value = validationError
-    }
 }

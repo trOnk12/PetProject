@@ -17,5 +17,4 @@ data class User(
     fun updateProfileImageUrl(uri: String): User {
         return this.copy(id = uri)
     }
-
 }

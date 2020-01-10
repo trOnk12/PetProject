@@ -3,6 +3,7 @@ package com.example.myapplication.di.modules.authentication
 import com.example.myapplication.data.authentication.AuthenticationFactory
 import com.example.myapplication.data.authentication.FirebaseAuthProvider
 import com.example.myapplication.domain.authentication.AuthenticationProvider
+import com.example.myapplication.domain.authentication.AuthenticationSource
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -15,7 +16,6 @@ abstract class AuthenticationModule {
 
     @Binds
     @IntoMap
-    @AuthenticationKey(FirebaseAuthProvider::class)
-    internal abstract fun splashViewModel(viewModel: FirebaseAuthProvider): AuthenticationProvider
-
+    @AuthenticationKey(AuthenticationSource.FireBase)
+    internal abstract fun firebaseAuthProvider(source: FirebaseAuthProvider): AuthenticationProvider
 }

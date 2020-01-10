@@ -5,5 +5,4 @@ data class UserSession(val id: String = "") {
     companion object {
         val EMPTY = UserSession()
     }
-
 }

@@ -4,10 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.core.functional.Result
-import com.example.myapplication.core.livedata.SingleLiveData
-import com.example.myapplication.core.platform.BaseViewModel
-import com.example.myapplication.data.util.ValidationError
+import com.example.myapplication.core.commons.livedata.SingleLiveData
+import com.example.myapplication.core.commons.base.BaseViewModel
 import com.example.myapplication.data.util.InputValidator
+import com.example.myapplication.data.util.ValidationError
+import com.example.myapplication.domain.authentication.AuthenticationSource
 import com.example.myapplication.domain.usecase.LogInUseCase
 import com.example.myapplication.domain.usecase.LoginData
 import javax.inject.Inject
@@ -21,53 +22,49 @@ class LoginViewModel
 
     val loginData: MutableLiveData<LoginData> = MutableLiveData(LoginData())
 
-    private val _emailError: MutableLiveData<ValidationError> = MutableLiveData()
-    val emailError: LiveData<ValidationError>
-        get() = _emailError
-
-    private val _passwordError: MutableLiveData<ValidationError> = MutableLiveData()
-    val passwordError: LiveData<ValidationError>
-        get() = _passwordError
-
-    private val _snackBarMessage = SingleLiveData<String>()
-    val snackBarMessage: LiveData<String>
-        get() = _snackBarMessage
-
     private val _event = SingleLiveData<LoginViewEvent>()
     val event: LiveData<LoginViewEvent>
         get() = _event
 
-    fun logIn() {
+    fun logIn(source: AuthenticationSource) {
         viewModelScope.launch {
             loginData.value?.let { data ->
-                if (inputValidator.validatePassword(data.password, ::onPasswordError) &&
-                    inputValidator.validateEmail(data.email, ::onEmailError)
+                val inputResult = data.copy(source = source)
+                if (inputValidator.validatePassword(
+                        password = inputResult.password,
+                        onError = ::onPasswordError
+                    ) &&
+                    inputValidator.validateEmail(
+                        email = inputResult.email,
+                        OnError = ::onEmailError
+                    )
                 ) {
-                    executeLogIn(data)
+                    login(inputResult)
                 }
             }
         }
     }
 
-    private suspend fun executeLogIn(data: LoginData) {
+    private suspend fun login(data: LoginData) {
         when (val loginResult = logInUseCase(data)) {
             is Result.Success -> {
-                _snackBarMessage.value = loginResult.data.name + "successfully log in !"
+                _event.value =
+                    LoginViewEvent.ShowSnackBarMessage(message = loginResult.data.name + "successfully log in !")
                 _event.value = LoginViewEvent.OpenMainActivity
             }
             is Result.Error -> {
-                loginResult.exception.message?.let {
-                    _snackBarMessage.value = it
+                loginResult.exception.message?.let { message ->
+                    _event.value = LoginViewEvent.ShowSnackBarMessage(message)
                 }
             }
         }
     }
 
-    private fun onEmailError(validationError: ValidationError) {
-        _emailError.value = validationError
+    private fun onEmailError(error: ValidationError) {
+        _event.value = LoginViewEvent.ShowEmailError(error)
     }
 
-    private fun onPasswordError(validationError: ValidationError) {
-        _passwordError.value = validationError
+    private fun onPasswordError(error: ValidationError) {
+        _event.value = LoginViewEvent.ShowPasswordError(error)
     }
 }

@@ -1,4 +1,4 @@
-package com.example.myapplication.core.extension
+package com.example.myapplication.core.extensions
 
 import android.app.Activity
 import android.content.Intent

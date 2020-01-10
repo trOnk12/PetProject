@@ -10,8 +10,7 @@ class CommentRepository
     private val remoteSource: CommentRemoteSource
 ) : CommentRepository {
 
-    override fun get(id: String): Comment = remoteSource.comment(id)
+    override fun get(id: String): Comment = remoteSource.get(id)
 
-    override fun get(): List<Comment> = remoteSource.comments()
-
+    override fun get(): List<Comment> = remoteSource.get()
 }

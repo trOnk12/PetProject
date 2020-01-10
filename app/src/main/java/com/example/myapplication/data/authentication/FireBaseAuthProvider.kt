@@ -6,14 +6,14 @@ import com.example.myapplication.domain.entity.User
 import com.example.myapplication.domain.usecase.LoginData
 import com.example.myapplication.domain.usecase.RegisterData
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.suspendCancellableCoroutine
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlinx.coroutines.withContext
 
-class FirebaseAuthProvider
+class FireBaseAuthProvider
 @Inject constructor(
     private val fireBaseAuth: FirebaseAuth,
     private val userDataMapper: UserDataMapper
@@ -52,7 +52,6 @@ class FirebaseAuthProvider
                                     continuation.resume(userDataMapper.map(user))
                                 }
                             }
-
                         } else {
                             task.exception?.let {
                                 continuation.resumeWithException(it)
@@ -61,6 +60,4 @@ class FirebaseAuthProvider
                     }
             }
         }
-
-
 }

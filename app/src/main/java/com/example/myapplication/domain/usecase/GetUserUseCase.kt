@@ -2,9 +2,9 @@ package com.example.myapplication.domain.usecase
 
 import com.example.core.interactor.None
 import com.example.core.interactor.UseCase
+import com.example.myapplication.data.repository.UserRepository
+import com.example.myapplication.data.repository.UserSessionRepository
 import com.example.myapplication.domain.entity.User
-import com.example.myapplication.domain.repository.UserRepository
-import com.example.myapplication.domain.repository.UserSessionRepository
 import javax.inject.Inject
 
 class GetUserUseCase
@@ -18,5 +18,4 @@ class GetUserUseCase
             userRepository.get(id)
         }
     }
-
 }

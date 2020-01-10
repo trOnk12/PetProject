@@ -1,11 +1,11 @@
 package com.example.myapplication.domain.usecase
 
+import com.example.core.functional.Result
 import com.example.core.interactor.None
 import com.example.core.interactor.UseCase
 import com.example.myapplication.domain.entity.User
 import com.example.myapplication.domain.repository.ProfilePictureRepository
 import com.example.myapplication.domain.repository.UserRepository
-import com.example.core.functional.Result
 import java.lang.IllegalStateException
 import javax.inject.Inject
 
@@ -29,5 +29,4 @@ class UpdateProfilePictureUseCase
             userRepository.update(user.copy(profileImageUrl = uri))
         }
     }
-
 }

@@ -9,14 +9,12 @@ interface AuthenticationProvider {
     suspend fun login(loginData: LoginData): User
 
     suspend fun register(registerData: RegisterData): User
-
 }
 
 abstract class AuthenticationProviderFactory {
-    abstract fun create(source: AuthenticationProviderSource): AuthenticationProvider
-
+    abstract fun create(source: AuthenticationSource): AuthenticationProvider
 }
 
-sealed class AuthenticationProviderSource {
-    abstract class FeatureSource : AuthenticationProviderSource()
+enum class AuthenticationSource {
+    Default, FireBase
 }

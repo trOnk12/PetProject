@@ -15,17 +15,17 @@ interface KParcelable : Parcelable {
 
 // Creator factory functions
 inline fun <reified T> parcelableCreator(crossinline create: (Parcel) -> T) =
-        object : Parcelable.Creator<T> {
-            override fun createFromParcel(source: Parcel) = create(source)
-            override fun newArray(size: Int) = arrayOfNulls<T>(size)
-        }
+    object : Parcelable.Creator<T> {
+        override fun createFromParcel(source: Parcel) = create(source)
+        override fun newArray(size: Int) = arrayOfNulls<T>(size)
+    }
 
 inline fun <reified T> parcelableClassLoaderCreator(crossinline create: (Parcel, ClassLoader) -> T) =
-        object : Parcelable.ClassLoaderCreator<T> {
-            override fun createFromParcel(source: Parcel, loader: ClassLoader) = create(source, loader)
-            override fun createFromParcel(source: Parcel) = createFromParcel(source, T::class.java.classLoader!!)
-            override fun newArray(size: Int) = arrayOfNulls<T>(size)
-        }
+    object : Parcelable.ClassLoaderCreator<T> {
+        override fun createFromParcel(source: Parcel, loader: ClassLoader) = create(source, loader)
+        override fun createFromParcel(source: Parcel) = createFromParcel(source, T::class.java.classLoader!!)
+        override fun newArray(size: Int) = arrayOfNulls<T>(size)
+    }
 
 // Parcel extensions
 
@@ -65,4 +65,5 @@ fun Parcel.writeBigDecimal(value: BigDecimal?) = writeNullable(value) {
 
 fun <T : Parcelable> Parcel.readTypedObjectCompat(c: Parcelable.Creator<T>) = readNullable { c.createFromParcel(this) }
 
-fun <T : Parcelable> Parcel.writeTypedObjectCompat(value: T?, parcelableFlags: Int) = writeNullable(value) { it.writeToParcel(this, parcelableFlags) }
+fun <T : Parcelable> Parcel.writeTypedObjectCompat(value: T?, parcelableFlags: Int) =
+    writeNullable(value) { it.writeToParcel(this, parcelableFlags) }

@@ -6,12 +6,12 @@
     <ID>EmptyClassBlock:PostRepository.kt$PostRepository</ID>
     <ID>FunctionParameterNaming:InputValidator.kt$Validator$OnError: (ValidationError) -&gt; Unit</ID>
     <ID>MatchingDeclarationName:Login.kt$com.example.myapplication.domain.entity.Login.kt</ID>
-    <ID>NewLineAtEndOfFile:Activity.kt$com.example.myapplication.core.extension.Activity.kt</ID>
+    <ID>NewLineAtEndOfFile:Activity.kt$com.example.myapplication.core.extensions.Activity.kt</ID>
     <ID>NewLineAtEndOfFile:ActivityBuilder.kt$com.example.myapplication.di.ActivityBuilder.kt</ID>
     <ID>NewLineAtEndOfFile:AddCommentToFavouriteUseCase.kt$com.example.myapplication.domain.usecase.AddCommentToFavouriteUseCase.kt</ID>
     <ID>NewLineAtEndOfFile:AppComponent.kt$com.example.myapplication.di.components.AppComponent.kt</ID>
     <ID>NewLineAtEndOfFile:Authenticator.kt$com.example.myapplication.data.firebase.Authenticator.kt</ID>
-    <ID>NewLineAtEndOfFile:BaseViewModel.kt$com.example.myapplication.core.platform.BaseViewModel.kt</ID>
+    <ID>NewLineAtEndOfFile:BaseViewModel.kt$com.example.myapplication.core.commons.base.BaseViewModel.kt</ID>
     <ID>NewLineAtEndOfFile:BindingAdapter.kt$com.example.myapplication.core.BindingAdapter.kt</ID>
     <ID>NewLineAtEndOfFile:CommentAdapter.kt$com.example.myapplication.feature.commentlist.ui.list.adapter.CommentAdapter.kt</ID>
     <ID>NewLineAtEndOfFile:CommentApi.kt$com.example.myapplication.data.network.service.CommentService.kt</ID>
@@ -20,25 +20,25 @@
     <ID>NewLineAtEndOfFile:CommentLocalSource.kt$com.example.myapplication.data.source.local.CommentLocalSource.kt</ID>
     <ID>NewLineAtEndOfFile:CommentRemoteSource.kt$com.example.myapplication.data.source.comment.remote.CommentRemoteSource.kt</ID>
     <ID>NewLineAtEndOfFile:CommentRepository.kt$com.example.myapplication.domain.repository.CommentRepository.kt</ID>
-    <ID>NewLineAtEndOfFile:CommentRepository.kt$com.example.myapplication.data.repository.CommentRepository.kt</ID>
+    <ID>NewLineAtEndOfFile:CommentRepository.kt$com.example.myapplication.data.repository.CommentRepositoryImpl.kt</ID>
     <ID>NewLineAtEndOfFile:CommentService.kt$com.example.myapplication.data.network.service.CommentService.kt</ID>
     <ID>NewLineAtEndOfFile:FeedFragment.kt$com.example.myapplication.feature.feed.FeedFragment.kt</ID>
     <ID>NewLineAtEndOfFile:FireBaseModule.kt$com.example.myapplication.di.modules.network.FireBaseModule.kt</ID>
-    <ID>NewLineAtEndOfFile:FirebaseUser.kt$com.example.myapplication.core.extension.FirebaseUser.kt</ID>
+    <ID>NewLineAtEndOfFile:FirebaseUser.kt$com.example.myapplication.core.extensions.FirebaseUser.kt</ID>
     <ID>NewLineAtEndOfFile:FriendsFragment.kt$com.example.myapplication.feature.friend.FriendsFragment.kt</ID>
     <ID>NewLineAtEndOfFile:GetCommentUseCase.kt$com.example.myapplication.domain.usecase.GetCommentUseCase.kt</ID>
     <ID>NewLineAtEndOfFile:GetCommentsUseCase.kt$com.example.myapplication.domain.usecase.GetCommentsUseCase.kt</ID>
-    <ID>NewLineAtEndOfFile:LiveData.kt$com.example.myapplication.core.extension.LiveData.kt</ID>
-    <ID>NewLineAtEndOfFile:LocalDataSourceModule.kt$com.example.myapplication.di.modules.datasource.LocalDataSourceModule.kt</ID>
+    <ID>NewLineAtEndOfFile:LiveData.kt$com.example.myapplication.core.extensions.LiveData.kt</ID>
+    <ID>NewLineAtEndOfFile:LocalDataSourceModule.kt$com.example.myapplication.di.modules.source.LocalDataSourceModule.kt</ID>
     <ID>NewLineAtEndOfFile:MainActivity.kt$com.example.myapplication.feature.MainActivity.kt</ID>
     <ID>NewLineAtEndOfFile:PetProject.kt$com.example.myapplication.PetProject.kt</ID>
     <ID>NewLineAtEndOfFile:NetworkModule.kt$com.example.myapplication.di.modules.network.NetworkModule.kt</ID>
-    <ID>NewLineAtEndOfFile:Pair.kt$com.example.myapplication.core.extension.Pair.kt</ID>
+    <ID>NewLineAtEndOfFile:Pair.kt$com.example.myapplication.core.extensions.Pair.kt</ID>
     <ID>NewLineAtEndOfFile:PostRepository.kt$com.example.myapplication.domain.repository.PostRepository.kt</ID>
     <ID>NewLineAtEndOfFile:RegisterData.kt$com.example.myapplication.domain.entity.RegisterData.kt</ID>
     <ID>NewLineAtEndOfFile:RegisterUseCase.kt$com.example.myapplication.domain.usecase.RegisterUseCase.kt</ID>
     <ID>NewLineAtEndOfFile:RegisterViewModel.kt$com.example.myapplication.feature.register.ui.RegisterViewModel.kt</ID>
-    <ID>NewLineAtEndOfFile:RemoteDataSourceModule.kt$com.example.myapplication.di.modules.datasource.RemoteDataSourceModule.kt</ID>
+    <ID>NewLineAtEndOfFile:RemoteDataSourceModule.kt$com.example.myapplication.di.modules.source.RemoteDataSourceModule.kt</ID>
     <ID>NewLineAtEndOfFile:RepositoryModule.kt$com.example.myapplication.di.modules.repository.RepositoryModule.kt</ID>
     <ID>NewLineAtEndOfFile:SearchActivity.kt$com.example.myapplication.feature.search.SearchActivity.kt</ID>
     <ID>NewLineAtEndOfFile:SearchFragment.kt$com.example.myapplication.feature.search.SearchFragment.kt</ID>
