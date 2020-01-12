@@ -27,9 +27,10 @@ class RegisterViewModel
         get() = _event
 
     fun register(source: AuthenticationSource) {
-        viewModelScope.launch {
-            registerData.value?.let { data ->
+        registerData.value?.let { data ->
+            viewModelScope.launch {
                 val inputData = data.copy(source = source)
+
                 if (inputValidator.validatePasswordWithRepeat(
                         password = inputData.password,
                         repeatPassword = inputData.repeatPassword,

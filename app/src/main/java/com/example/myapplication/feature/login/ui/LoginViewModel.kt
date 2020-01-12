@@ -30,6 +30,7 @@ class LoginViewModel
         loginData.value?.let { data ->
             viewModelScope.launch {
                 val inputResult = data.copy(source = source)
+
                 if (inputValidator.validatePassword(
                         password = inputResult.password,
                         onError = ::onPasswordError

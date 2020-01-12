@@ -2,7 +2,6 @@ package com.example.myapplication.domain.usecase
 
 import com.example.core.interactor.UseCase
 import com.example.myapplication.data.repository.UserRepository
-import com.example.myapplication.domain.authentication.AuthenticationProvider
 import com.example.myapplication.domain.authentication.AuthenticationProviderFactory
 import com.example.myapplication.domain.authentication.AuthenticationSource
 import com.example.myapplication.domain.entity.User

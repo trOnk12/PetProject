@@ -11,7 +11,7 @@ import com.example.myapplication.core.extensions.showSnackBar
 import com.example.myapplication.core.extensions.viewModel
 import com.example.myapplication.data.util.ValidationError
 import com.example.myapplication.databinding.RegisterFragmentBinding
-import com.example.myapplication.domain.authentication.AuthenticationSource
+import com.example.myapplication.di.modules.authentication.AuthenticationSources
 import com.example.myapplication.feature.register.ui.di.DaggerRegisterComponent
 import kotlinx.android.synthetic.main.register_fragment.*
 
@@ -39,7 +39,7 @@ class RegisterFragment : BaseFragment<RegisterFragmentBinding, RegisterViewModel
 
     override fun onInitDataBinding() {
         viewBinding.viewModel = viewModel
-        viewBinding.signInButton.setOnClickListener { viewModel.register(AuthenticationSource.FireBase) }
+        viewBinding.signInButton.setOnClickListener { viewModel.register(AuthenticationSources.FIREBASE) }
         viewBinding.registerInfo.setOnClickListener { findNavController().navigate(R.id.loginFragment) }
     }
 

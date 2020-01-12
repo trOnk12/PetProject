@@ -4,7 +4,7 @@ import com.example.myapplication.domain.entity.User
 import com.example.myapplication.domain.usecase.LoginData
 import com.example.myapplication.domain.usecase.RegisterData
 
-interface AuthenticationProvider {
+interface Authentication {
 
     suspend fun login(loginData: LoginData): User
 
@@ -12,9 +12,9 @@ interface AuthenticationProvider {
 }
 
 interface AuthenticationProviderFactory {
-    fun create(source: AuthenticationSource): AuthenticationProvider
+    fun create(source: AuthenticationSource): Authentication
 }
 
-enum class AuthenticationSource {
-    Default, FireBase
-}
+interface AuthenticationSource
+
+

@@ -1,7 +1,7 @@
 package com.example.myapplication.data.authentication
 
 import com.example.myapplication.data.mapper.UserDataMapper
-import com.example.myapplication.domain.authentication.AuthenticationProvider
+import com.example.myapplication.domain.authentication.Authentication
 import com.example.myapplication.domain.entity.User
 import com.example.myapplication.domain.usecase.LoginData
 import com.example.myapplication.domain.usecase.RegisterData
@@ -13,11 +13,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
 
-class FireBaseAuthProvider
+class FireBaseAuth
 @Inject constructor(
     private val fireBaseAuth: FirebaseAuth,
     private val userDataMapper: UserDataMapper
-) : AuthenticationProvider {
+) : Authentication {
 
     override suspend fun login(loginData: LoginData) =
         withContext(Dispatchers.Main) {

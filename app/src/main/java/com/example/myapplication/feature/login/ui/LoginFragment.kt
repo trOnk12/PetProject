@@ -9,6 +9,7 @@ import com.example.myapplication.core.extensions.*
 import com.example.myapplication.core.commons.base.BaseFragment
 import com.example.myapplication.data.util.ValidationError
 import com.example.myapplication.databinding.LoginFragmentBinding
+import com.example.myapplication.di.modules.authentication.AuthenticationSources
 import com.example.myapplication.domain.authentication.AuthenticationSource
 import com.example.myapplication.feature.MainActivity
 import com.example.myapplication.feature.login.ui.di.DaggerLoginComponent
@@ -38,7 +39,7 @@ class LoginFragment : BaseFragment<LoginFragmentBinding, LoginViewModel>
 
     override fun onInitDataBinding() {
         viewBinding.viewModel = viewModel
-        viewBinding.signInButton.setOnClickListener { viewModel.logIn(AuthenticationSource.FireBase) }
+        viewBinding.signInButton.setOnClickListener { viewModel.logIn(AuthenticationSources.FIREBASE) }
         viewBinding.registerInfo.setOnClickListener { findNavController().navigate(R.id.registerFragment) }
     }
 

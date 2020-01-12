@@ -8,7 +8,6 @@ import com.example.myapplication.R
 import com.example.myapplication.core.commons.base.BaseFragment
 import com.example.myapplication.core.extensions.observe
 import com.example.myapplication.core.extensions.showSnackBar
-import com.example.myapplication.core.extensions.showToast
 import com.example.myapplication.core.extensions.viewModel
 import com.example.myapplication.databinding.CommentsFragmentBinding
 import com.example.myapplication.domain.entity.Comment
@@ -54,22 +53,21 @@ class CommentsListFragment :
         viewBinding.commentList.adapter = adapter
     }
 
-    private fun onViewEvent(viewState: CommentsListViewEvent) {
-        when (viewState) {
+    private fun onViewEvent(event: CommentsListViewEvent) {
+        when (event) {
             is CommentsListViewEvent.OpenCommentDetail -> findNavController().navigate(
                 CommentsListFragmentDirections.actionCommentFragmentToCommentDetailFragment(
-                    viewState.comment.id
+                    event.comment.id
                 )
             )
             is CommentsListViewEvent.OpenImageSourceDialog -> findNavController().navigate(R.id.optionDialog)
             is CommentsListViewEvent.ShowSnackBarMessage -> showSnackBar(
                 commentList,
-                viewState.message
+                event.message
             )
         }
     }
 
     private fun onCommentsFetched(comments: List<Comment>) =
         adapter.submitList(comments)
-
 }
