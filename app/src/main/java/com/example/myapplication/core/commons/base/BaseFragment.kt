@@ -13,7 +13,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import javax.inject.Inject
 
-abstract class BaseFragment<B : ViewDataBinding, VM : ViewModel>(@LayoutRes private val layoutId: Int) : Fragment() {
+abstract class BaseFragment<B : ViewDataBinding, VM : ViewModel>(@LayoutRes private val layoutId: Int) :
+    Fragment() {
 
     @Inject
     lateinit var provider: ViewModelProvider.Factory
@@ -26,7 +27,11 @@ abstract class BaseFragment<B : ViewDataBinding, VM : ViewModel>(@LayoutRes priv
         onInitDependency()
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         viewBinding = DataBindingUtil.inflate(inflater, layoutId, container, false)
         viewBinding.lifecycleOwner = viewLifecycleOwner
         return viewBinding.root

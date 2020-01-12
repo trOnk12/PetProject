@@ -27,8 +27,8 @@ class LoginViewModel
         get() = _event
 
     fun logIn(source: AuthenticationSource) {
-        viewModelScope.launch {
-            loginData.value?.let { data ->
+        loginData.value?.let { data ->
+            viewModelScope.launch {
                 val inputResult = data.copy(source = source)
                 if (inputValidator.validatePassword(
                         password = inputResult.password,

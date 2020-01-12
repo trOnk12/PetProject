@@ -3,6 +3,7 @@ package com.example.myapplication.feature.login.ui
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
+import com.example.myapplication.PetProject
 import com.example.myapplication.R
 import com.example.myapplication.core.extensions.*
 import com.example.myapplication.core.commons.base.BaseFragment
@@ -10,6 +11,7 @@ import com.example.myapplication.data.util.ValidationError
 import com.example.myapplication.databinding.LoginFragmentBinding
 import com.example.myapplication.domain.authentication.AuthenticationSource
 import com.example.myapplication.feature.MainActivity
+import com.example.myapplication.feature.login.ui.di.DaggerLoginComponent
 import kotlinx.android.synthetic.main.login_fragment.*
 
 class LoginFragment : BaseFragment<LoginFragmentBinding, LoginViewModel>
@@ -23,7 +25,11 @@ class LoginFragment : BaseFragment<LoginFragmentBinding, LoginViewModel>
     }
 
     override fun onInitDependency() {
-
+        DaggerLoginComponent
+            .builder()
+            .coreComponent(PetProject.coreComponent(requireContext()))
+            .build()
+            .inject(this)
     }
 
     override fun onInitViewModel() {
@@ -31,27 +37,9 @@ class LoginFragment : BaseFragment<LoginFragmentBinding, LoginViewModel>
     }
 
     override fun onInitDataBinding() {
-        viewBinding.apply {
-            viewModel = viewModel
-            signInButton.setOnClickListener {
-                this@LoginFragment.viewModel.logIn(
-                    AuthenticationSource.FireBase
-                )
-            }
-            registerInfo.setOnClickListener { findNavController().navigate(R.id.registerFragment) }
-        }
-    }
-
-    private fun onEmailError(validationError: ValidationError) {
-        when (validationError) {
-            is ValidationError.IsEmpty -> emailAddress.error = "Empty password"
-        }
-    }
-
-    private fun onPasswordError(validationError: ValidationError?) {
-        when (validationError) {
-            is ValidationError.IsEmpty -> password.error = " Empty password"
-        }
+        viewBinding.viewModel = viewModel
+        viewBinding.signInButton.setOnClickListener { viewModel.logIn(AuthenticationSource.FireBase) }
+        viewBinding.registerInfo.setOnClickListener { findNavController().navigate(R.id.registerFragment) }
     }
 
     private fun onViewEvent(event: LoginViewEvent) {
@@ -64,6 +52,18 @@ class LoginFragment : BaseFragment<LoginFragmentBinding, LoginViewModel>
                     startWithFinish(MainActivity.callingIntent(it))
                 }
             }
+        }
+    }
+
+    private fun onEmailError(validationError: ValidationError) {
+        when (validationError) {
+            is ValidationError.IsEmpty -> emailAddress.error = "Empty password"
+        }
+    }
+
+    private fun onPasswordError(validationError: ValidationError?) {
+        when (validationError) {
+            is ValidationError.IsEmpty -> password.error = " Empty password"
         }
     }
 }

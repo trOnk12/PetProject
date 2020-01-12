@@ -21,11 +21,12 @@ class CommentRemoteSource
     }
 
     override fun get(id: String): Comment {
-        return transform(
-            commentService.get(id),
-            { it.mapToDomain() },
-            Comment.EMPTY
-        )
+        return Comment.EMPTY
+//        return transform(
+//            commentService.get(id),
+//            { it.mapToDomain() },
+//            Comment.EMPTY
+//        )
     }
 
     private fun <T, R> transform(

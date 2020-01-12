@@ -1,32 +1,37 @@
 package com.example.myapplication.feature.splash
 
+import android.content.Context
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
+import com.example.myapplication.PetProject
 import com.example.myapplication.R
 import com.example.myapplication.core.extensions.observe
 import com.example.myapplication.core.extensions.startWithFinish
 import com.example.myapplication.core.extensions.viewModel
 import com.example.myapplication.core.commons.base.BaseActivity
 import com.example.myapplication.feature.MainActivity
+import com.example.myapplication.feature.splash.di.DaggerSplashComponent
+import com.example.myapplication.feature.splash.di.SplashComponent
+import javax.inject.Inject
 
-class SplashActivity : BaseActivity() {
+class SplashActivity :
+    BaseActivity(R.layout.splash_activity) {
 
+    @Inject
     lateinit var viewModel: SplashViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.splash_activity)
-
-        initializeViewModel()
-        initializeObserver()
-    }
-
-    private fun initializeViewModel() {
-        viewModel = viewModel(provider)
-    }
-
-    private fun initializeObserver() {
         observe(viewModel.event, ::onEventChange)
+    }
+
+    override fun initDependencyComponent() {
+        DaggerSplashComponent
+            .builder()
+            .coreComponent(PetProject.coreComponent(this))
+            .build()
+            .inject(this)
     }
 
     private fun onEventChange(event: SplashViewEvent) {

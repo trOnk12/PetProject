@@ -8,7 +8,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.example.myapplication.R
 import com.example.myapplication.core.constants.CHANNEL_ID
-import com.example.myapplication.domain.repository.UserRepository
+import com.example.myapplication.data.repository.UserRepository
 import com.example.myapplication.feature.commentlist.ui.list.dialog.ImageSourceDialogFragment.Companion.IMAGE_URI_EXTRA
 import dagger.android.AndroidInjection
 import javax.inject.Inject
@@ -56,14 +56,14 @@ class FireStorageService : Service() {
             serviceScope.launch {
                 builder.setProgress(PROGRESS_MAX, PROGRESS_CURRENT, false)
                 notify(FIRE_STORAGE_NOTIFICATION_ID, builder.build())
-
-                intent?.let {
-                    it.getStringExtra(IMAGE_URI_EXTRA)?.let { uri ->
-                        userRepository.uploadProfilePicture(uri).also { user ->
-                            EventBus.getDefault().post(user)
-                        }
-                    }
-                }
+//
+//                intent?.let {
+//                    it.getStringExtra(IMAGE_URI_EXTRA)?.let { uri ->
+//                        userRepository.uploadProfilePicture(uri).also { user ->
+//                            EventBus.getDefault().post(user)
+//                        }
+//                    }
+//                }
 
                 builder.setContentText("Upload complete")
                     .setProgress(0, 0, false)

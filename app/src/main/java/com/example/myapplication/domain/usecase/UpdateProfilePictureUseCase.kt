@@ -3,16 +3,16 @@ package com.example.myapplication.domain.usecase
 import com.example.core.functional.Result
 import com.example.core.interactor.None
 import com.example.core.interactor.UseCase
+import com.example.myapplication.data.repository.UserRepository
 import com.example.myapplication.domain.entity.User
-import com.example.myapplication.domain.repository.ProfilePictureRepository
-import com.example.myapplication.domain.repository.UserRepository
+import com.example.myapplication.domain.repository.IProfilePictureRepository
 import java.lang.IllegalStateException
 import javax.inject.Inject
 
 class UpdateProfilePictureUseCase
 @Inject constructor(
     private val getUserUseCase: GetUserUseCase,
-    private val profilePictureRepository: ProfilePictureRepository,
+    private val profilePictureRepository: IProfilePictureRepository,
     private val userRepository: UserRepository
 ) : UseCase<User, String>() {
 

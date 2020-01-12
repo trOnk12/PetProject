@@ -6,14 +6,14 @@ import com.example.core.interactor.UseCase
 import com.example.myapplication.data.repository.UserRepository
 import com.example.myapplication.domain.entity.Comment
 import com.example.myapplication.domain.entity.User
-import com.example.myapplication.domain.repository.UserRepository
+import com.example.myapplication.domain.repository.IUserRepository
 import java.lang.IllegalStateException
 import javax.inject.Inject
 
 class AddCommentToFavouriteUseCase
 @Inject constructor(
     private val getUserUseCase: GetUserUseCase,
-    private val userRepository: UserRepository
+    private val userRepository: IUserRepository
 ) : UseCase<Comment, Comment>() {
 
     override suspend fun run(params: Comment): Comment {
@@ -33,7 +33,7 @@ class AddCommentToFavouriteUseCase
         }
     }
 
-    private suspend fun updateUser(user: User, comment: Comment) {
+    private suspend fun updateUser(user: User, comment: Comment): Comment {
         if (user.favouriteCommentsId.contains(comment.id)) {
             user.favouriteCommentsId.remove(comment.id)
         } else {
@@ -41,5 +41,6 @@ class AddCommentToFavouriteUseCase
         }
 
         userRepository.update(user)
+        return comment
     }
 }

@@ -7,19 +7,19 @@ import javax.inject.Inject
 
 class UserSessionLocalSource
 @Inject constructor(
-    private val userSharedPreferenceStorage: SharedPreferenceStorage.UserSharedPreferenceStorage
+    private val sharedPreferenceStorage: SharedPreferenceStorage
 ) : IUserSessionLocalSource {
 
     override fun create(userSession: UserSession) {
-        userSharedPreferenceStorage.userId = userSession.id
+        sharedPreferenceStorage.userId = userSession.id
     }
 
     override fun update(userSession: UserSession) {
-        userSharedPreferenceStorage.userId = userSession.id
+        sharedPreferenceStorage.userId = userSession.id
     }
 
     override fun get(): UserSession {
-        val userId = userSharedPreferenceStorage.userId
+        val userId = sharedPreferenceStorage.userId
         if (userId == null) throw Exception("No user cached") else return UserSession(id = userId)
     }
 }

@@ -11,8 +11,8 @@ interface AuthenticationProvider {
     suspend fun register(registerData: RegisterData): User
 }
 
-abstract class AuthenticationProviderFactory {
-    abstract fun create(source: AuthenticationSource): AuthenticationProvider
+interface AuthenticationProviderFactory {
+    fun create(source: AuthenticationSource): AuthenticationProvider
 }
 
 enum class AuthenticationSource {

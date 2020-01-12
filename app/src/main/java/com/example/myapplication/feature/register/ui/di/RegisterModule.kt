@@ -1,3 +1,8 @@
 package com.example.myapplication.feature.register.ui.di
 
-interface RegisterModule
+import dagger.Module
+
+@Module
+class RegisterModule {
+
+}

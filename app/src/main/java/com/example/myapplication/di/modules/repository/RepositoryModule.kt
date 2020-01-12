@@ -1,5 +1,9 @@
 package com.example.myapplication.di.modules.repository
 
+import com.example.myapplication.data.repository.CommentRepository
+import com.example.myapplication.data.repository.UserRepository
+import com.example.myapplication.domain.repository.ICommentRepository
+import com.example.myapplication.domain.repository.IUserRepository
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -10,16 +14,16 @@ class RepositoryModule {
     @Singleton
     @Provides
     fun provideCommentRepository(
-        repository: com.example.myapplication.data.repository.CommentRepository
-    ): com.example.myapplication.domain.repository.CommentRepository {
+        repository: CommentRepository
+    ): ICommentRepository {
         return repository
     }
 
     @Singleton
     @Provides
     fun provideUserRepository(
-        repository: com.example.myapplication.data.repository.UserRepository
-    ): com.example.myapplication.domain.repository.UserRepository {
+        repository: UserRepository
+    ): IUserRepository {
         return repository
     }
 }

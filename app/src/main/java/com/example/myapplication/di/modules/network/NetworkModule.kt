@@ -14,12 +14,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 @Module
 class NetworkModule {
 
-    @Reusable
-    @Provides
-    fun provideCommentService(retrofit: Retrofit): CommentService {
-        return retrofit.create(CommentService::class.java)
-    }
-
     @Singleton
     @Provides
     fun provideOkHttpClient(): OkHttpClient {
@@ -39,5 +33,11 @@ class NetworkModule {
             .client(httpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+    }
+
+    @Reusable
+    @Provides
+    fun provideCommentService(retrofit: Retrofit): CommentService {
+        return retrofit.create(CommentService::class.java)
     }
 }

@@ -3,22 +3,17 @@ package com.example.myapplication.feature.register.ui
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
+import com.example.myapplication.PetProject
 import com.example.myapplication.R
+import com.example.myapplication.core.commons.base.BaseFragment
 import com.example.myapplication.core.extensions.observe
 import com.example.myapplication.core.extensions.showSnackBar
 import com.example.myapplication.core.extensions.viewModel
-import com.example.myapplication.core.commons.base.BaseFragment
-import com.example.myapplication.core.extensions.startWithFinish
 import com.example.myapplication.data.util.ValidationError
 import com.example.myapplication.databinding.RegisterFragmentBinding
 import com.example.myapplication.domain.authentication.AuthenticationSource
-import com.example.myapplication.feature.MainActivity
-import com.example.myapplication.feature.login.ui.LoginViewEvent
-import kotlinx.android.synthetic.main.login_fragment.*
+import com.example.myapplication.feature.register.ui.di.DaggerRegisterComponent
 import kotlinx.android.synthetic.main.register_fragment.*
-import kotlinx.android.synthetic.main.register_fragment.emailAddress
-import kotlinx.android.synthetic.main.register_fragment.password
-import kotlinx.android.synthetic.main.register_fragment.signInButton
 
 class RegisterFragment : BaseFragment<RegisterFragmentBinding, RegisterViewModel>
     (R.layout.register_fragment) {
@@ -30,26 +25,22 @@ class RegisterFragment : BaseFragment<RegisterFragmentBinding, RegisterViewModel
         }
     }
 
-    override fun onInitDataBinding() {
-        viewModel = viewModel(provider)
-
-        viewBinding.apply {
-            viewModel = this@RegisterFragment.viewModel
-            signInButton.setOnClickListener {
-                this@RegisterFragment.viewModel.register(
-                    AuthenticationSource.FireBase
-                )
-            }
-            registerInfo.setOnClickListener { findNavController().navigate(R.id.loginFragment) }
-        }
-    }
-
     override fun onInitDependency() {
-
+        DaggerRegisterComponent
+            .builder()
+            .coreComponent(PetProject.coreComponent(requireContext()))
+            .build()
+            .inject(this)
     }
 
     override fun onInitViewModel() {
+        viewModel = viewModel(provider)
+    }
 
+    override fun onInitDataBinding() {
+        viewBinding.viewModel = viewModel
+        viewBinding.signInButton.setOnClickListener { viewModel.register(AuthenticationSource.FireBase) }
+        viewBinding.registerInfo.setOnClickListener { findNavController().navigate(R.id.loginFragment) }
     }
 
     private fun onViewEvent(event: RegisterViewEvent) {

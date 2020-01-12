@@ -13,6 +13,7 @@ import com.example.myapplication.domain.entity.User
 import com.example.myapplication.domain.usecase.AddCommentToFavouriteUseCase
 import com.example.myapplication.domain.usecase.GetCommentsUseCase
 import com.example.myapplication.domain.usecase.GetUserUseCase
+import com.example.myapplication.feature.login.ui.LoginViewEvent
 import javax.inject.Inject
 import kotlinx.coroutines.launch
 
@@ -51,7 +52,9 @@ class CommentsListViewModel
         viewModelScope.launch {
             when (val result = getCommentsUseCase(None())) {
                 is Result.Success -> _comments.value = result.data
-                is Result.Error -> handleFailure(result.exception)
+                is Result.Error -> result.exception.message?.let { message ->
+                    _event.value = CommentsListViewEvent.ShowSnackBarMessage(message)
+                }
             }
         }
     }
@@ -60,7 +63,9 @@ class CommentsListViewModel
         viewModelScope.launch {
             when (val result = addCommentToFavouriteUseCase(comment.toggleIsFavourite())) {
                 is Result.Success -> handleSuccess(oldComment = comment, newComment = result.data)
-                is Result.Error -> handleFailure(result.exception)
+                is Result.Error -> result.exception.message?.let { message ->
+                    _event.value = CommentsListViewEvent.ShowSnackBarMessage(message)
+                }
             }
         }
     }

@@ -15,22 +15,27 @@ class PetProject : Application() {
 
     lateinit var coreComponent: CoreComponent
 
+    companion object {
+        fun coreComponent(context: Context) =
+            (context.applicationContext as PetProject).coreComponent
+    }
+
     override fun onCreate() {
         super.onCreate()
 
-        initializeDaggerCoreComponent()
-        initializeDaggerAppComponent()
-        createNotificationChannel()
+        initDaggerCoreComponent()
+        initDaggerAppComponent()
+        initNotificationChannel()
     }
 
-    private fun initializeDaggerCoreComponent() {
+    private fun initDaggerCoreComponent() {
         coreComponent = DaggerCoreComponent
             .builder()
             .contextModule(ContextModule(this))
             .build()
     }
 
-    private fun initializeDaggerAppComponent() {
+    private fun initDaggerAppComponent() {
         DaggerAppComponent
             .builder()
             .coreComponent(coreComponent)
@@ -38,9 +43,7 @@ class PetProject : Application() {
             .inject(this)
     }
 
-    private fun createNotificationChannel() {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
+    private fun initNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val name = "TEST"
             val descriptionText = "TEST"
@@ -48,7 +51,6 @@ class PetProject : Application() {
             val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
                 description = descriptionText
             }
-            // Register the channel with the system
             val notificationManager: NotificationManager =
                 getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(channel)

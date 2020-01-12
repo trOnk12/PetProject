@@ -2,13 +2,13 @@ package com.example.myapplication.data.repository
 
 import com.example.myapplication.data.source.usersession.local.UserSessionLocalSource
 import com.example.myapplication.domain.entity.UserSession
-import com.example.myapplication.domain.repository.UserSessionRepository
+import com.example.myapplication.domain.repository.IUserSessionRepository
 import javax.inject.Inject
 
 class UserSessionRepository
 @Inject constructor(
     private val userSessionLocalSource: UserSessionLocalSource
-) : UserSessionRepository {
+) : IUserSessionRepository {
 
     override suspend fun create(userSession: UserSession) {
         userSessionLocalSource.create(userSession)

@@ -19,9 +19,9 @@ class SharedPreferenceStorage
     private val preferences =
         context.applicationContext.getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
 
-    inner class UserSharedPreferenceStorage {
+
         var userId by StringPreference(preferences, userID, null)
-    }
+
 }
 
 class StringPreference(
