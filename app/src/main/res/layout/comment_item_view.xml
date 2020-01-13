@@ -2,43 +2,44 @@
 <layout>
 
     <data>
+
         <variable
                 name="comment"
-                type="com.example.myapplication.domain.entity.Comment"/>
+                type="com.example.myapplication.domain.entity.Comment" />
 
         <variable
                 name="commentEventListener"
-                type="com.example.myapplication.feature.commentlist.ui.list.CommentListListeners.CommentEventListener"/>
+                type="com.example.myapplication.feature.commentlist.ui.list.CommentListListeners.CommentEventListener" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:orientation="vertical">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
             <ImageView
-                    android:scaleType="centerInside"
                     android:id="@+id/background_image"
                     android:layout_width="match_parent"
                     android:layout_height="172dp"
-                    android:src="@drawable/placeholder"/>
+                    android:scaleType="centerInside"
+                    android:src="@drawable/placeholder" />
         </LinearLayout>
 
         <TextView
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{comment.title}"/>
+                android:text="@{comment.title}" />
 
         <TextView
                 android:id="@+id/body"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{comment.body}"/>
+                android:text="@{comment.body}" />
 
         <com.google.android.material.internal.CheckableImageButton
                 android:id="@+id/favouriteIcon"
@@ -47,7 +48,7 @@
                 android:background="?selectableItemBackgroundBorderless"
                 android:checked="@{comment.isFavourite}"
                 android:onClick="@{() -> commentEventListener.onStarClicked(comment)}"
-                android:src="@drawable/favourite_star"/>
+                android:src="@drawable/favourite_star" />
 
     </LinearLayout>
 </layout>

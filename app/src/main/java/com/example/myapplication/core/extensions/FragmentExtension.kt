@@ -21,12 +21,17 @@ inline fun <reified VM : ViewModel> FragmentActivity.viewModel(
 ) =
     ViewModelProviders.of(this, provider).get(VM::class.java)
 
+inline fun <reified VM : ViewModel> Fragment.parentViewModelProvider(
+    provider: ViewModelProvider.Factory
+) =
+    ViewModelProviders.of(parentFragment!!, provider).get(VM::class.java)
+
 fun Fragment.showToast(message: String?) {
     Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
 }
 
 fun Fragment.showSnackBar(view: View, message: String) {
-    Snackbar.make(signInButton, message, Snackbar.LENGTH_LONG).show()
+    Snackbar.make(view, message, Snackbar.LENGTH_LONG).show()
 }
 
 fun Fragment.startWithFinish(intent: Intent) {

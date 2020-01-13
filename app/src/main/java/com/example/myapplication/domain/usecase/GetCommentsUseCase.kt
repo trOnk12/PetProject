@@ -18,13 +18,15 @@ class GetCommentsUseCase
     override suspend fun run(params: None): List<Comment> {
         val comments = commentRepository.get()
 
-        return getUserUseCase(None()).let { result ->
-            when (result) {
-                is Result.Success -> combineWithComments(result.data, comments)
-                is Result.Error -> throw result.exception
-                else -> throw IllegalStateException()
-            }
-        }
+        return comments
+
+//        return getUserUseCase(None()).let { result ->
+//            when (result) {
+//                is Result.Success -> combineWithComments(result.data, comments)
+//                is Result.Error -> throw result.exception
+//                else -> throw IllegalStateException()
+//            }
+//        }
     }
 
     private fun combineWithComments(user: User, comments: List<Comment>): List<Comment> {

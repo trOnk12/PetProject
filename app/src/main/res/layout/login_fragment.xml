@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <import type="com.example.myapplication.domain.usecase.LoginData"/>
+
+        <import type="com.example.myapplication.domain.usecase.LoginData" />
+
         <variable
                 name="viewModel"
                 type="com.example.myapplication.feature.login.ui.LoginViewModel" />
@@ -33,11 +35,11 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textPassword"
+                android:text="@={viewModel.loginData.password}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/emailAddress"
-                android:text="@={viewModel.loginData.password}" />
+                app:layout_constraintTop_toBottomOf="@id/emailAddress" />
 
         <Button
                 android:id="@+id/signInButton"
@@ -48,6 +50,7 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/password" />
+
         <TextView
                 android:id="@+id/registerInfo"
                 android:layout_width="wrap_content"
@@ -59,8 +62,10 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginBottom="8dp"
                 android:text="Click here to register"
-                app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@+id/signInButton"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/signInButton" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

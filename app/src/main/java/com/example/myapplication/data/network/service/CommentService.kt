@@ -6,7 +6,7 @@ import retrofit2.http.GET
 
 interface CommentService {
     companion object {
-        private const val COMMENTS = "/get"
+        private const val COMMENTS = "/posts"
         private const val COMMENT = "/get"
     }
 

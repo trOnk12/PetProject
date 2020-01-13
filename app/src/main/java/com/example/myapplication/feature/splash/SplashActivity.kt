@@ -1,18 +1,14 @@
 package com.example.myapplication.feature.splash
 
-import android.content.Context
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import com.example.myapplication.PetProject
 import com.example.myapplication.R
+import com.example.myapplication.core.commons.base.BaseActivity
 import com.example.myapplication.core.extensions.observe
 import com.example.myapplication.core.extensions.startWithFinish
-import com.example.myapplication.core.extensions.viewModel
-import com.example.myapplication.core.commons.base.BaseActivity
 import com.example.myapplication.feature.MainActivity
 import com.example.myapplication.feature.splash.di.DaggerSplashComponent
-import com.example.myapplication.feature.splash.di.SplashComponent
 import javax.inject.Inject
 
 class SplashActivity :

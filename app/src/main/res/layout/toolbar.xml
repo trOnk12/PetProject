@@ -3,16 +3,17 @@
 <layout>
 
     <data>
+
         <variable
                 name="toolbarEventListener"
-                type="com.example.myapplication.feature.commentlist.ui.list.CommentListListeners.ToolBarEventListener"/>
+                type="com.example.myapplication.feature.commentlist.ui.list.CommentListListeners.ToolBarEventListener" />
+
         <variable
                 name="user"
-                type="com.example.myapplication.domain.entity.User"/>
+                type="com.example.myapplication.domain.entity.User" />
     </data>
 
-    <com.google.android.material.appbar.AppBarLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.google.android.material.appbar.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -40,7 +41,7 @@
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toLeftOf="@id/title"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:profileImage="@{user.profileImageUrl}"/>
+                        app:profileImage="@{user.profileImageUrl}" />
 
                 <TextView
                         android:id="@+id/title"
@@ -52,7 +53,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"/>
+                        app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                         android:id="@+id/search_icon"
@@ -62,7 +63,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toRightOf="@id/title"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"/>
+                        app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

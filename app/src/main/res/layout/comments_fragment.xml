@@ -4,38 +4,75 @@
         xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
                 name="viewModel"
-                type="com.example.myapplication.feature.commentlist.ui.list.CommentsListViewModel"/>
+                type="com.example.myapplication.feature.commentlist.ui.list.CommentsListViewModel" />
     </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".feature.commentlist.CommentsActivity">
+            android:orientation="vertical">
 
         <include
                 android:id="@+id/toolbar"
-                layout="@layout/toolbar"/>
+                layout="@layout/toolbar" />
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-                android:id="@+id/swipeContainer"
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:isRefreshing="@{viewModel.isLoading}">
+                android:layout_height="match_parent">
 
-            <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/commentList"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+                <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                        android:id="@+id/swipeContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:isRefreshing="@{viewModel.isLoading}">
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/commentList"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+                </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+                <androidx.cardview.widget.CardView
+                        android:id="@+id/filterFab"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toRightOf="parent">
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/favourite_star" />
+
+                </androidx.cardview.widget.CardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <fragment
+                    android:id="@+id/filterBottomSheet"
+                    android:name="com.example.myapplication.feature.commentlist.ui.list.CommentsListFilterFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:behavior_hideable="true"
+                    app:behavior_peekHeight="48dp"
+                    app:behavior_skipCollapsed="true"
+                    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+                    tools:layout="@layout/comments_filter_fragment" />
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    </LinearLayout>
 
 </layout>

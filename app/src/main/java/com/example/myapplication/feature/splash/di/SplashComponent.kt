@@ -7,7 +7,6 @@ import dagger.Component
 
 @FeatureScope
 @Component(
-    modules = [SplashModule::class],
     dependencies = [CoreComponent::class]
 )
 interface SplashComponent {

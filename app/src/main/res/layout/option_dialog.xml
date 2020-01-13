@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:orientation="horizontal">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
     <LinearLayout
             android:id="@+id/fileSource"
@@ -14,13 +14,13 @@
         <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/favourite_star"/>
+                android:src="@drawable/favourite_star" />
 
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="Choose file."
-                android:textAlignment="center"/>
+                android:textAlignment="center" />
 
     </LinearLayout>
 
@@ -34,13 +34,13 @@
         <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/favourite_star"/>
+                android:src="@drawable/favourite_star" />
 
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="Take a selfie."
-                android:textAlignment="center"/>
+                android:textAlignment="center" />
 
     </LinearLayout>
 

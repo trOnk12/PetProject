@@ -18,12 +18,6 @@ import kotlinx.android.synthetic.main.register_fragment.*
 class RegisterFragment : BaseFragment<RegisterFragmentBinding, RegisterViewModel>
     (R.layout.register_fragment) {
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        viewModel.apply {
-            observe(event, ::onViewEvent)
-        }
-    }
 
     override fun onInitDependency() {
         DaggerRegisterComponent
@@ -35,6 +29,9 @@ class RegisterFragment : BaseFragment<RegisterFragmentBinding, RegisterViewModel
 
     override fun onInitViewModel() {
         viewModel = viewModel(provider)
+        viewModel.apply {
+            observe(event, ::onViewEvent)
+        }
     }
 
     override fun onInitDataBinding() {

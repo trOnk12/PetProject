@@ -25,7 +25,7 @@ class NetworkModule {
         return clientBuilder.build()
     }
 
-    @Reusable
+    @Singleton
     @Provides
     fun provideNetworkClient(httpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
@@ -35,7 +35,7 @@ class NetworkModule {
             .build()
     }
 
-    @Reusable
+    @Singleton
     @Provides
     fun provideCommentService(retrofit: Retrofit): CommentService {
         return retrofit.create(CommentService::class.java)
